@@ -1,0 +1,117 @@
+body {
+  font-family: "Outfit", sans-serif;
+}
+:root {
+  --primary-color: #f5b754;
+  --secondary-color: #1b1b1b;
+  --tertiary-color: #ffffff;
+}
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #f5b754;
+  --bs-btn-border-color: #f5b754;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #f5b754;
+  --bs-btn-hover-border-color: #f5b754;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #f5b754;
+  --bs-btn-active-border-color: #f5b754;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #f5b754;
+  --bs-btn-disabled-border-color: #f5b754;
+}
+.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+.color-primary {
+  color: var(--primary-color) !important;
+}
+a.color-primary {
+  transition: all 0.4s;
+}
+a.color-primary:hover {
+  color: var(--tertiary-color) !important;
+}
+
+.shade {
+  background-image: linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0.6)
+  );
+}
+.btn-secondary {
+  background-color: #1b1b1b !important;
+  color: white !important;
+  transition: all 0.5s;
+}
+.btn-secondary:hover {
+  background-color: #292929 !important;
+}
+button.bg-primary:hover {
+  background-color: #1b1b1b !important;
+  color: white !important;
+}
+textarea:focus,
+input:focus,
+input[type]:focus,
+.uneditable-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 3px 3px rgba(229, 103, 23, 0.075) inset,
+    0 0 8px var(--primary-color);
+}
+.background {
+  background-image: linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.3)
+    ),
+    url(https://images.pexels.com/photos/164634/pexels-photo-164634.jpeg?cs=srgb&dl=pexels-pixabay-164634.jpg&fm=jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 1s ease-out;
+}
+
+.loading-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--tertiary-color);
+  border-top: 5px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
