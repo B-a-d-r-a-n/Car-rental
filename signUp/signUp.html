@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="signUp.css" />
+    <title>Sign up</title>
+  </head>
+  <body>
+    <div id="loadingScreen" class="loading-screen">
+      <div class="spinner"></div>
+    </div>
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div
+        id="liveToast"
+        class="toast"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      ></div>
+    </div>
+    <section
+      class="min-vh-100 background d-flex align-items-center justify-content-center"
+    >
+      <div class="h-100">
+        <div class="container h-100">
+          <div class="row h-100 align-content-center">
+            <div
+              class="col-12 d-flex align-items-center justify-content-center mb-3"
+            >
+              <h2 class="display-3 text-center opacity-75 text-white">
+                Your dream car is just a click away
+              </h2>
+            </div>
+            <div
+              class="col-12 d-flex align-items-center justify-content-center"
+            >
+              <form
+                id="signUp"
+                class="shade col-md-8 col-12 col-lg-6 text-white border border-2 p-3 rounded-2 border-black opacity-75"
+              >
+                <div class="row mb-3">
+                  <label for="inputUsername" class="col-12 col-form-label"
+                    >username</label
+                  >
+                  <div class="col-12">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inputusername"
+                      name="username"
+                    />
+                    <div
+                      class="text-danger fs-6 mt-1 err"
+                      id="username-err"
+                    ></div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputEmail" class="col-12 col-form-label"
+                    >Email</label
+                  >
+                  <div class="col-12">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="inputEmail"
+                      name="email"
+                    />
+                    <div class="text-danger fs-6 mt-1 err" id="email-err"></div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputPassword" class="col-12 col-form-label"
+                    >Password</label
+                  >
+                  <div class="col-12">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="inputPassword"
+                      name="password"
+                    />
+                    <div
+                      class="text-danger fs-6 mt-1 err"
+                      id="password-err"
+                    ></div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-between">
+                  <button
+                    type="submit"
+                    class="btn btn-primary text-black bg-primary"
+                  >
+                    Sign up
+                  </button>
+                  <p class="fs-6">
+                    already a user ?
+                    <a
+                      class="color-primary"
+                      style="text-decoration: none"
+                      href="../signIn/signIn.html"
+                      >sign in</a
+                    >
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="signUp.js"></script>
+  </body>
+</html>
