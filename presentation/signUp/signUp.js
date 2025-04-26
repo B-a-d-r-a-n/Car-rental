@@ -1,4 +1,4 @@
-import { User } from "../domain/Entities.js";
+import { User } from "../../infrastructure/domain/Entities.js";
 const loadingScreen = document.getElementById("loadingScreen");
 loadingScreen.classList.add("hidden");
 setTimeout(() => {
@@ -102,11 +102,11 @@ form.addEventListener("submit", (e) => {
  ></button>
 </div>
 <div class="toast-body bg-success text-white">
- Login successful! Welcome ${data.username}.
+ Sign up successful! Welcome ${data.username}.
 </div>`;
   toastBootstrap.show();
   form.reset();
   setTimeout(() => {
-    window.location.href = "../signUp/signUp.html";
+    window.location.href = "../signIn/signIn.html";
   }, 1500);
 });
