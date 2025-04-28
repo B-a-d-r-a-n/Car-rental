@@ -1,13 +1,18 @@
 body {
-  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  padding-top: 80px; 
+}
+.container {
+  flex: 1;
 }
 .rent-form {
-  background: white;
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  margin: 50px auto;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
 }
 .rent-form h2 {
   color: #f4a300;
@@ -53,4 +58,51 @@ body {
 
 .car-info strong {
   color: #000;
+}
+html, body {
+  height: 100%;
+}
+
+.btn-custom {
+  background-color: #ff5722;
+  color: white;
+  border: none;
+}
+.btn-custom:hover {
+  background-color: #e64a19;
+}
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.navbar-nav .nav-link {
+  color: white !important;
+}
+.navbar-nav .nav-link:hover {
+  color: #f5b754 !important;
+}
+/* Footer */
+footer span, footer p, footer a {
+  color: whitesmoke;
+}
+footer h5 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: white;
+  font-size: 1.5rem;
+}
+footer i {
+  color: #f5b754;
+  font-size: 1.5rem;
+  width: auto;
+  transition: none;
+}
+footer i:hover,
+footer a:hover {
+  color: #f5b754;
+  font-size: 1.5rem;
+  transition: none;
 }

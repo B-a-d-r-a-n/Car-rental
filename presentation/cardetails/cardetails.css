@@ -1,26 +1,268 @@
 body {
-  background-color: #f9f9f9;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: 'Poppins', sans-serif;
 }
-.rent-form {
-  background: white;
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  margin: 50px auto;
+
+.maindev {
+background: url(../../assets/images/mainsection.webp) center fixed;
+background-size: cover;
+height: 100vh;
+margin: 0;
+padding: 0;
+
 }
-.rent-form h2 {
-  color: #f4a300;
-  margin-bottom: 30px;
-  font-weight: bold;
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+color: var(--bs-nav-pills-link-active-color);
+background-color: #f5b754;
+}
+
+.s {
+background-color: rgba(0, 0, 0, 0.532);
+width: 100%;
+height: 100vh;
+padding: 1rem;
+}
+
+.main-header {
+font-family: "Boldonse", system-ui;
+font-weight: 400;
+font-style: normal;
+font-size: 48px;
+color: whitesmoke;
+letter-spacing: 5px;
+font-weight: bold;
+}
+
+.mainbutton {
+position: absolute;
+top: 50%;
+}
+
+.custom-button {
+background-color: #F5B754;
+width: 12rem;
+height: 4rem;
+border-radius: 30px;
+border: none;
+margin: 8px;
+padding-top: 1rem;
+}
+
+.custom-button:hover {
+background-color: gray;
+color: whitesmoke;
+transform: translateY(-10%);
+}
+.section-padding {
+  padding: 60px 0;
+}
+.sidebar-car {
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 15px;
+}
+.sidebar-car .title {
+  background-color: #f4a300;
+  padding: 20px;
+  border-radius: 10px 10px 0 0;
+  color: white;
   text-align: center;
+  font-size: 24px;
 }
-.btn-custom {
+.features {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+}
+.features i {
+  color: #f4a300;
+  margin-right: 10px;
+}
+.btn-double a {
+  display: inline-block;
+  width: 48%;
+  margin: 5px 1%;
+  padding: 10px;
   background-color: #f4a300;
   color: white;
-  font-weight: bold;
-  padding: 10px 40px;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
 }
-.btn-custom:hover {
-  background-color: #d48806;
+.btn-double a:hover {
+  background-color: #d88e00;
+}
+h3 {
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+.list-unstyled li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.list-unstyled li i {
+  color: #f4a300;
+  margin-right: 10px;
+}
+
+/* Rental Conditions Accordion Custom Style */
+.custom-accordion .accordion-item {
+  background-color: #f4f4f4;
+  border: none;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+.custom-accordion .accordion-button {
+  background-color: transparent;
+  box-shadow: none;
+  padding: 20px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #000;
+  position: relative;
+}
+.custom-accordion .accordion-button::after {
+  display: none;
+}
+.custom-accordion .accordion-button i {
+  transition: transform 0.3s ease;
+}
+.custom-accordion .accordion-button:not(.collapsed) i {
+  transform: rotate(90deg);
+}
+.custom-accordion .accordion-body {
+  padding: 20px;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+}
+.footer {
+background-color: #1a1a1a;
+color: #ffffff;
+padding: 60px 0 30px;
+}
+.nav-link{
+color: whitesmoke;
+}
+.nav-link:hover{
+color: gray;
+}
+
+.footer h1,
+.footer h2,
+.footer h3 {
+color: #ffffff;
+position: relative;
+padding-bottom: 10px;
+margin-bottom: 20px;
+}
+
+.footer h1::after,
+.footer h2::after,
+.footer h3::after {
+content: '';
+position: absolute;
+left: 0;
+bottom: 0;
+width: 50px;
+height: 2px;
+background: #f5b754;
+}
+
+.footer p,
+.footer a {
+color: #b3b3b3;
+text-decoration: none;
+}
+
+.footer a:hover {
+color: #f5b754;
+}
+
+.contact-info {
+margin-bottom: 15px;
+}
+
+.contact-info i {
+color: #f5b754;
+margin-right: 10px;
+}
+
+.subscribe-input {
+background: #2e2e2e;
+border: none;
+color: #ffffff;
+}
+
+.subscribe-btn {
+background: #f5b754;
+color: #ffffff;
+border: none;
+}
+
+.subscribe-btn:hover {
+background: #f5b754;
+}
+
+.divider {
+height: 1px;
+background: #333333;
+margin: 30px 0;
+}
+
+i {
+color: #F5B754;
+}
+
+footer span {
+color: whitesmoke;
+}
+
+footer h1 {
+margin-top: 2rem;
+margin-bottom: 1em;
+color: white;
+font-size: 1.5rem;
+}
+
+footer p {
+color: whitesmoke;
+}
+
+.fotter-list i {
+font-size: 2rem;
+width: 4rem;
+}
+
+footer i:hover {
+font-size: 3rem;
+transition: 0.5s;
+}
+
+footer a {
+text-decoration: none;
+color: whitesmoke;
+
+}
+
+footer a:hover {
+color: #f5b754;
+
+}
+.nav-underline .nav-link.active, .nav-underline .show>.nav-link {
+font-weight: 700;
+color:#F5B754;
+border-bottom-color: currentcolor;
+}
+.contactt{
+height: 15em;
+border-radius: 20px;
+background-color: #F5B754;
 }

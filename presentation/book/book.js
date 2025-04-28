@@ -10,7 +10,7 @@ const cars = JSON.parse(localStorage.getItem('cars')).map(carData => Object.assi
 // Find selected car
 const selectedCar = cars.find(car => car.id == carId);
 
-// Display car details in a more stylish way
+// Display car details
 if (selectedCar) {
   document.getElementById('car-details').innerHTML = `
     <div class="car-details-container">
@@ -24,21 +24,54 @@ if (selectedCar) {
   `;
 }
 
-// Handle booking form submit
 document.getElementById('booking-form').addEventListener('submit', function(e) {
   e.preventDefault();
 
-  const customerName = document.getElementById('fullName').value;
-  const customerEmail = document.getElementById('email').value;
-  const customerPhone = document.getElementById('phone').value;
+  // قراءة الداتا
+  const customerName = document.getElementById('fullName').value.trim();
+  const customerEmail = document.getElementById('email').value.trim();
+  const customerPhone = document.getElementById('phone').value.trim();
+  const pickupLocation = document.getElementById('pickupLocation').value.trim();
   const pickupDate = document.getElementById('pickupDate').value;
+  const dropoffLocation = document.getElementById('dropoffLocation').value.trim();
   const dropoffDate = document.getElementById('returnDate').value;
+  const note = document.getElementById('note').value.trim();
 
+  // الفاليديشن
+  if (!customerName || !customerEmail || !customerPhone || !pickupLocation || !pickupDate || !dropoffLocation || !dropoffDate) {
+    alert('Please fill in all required fields.');
+    return;
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(customerEmail)) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+
+  const phoneRegex = /^[0-9]{10,15}$/;
+  if (!phoneRegex.test(customerPhone)) {
+    alert('Please enter a valid phone number.');
+    return;
+  }
+
+  const today = new Date().toISOString().split('T')[0];
+  if (pickupDate < today) {
+    alert('Pickup date must be today or later.');
+    return;
+  }
+  if (dropoffDate <= pickupDate) {
+    alert('Return date must be after pickup date.');
+    return;
+  }
+
+  // حساب عدد الأيام والسعر
   const rentalDays = (new Date(dropoffDate) - new Date(pickupDate)) / (1000 * 60 * 60 * 24);
   const totalAmount = selectedCar.rentPerDay * rentalDays;
 
+  // إنشاء البوكنج
   const newBooking = new Booking(
-    Date.now(), // Generate unique ID
+    Date.now(),
     selectedCar.id,
     customerName,
     customerEmail,
@@ -49,20 +82,19 @@ document.getElementById('booking-form').addEventListener('submit', function(e) {
     totalAmount
   );
 
-  // Read existing bookings from localStorage and ensure it's an array
+  // حفظ الداتا
   let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
-
-  // Ensure bookings is an array before pushing
   if (!Array.isArray(bookings)) {
     bookings = [];
   }
-
-  // Add new booking
   bookings.push(newBooking);
-
-  // Save updated bookings to localStorage
   localStorage.setItem('bookings', JSON.stringify(bookings));
 
-  // Redirect to the history page
-  window.location.href = 'history.html';
+  // توست رسالة نجاح
+  const successToast = new bootstrap.Toast(document.getElementById('successToast'));
+  successToast.show();
+
+  setTimeout(() => {
+    window.location.href = 'history.html';
+  }, 1500);
 });
