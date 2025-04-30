@@ -1,0 +1,36 @@
+/* Review Cards */
+#reviews-list .card {
+  background-color: #f2f2f2;
+  border-radius: 20px;
+  min-height: 200px;
+  padding: 40px 40px 0px;
+  border: none;
+}
+
+/* Review Form */
+#review-form input,
+#review-form select,
+#review-form textarea,
+#review-form button {
+  padding: 20px;
+  border-radius: 20px;
+}
+
+#review-form input:focus,
+#review-form select:focus,
+#review-form textarea:focus {
+  box-shadow: none;
+  border-color: #b5b5b5;
+}
+
+#review-form button {
+  background-color: transparent;
+  color: black;
+  transition: all 500ms ease;
+  border: 1px solid #f5b754;
+}
+
+#review-form button:hover {
+  background-color: #f5b754;
+  color: white;
+}

@@ -86,6 +86,6 @@ form.addEventListener("submit", (e) => {
         </div>`;
   toastBootstrap.show();
   setTimeout(() => {
-    window.location.href = "../signUp/signUp.html";
+    window.location.href = "./../../index.html";
   }, 1500);
 });
