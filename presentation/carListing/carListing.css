@@ -1,0 +1,144 @@
+.banner-header {
+  background-image: url(../../assets/images/11a.jpg);
+  height: 70vh;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-bottom: 120px;
+}
+
+/* =========================================cards======================================= */
+#carList .card {
+  border-radius: 20px;
+  overflow: hidden;
+}
+#carList .card .card-body {
+  padding: 30px;
+  background: #f2f2f2;
+  border-radius: 0 0 20px 20px;
+}
+#carList .card-body h5 {
+  font-size: 21px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+#carList .card .card-body p:nth-of-type(2) {
+  font-size: 21px;
+}
+#carList .card .card-body p:nth-of-type(2) span {
+  font-size: 21px;
+  line-height: 1.2em;
+  color: #f5b754;
+  font-weight: 700;
+}
+#carList .card img {
+  border-radius: 20px 20px 0 0;
+  height: 250px;
+  transition: all 0.5s;
+  object-fit: cover;
+}
+#carList .card img:hover {
+  transform: scale(1.1);
+}
+#carList .card a {
+  padding: 10px 20px;
+  margin-top: 20px !important;
+  border: 1px solid #f5b754;
+  border-radius: 30px;
+  background-color: #f5b754;
+  color: #1b1b1b;
+  /* transition: border-color 300ms ease, transform 300ms ease, background-color 300ms ease, color 300ms ease;
+    transform-style: preserve-3d; */
+}
+#carList .card a:hover {
+  background-color: #1b1b1b;
+  border-color: #1b1b1b;
+  color: #f5b754;
+}
+
+/* ==========================================filters======================================= */
+#search,
+#items {
+  padding: 30px;
+}
+#search {
+  position: relative;
+  background-color: #f5b754;
+  border-radius: 30px 30px 0 0;
+}
+#search input {
+  padding: 17px 15px;
+  border-radius: 30px;
+  border: 1px solid #f2f2f2;
+  box-shadow: none;
+}
+#search button {
+  position: absolute;
+  right: 35px;
+  top: 35px;
+  background-color: #1b1b1b;
+  color: #f5b754;
+  border: 0;
+  cursor: pointer;
+  border-radius: 100%;
+  /* outline: none; */
+  transform: rotate(0);
+  -webkit-transition: all 0.7s linear;
+  -o-transition: all 0.7s linear;
+  transition: all 0.7s linear;
+  width: 50px !important;
+  height: 50px;
+}
+#search button:hover {
+  background-color: #f5b754;
+  color: #1b1b1b;
+  transform: rotate(90deg);
+}
+
+#items {
+  background-color: #f2f2f2;
+  border-radius: 0 0 30px 30px;
+  height: fit-content;
+}
+
+/*  حقول الإدخال */
+#filterType,
+#minPrice,
+#maxPrice {
+  border-radius: 30px;
+  padding: 10px 20px;
+  margin-bottom: 30px;
+  border: 1px solid #f2f2f2;
+  box-shadow: none;
+}
+
+/*  العناوين */
+.filter-label {
+  font-weight: bold;
+  color: #1b1b1b;
+  margin-bottom: 10px;
+}
+
+/*  checkbox */
+.form-check-input {
+  margin-right: 10px;
+  border-radius: 5px;
+}
+.form-check-label {
+  color: #1b1b1b;
+}
+
+/*  زر البحث */
+/* #applyFilters {
+    background-color: #1b1b1b;
+    color: #f5b754;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s ease;
+}
+ */
+
+/* التأثير عند الـ hover */

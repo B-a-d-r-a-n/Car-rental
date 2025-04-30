@@ -98,8 +98,7 @@ function deleteCar(index) {
     location.reload();
   }
 }
-function updatecar(index,) {
-
+function updatecar(index) {
   let brand = document.querySelector('input[name="upbrand"]');
   let model = document.querySelector('input[name="upmodel"]');
   let type = document.querySelector('input[name="uptype"]');
@@ -107,7 +106,7 @@ function updatecar(index,) {
   let Img = document.querySelector('input[name="upimage"]');
   let carid = document.querySelector('input[name="upid"]');
   let parsedcarList = JSON.parse(localStorage.getItem("cars"));
-  let updatebtn=document.querySelector(".formbutton2");
+  let updatebtn = document.querySelector(".formbutton2");
 
   brand.value = parsedcarList[index].brand;
   carid.value = parsedcarList[index].id;
@@ -116,25 +115,23 @@ function updatecar(index,) {
   type.value = parsedcarList[index].type;
   description.value = parsedcarList[index].description;
 
-updatebtn.addEventListener("click",function(e){
-  // e.preventDefault();
-  let newCar = {
-    id: carid.value,
-    brand: brand.value,
-    model: model.value,
-    type: type.value,
-    description: description.value,
-    image: Img.value,
-  };
-  parsedcarList[index].brand=brand.value;
-  parsedcarList[index].model=model.value;
-  parsedcarList[index].type=type.value;
-  parsedcarList[index].description=description.value;
-  parsedcarList[index].image=Img.value;
-  localStorage.setItem("cars", JSON.stringify(parsedcarList));
-})
-
-  
+  updatebtn.addEventListener("click", function (e) {
+    // e.preventDefault();
+    let newCar = {
+      id: carid.value,
+      brand: brand.value,
+      model: model.value,
+      type: type.value,
+      description: description.value,
+      image: Img.value,
+    };
+    parsedcarList[index].brand = brand.value;
+    parsedcarList[index].model = model.value;
+    parsedcarList[index].type = type.value;
+    parsedcarList[index].description = description.value;
+    parsedcarList[index].image = Img.value;
+    localStorage.setItem("cars", JSON.stringify(parsedcarList));
+  });
 }
 
 displayCars();
