@@ -1,12 +1,30 @@
+/* ========= Light Mode ========= */
 body {
   display: flex;
   flex-direction: column;
-  background-color: #f8f9fa;
-  padding-top: 80px; 
+  background-color: #ffffff; 
+  padding-top: 80px;
+  color: #222;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 .container {
   flex: 1;
 }
+
+/* Navbar */
+.navbar {
+  background-color: #ffffff !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.navbar-nav .nav-link {
+  color: #333 !important;
+}
+.navbar-nav .nav-link:hover {
+  color: #f5b754 !important;
+}
+
+/* Rent Form */
 .rent-form {
   background-color: #ffffff;
   padding: 30px;
@@ -20,89 +38,192 @@ body {
   font-weight: bold;
   text-align: center;
 }
+
+/* Inputs */
+.form-control,
+textarea {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ccc;
+}
+.form-control::placeholder,
+textarea::placeholder {
+  color: #888;
+}
+
+/* Buttons */
 .btn-custom {
   background-color: #f4a300;
   color: white;
   font-weight: bold;
   padding: 10px 40px;
+  border: none;
 }
 .btn-custom:hover {
   background-color: #d48806;
 }
 
+/* Car Section */
 .car-details-container {
   background-color: #fff;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
-
 .car-title {
   font-size: 24px;
   font-weight: bold;
   color: #333;
 }
-
-.car-image {
-  width: 100%;
-  max-height: 300px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-top: 20px;
-}
-
 .car-info p {
   font-size: 16px;
   color: #555;
 }
-
 .car-info strong {
   color: #000;
 }
-html, body {
-  height: 100%;
-}
 
-.btn-custom {
-  background-color: #ff5722;
-  color: white;
-  border: none;
-}
-.btn-custom:hover {
-  background-color: #e64a19;
-}
-.toast {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 9999;
-}
-
-.navbar-nav .nav-link {
-  color: white !important;
-}
-.navbar-nav .nav-link:hover {
-  color: #f5b754 !important;
-}
 /* Footer */
-footer span, footer p, footer a {
-  color: whitesmoke;
+.site-footer {
+  background-color: #f9f9f9;
+  color: #000 !important;
+  transition: background-color 0.3s ease;
 }
-footer h5 {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  color: white;
-  font-size: 1.5rem;
+.site-footer a,
+.site-footer p {
+  color: #333;
+}
+.site-footer a:hover {
+  color: #f5b754;
+}
+.footer h1,
+.footer h2,
+.footer h3 {
+  color: #000;
+  position: relative;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+.footer h1::after,
+.footer h2::after,
+.footer h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 2px;
+  background: #f5b754;
 }
 footer i {
-  color: #f5b754;
-  font-size: 1.5rem;
-  width: auto;
-  transition: none;
+  color: #F5B754;
 }
-footer i:hover,
-footer a:hover {
+footer i:hover {
+  font-size: 3rem;
+  transition: 0.5s;
+}
+footer a {
+  text-decoration: none;
+}
+.fotter-list i {
+  font-size: 2rem;
+  width: 4rem;
+}
+.list-unstyled li {
+  color: #000;
+}
+/* Subscribe */
+.subscribe-input {
+  background: #2e2e2e;
+  border: none;
+  color: #ffffff;
+}
+.subscribe-btn {
+  background: #f5b754;
+  color: #ffffff;
+  border: none;
+}
+.subscribe-btn:hover {
+  background: #f5b754;
+}
+.divider {
+  height: 1px;
+  background: #333333;
+  margin: 30px 0;
+}
+
+/* Contact */
+.contactt {
+  height: 15em;
+  border-radius: 20px;
+  background-color: #F5B754;
+}
+
+/* ========= Dark Mode ========= */
+body.dark-mode {
+  background-color: #181818;
+  color: #e0e0e0;
+}
+
+body.dark-mode .navbar {
+  background-color: #222 !important;
+  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .navbar-nav .nav-link {
+  color: #f0f0f0 !important;
+}
+
+body.dark-mode .navbar-nav .nav-link:hover {
+  color: #f5b754 !important;
+}
+
+body.dark-mode .rent-form,
+body.dark-mode .car-details-container {
+  background-color: #252525;
+  box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .rent-form h2 {
   color: #f5b754;
-  font-size: 1.5rem;
-  transition: none;
+}
+
+body.dark-mode .form-control,
+body.dark-mode textarea {
+  background-color: #2c2c2c;
+  color: #f5f5f5;
+  border: 1px solid #444;
+}
+
+body.dark-mode .form-control::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #aaa;
+}
+
+body.dark-mode .btn-custom {
+  background-color: #f5b754;
+  color: #1e1e1e;
+}
+
+body.dark-mode .btn-custom:hover {
+  background-color: #d48806;
+  color: #000;
+}
+
+body.dark-mode footer {
+  background-color: #1a1a1a;
+}
+
+body.dark-mode footer h5 {
+  color: #f5f5f5;
+}
+
+body.dark-mode footer span,
+body.dark-mode footer p,
+body.dark-mode footer a {
+  color: #ccc;
+}
+
+body.dark-mode footer i {
+  color: #f5b754;
 }

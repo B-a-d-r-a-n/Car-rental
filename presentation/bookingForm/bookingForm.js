@@ -117,3 +117,4 @@ document
       window.location.href = "../BookingHistory/bookingHistory.html";
     }, 1500);
   });
+console.log(key);
