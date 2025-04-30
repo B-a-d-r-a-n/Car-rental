@@ -1,6 +1,8 @@
-function getCarsFromLocalStorage() {
-  return JSON.parse(localStorage.getItem("cars")) || [];
-}
+// function getCarsFromLocalStorage() {
+//   return JSON.parse(localStorage.getItem("cars")) || [];
+// }
+
+const cars = JSON.parse(localStorage.getItem("cars")) || [];
 
 function renderCars(cars) {
   const container = document.getElementById("carList");
@@ -29,17 +31,13 @@ function renderCars(cars) {
 }
 
 function applyFilters() {
-  const searchQuery = document
-    .getElementById("searchInput")
-    .value.trim()
-    .toLowerCase();
+  const searchQuery = document.getElementById("searchInput").value.trim().toLowerCase();
   const type = document.getElementById("filterType").value;
   const minPrice = parseFloat(document.getElementById("minPrice").value) || 0;
-  const maxPrice =
-    parseFloat(document.getElementById("maxPrice").value) || Infinity;
+  const maxPrice = parseFloat(document.getElementById("maxPrice").value) || Infinity;
   const availableOnly = document.getElementById("availableOnly").checked;
 
-  const cars = getCarsFromLocalStorage();
+  // const cars = getCarsFromLocalStorage();
 
   const filtered = cars.filter((car) => {
     const matchesSearch =
@@ -60,5 +58,5 @@ function applyFilters() {
 
 document.getElementById("applyFilters").addEventListener("click", applyFilters);
 
-// Initial render: show all cars regardless of availability
-renderCars(getCarsFromLocalStorage());
+// renderCars(getCarsFromLocalStorage());
+renderCars(cars);

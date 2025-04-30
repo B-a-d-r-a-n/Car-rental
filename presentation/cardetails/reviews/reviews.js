@@ -1,5 +1,10 @@
 import { Review } from "../../../infrastructure/domain/Entities.js";
-const carId = 6;
+
+// const carId = 6;
+
+const params = new URLSearchParams(window.location.search);
+const carId = parseInt(params.get('id'));
+
 
 function loadReviewsForCar(carId) {
   const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
@@ -28,9 +33,7 @@ function loadReviewsForCar(carId) {
                 </div>
                 <p class="card-text">${review.comment}</p>
                 <p class="card-text text-end mt-auto">
-                <small class="text-muted">${new Date(
-                  review.date
-                ).toLocaleDateString()}</small>
+                <small class="text-muted">${new Date(review.date).toLocaleDateString()}</small>
                 </p>
             </div>
             </div>
@@ -89,5 +92,5 @@ document.getElementById("review-form").addEventListener("submit", function (e) {
   // alert("Review submitted successfully!");
 });
 
-// تحميل الريفيوز عند فتح الصفحة
+
 loadReviewsForCar(carId);
