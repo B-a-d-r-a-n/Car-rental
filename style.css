@@ -3,7 +3,209 @@ body {
   font-family: "Outfit", sans-serif;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Boldonse&family=Cairo:wght@200..1000&family=Playwrite+RO:wght@100..400&display=swap");
+body {
+  font-family: "Outfit", sans-serif;
+}
+
 :root {
+  /* --- Base Colors (Unchanged) --- */
+  --clr-accent: #f5b754; /* Warm yellow/orange */
+  --clr-dark: #1b1b1b; /* Very dark gray */
+  --clr-light: #ffffff; /* Pure white */
+
+  /* --- Derived & Utility Colors --- */
+  --clr-light-darker: #f8f9fa; /* Slightly off-white for less glare */
+  --clr-accent-rgb: 245, 183, 84;
+  --clr-dark-rgb: 27, 27, 27;
+  --clr-light-rgb: 255, 255, 255;
+  --clr-accent-darker: #d99a36; /* Slightly adjusted darker accent for potentially better contrast */
+
+  /* ===== LIGHT MODE ===== */
+
+  /* --- Text --- */
+  --text-primary: var(--clr-dark); /* Dark text */
+  --text-secondary: rgba(
+    var(--clr-dark-rgb),
+    0.7
+  ); /* Darker gray, slightly more opaque */
+  --text-accent: var(--clr-accent-darker); /* Darker accent color for text */
+  --text-on-accent: var(--clr-dark); /* Dark text on accent bg */
+  --text-on-dark-bg: var(--clr-light); /* White text on dark elements */
+  --text-muted-on-dark-bg: rgba(
+    var(--clr-light-rgb),
+    0.75
+  ); /* Muted white on dark elements */
+
+  /* --- Backgrounds --- */
+  --bg-page: var(--clr-light-darker); /* Off-white page background */
+  --bg-panel: var(--clr-dark); /* Dark panel background */
+  --bg-card: var(--clr-light); /* White card background */
+  --bg-table-header: var(--clr-dark); /* Dark table header */
+  --bg-table-row-odd: rgba(
+    var(--clr-dark-rgb),
+    0.04
+  ); /* Subtle dark tint for odd rows */
+
+  /* --- Borders --- */
+  --border-color: rgba(
+    var(--clr-dark-rgb),
+    0.15
+  ); /* Standard light gray border */
+  /* Panel border slightly lighter than panel bg to differentiate from page */
+  --border-color-panel: color-mix(
+    in srgb,
+    var(--clr-dark),
+    var(--clr-light) 10%
+  );
+  --border-color-accent: var(--clr-accent); /* Accent color border */
+}
+
+[data-bs-theme="dark"] {
+  /* ===== DARK MODE ===== */
+
+  /* --- Text --- */
+  --text-primary: var(--clr-light); /* White text */
+  --text-secondary: rgba(
+    var(--clr-light-rgb),
+    0.8
+  ); /* Brighter secondary text */
+  --text-accent: var(--clr-accent); /* Accent color for text */
+  --text-on-accent: var(--clr-dark); /* Dark text on accent bg */
+  --text-on-dark-bg: var(
+    --clr-light
+  ); /* White text on dark (same as primary) */
+  --text-muted-on-dark-bg: rgba(
+    var(--clr-light-rgb),
+    0.65
+  ); /* Dimmer muted text */
+
+  /* --- Backgrounds --- */
+  --bg-page: var(--clr-dark); /* Dark page background */
+  /* Slightly increased contrast steps for backgrounds */
+  --bg-panel: color-mix(in srgb, var(--clr-dark), var(--clr-light) 8%);
+  --bg-card: color-mix(in srgb, var(--clr-dark), var(--clr-light) 12%);
+  --bg-table-header: color-mix(in srgb, var(--clr-dark), var(--clr-light) 16%);
+  --bg-table-row-odd: rgba(
+    var(--clr-light-rgb),
+    0.05
+  ); /* Slightly more visible odd row tint */
+
+  /* --- Borders --- */
+  --border-color: rgba(
+    var(--clr-light-rgb),
+    0.2
+  ); /* More visible standard border */
+  --border-color-panel: rgba(
+    var(--clr-light-rgb),
+    0.2
+  ); /* Consistent panel border */
+  --border-color-accent: var(--clr-accent); /* Accent color border */
+}
+
+.text-clr-primary {
+  color: var(--text-primary) !important;
+}
+.text-clr-secondary {
+  color: var(--text-secondary) !important;
+}
+.text-clr-accent {
+  color: var(--text-accent) !important;
+}
+.text-clr-on-accent {
+  color: var(--text-on-accent) !important;
+}
+.text-clr-on-dark-bg {
+  color: var(--text-on-dark-bg) !important;
+}
+.text-clr-muted-on-dark-bg {
+  color: var(--text-muted-on-dark-bg) !important;
+}
+
+.bg-clr-primary {
+  background-color: var(--text-primary) !important;
+}
+.bg-clr-secondary {
+  background-color: var(--text-secondary) !important;
+}
+.bg-clr-accent {
+  background-color: var(--clr-accent) !important;
+}
+.bg-clr-page {
+  background-color: var(--bg-page) !important;
+}
+.bg-clr-panel {
+  background-color: var(--bg-panel) !important;
+}
+.bg-clr-card {
+  background-color: var(--bg-card) !important;
+}
+
+.border-clr-accent {
+  border-color: var(--border-color-accent) !important;
+}
+.border-standard {
+  border: 1px solid var(--border-color);
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 1s ease-out;
+}
+
+.loading-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--clr-accent-darker);
+  border-top: 5px solid var(--clr-light);
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.bd-example-toasts {
+  top: 0;
+  right: 0;
+}
+
+/*   Specific  */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #ffffff;
   /* --- Base Colors (Unchanged) --- */
   --clr-accent: #f5b754; /* Warm yellow/orange */
   --clr-dark: #1b1b1b; /* Very dark gray */
@@ -226,17 +428,21 @@ body {
 
 .main-header {
   font-family: "Boldonse", system-ui;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 48px;
+  font-weight: 700;
+  font-size: 70px;
   color: whitesmoke;
   letter-spacing: 5px;
   font-weight: bold;
 }
 
 .mainbutton {
-  position: absolute;
-  top: 50%;
+  position: relative;
+  top: 30%;
+
+}
+.mainbutton h5{
+  color: #d99a36;
+  letter-spacing: 5px;
 }
 
 .custom-button {
@@ -246,7 +452,6 @@ body {
   border-radius: 30px;
   border: none;
   margin: 8px;
-  padding-top: 1rem;
 }
 
 .custom-button:hover {
@@ -279,9 +484,7 @@ body {
   text-align: center;
 }
 
-.catogry-title {
-  margin-left: 1rem;
-}
+
 
 .catogry-title:hover {
   cursor: pointer;
@@ -388,7 +591,7 @@ footer p {
 }
 
 footer i:hover {
-  font-size: 3rem;
+  color: #b3b3b3;
   transition: 0.5s;
 }
 
@@ -410,4 +613,28 @@ footer a:hover {
   height: 15em;
   border-radius: 20px;
   background-color: #f5b754;
+}
+
+.genral-btn{
+  background-color: #d99a36;
+  color: whitesmoke;
+  border: none;
+  
+}
+
+.catogry-title{
+  position: absolute;
+  top: 0;
+  font-weight: bolder;
+  font-size: 40px;
+  color: whitesmoke;
+  margin-left: 15px;
+}
+
+
+.catograycard:hover {
+  transform: scale(1.05);
+  transition: 500ms ease;
+
+  
 }

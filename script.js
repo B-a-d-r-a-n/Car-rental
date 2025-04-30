@@ -1,5 +1,6 @@
 window.onload = function () {
   initimg();
+  displayOffers();
 };
 function handleactive(element) {
   let links = document.querySelectorAll(".nav-link");
@@ -72,3 +73,28 @@ function dynamicNavbarInsertion() {
 
 document.addEventListener("DOMContentLoaded", dynamicNavbarInsertion);
 //#EndRegion badran
+
+
+
+
+//#regin Atallah
+
+
+function displayOffers() {
+  let offers=  JSON.parse(localStorage.getItem("promotions"));
+ let offerslide= document.querySelector(".offerslider");
+ offers.forEach(function (element) {
+   let con=  document.createElement("div");
+     con.classList.add("carousel-item","position-relative")
+     con.innerHTML=`<img src="${element.imageUrl}" class="d-block w-100 rounded-4"
+              style="height: 500px; object-fit: cover; filter: brightness(60%);" alt="Hero Offer">
+
+            <div class="position-absolute top-50  translate-middle-y text-white px-5" style="max-width: 600px;left:20%;"    >
+              <h2 class="fw-bold display-5">${element.title}</h2>
+              <p class="mt-3">
+                <a href="#" class="btn btn-light btn-lg fw-bold rounded-pill">${element.description}</a>
+              </p>
+            </div>`;
+            offerslide.appendChild(con);
+})
+}
