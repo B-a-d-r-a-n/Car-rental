@@ -1,6 +1,6 @@
-const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 
-const historyContainer = document.getElementById('history-list');
+const historyContainer = document.getElementById("history-list");
 
 if (bookings.length === 0) {
   historyContainer.innerHTML = `
@@ -9,7 +9,7 @@ if (bookings.length === 0) {
     </div>
   `;
 } else {
-  const cars = JSON.parse(localStorage.getItem('cars')) || [];
+  const cars = JSON.parse(localStorage.getItem("cars")) || [];
 
   let tableHTML = `
     <div class="table-responsive">
@@ -29,17 +29,29 @@ if (bookings.length === 0) {
   `;
 
   bookings.forEach((booking) => {
-    const selectedCar = cars.find(car => car.id == booking.carId);
+    const selectedCar = cars.find((car) => car.id == booking.carId);
 
     if (selectedCar) {
+      const pickupDate = new Date(booking.pickupDate);
+      const dropoffDate = new Date(booking.dropoffDate);
       tableHTML += `
         <tr>
           <td>${selectedCar.brand} ${selectedCar.model}</td>
           <td>${booking.customerName}</td>
           <td>${booking.customerEmail}</td>
           <td>${booking.customerPhone}</td>
-          <td>${booking.pickupDate}</td>
-          <td>${booking.dropoffDate}</td>
+<td>${pickupDate.getFullYear()}/${(pickupDate.getMonth() + 1)
+        .toString()
+        .padStart(2, "0")}/${pickupDate
+        .getDate()
+        .toString()
+        .padStart(2, "0")}</td>
+<td>${dropoffDate.getFullYear()}/${(dropoffDate.getMonth() + 1)
+        .toString()
+        .padStart(2, "0")}/${dropoffDate
+        .getDate()
+        .toString()
+        .padStart(2, "0")}</td>
           <td>$${booking.totalAmount}</td>
         </tr>
       `;

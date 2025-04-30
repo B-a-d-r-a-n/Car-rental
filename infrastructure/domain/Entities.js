@@ -9,58 +9,71 @@ export class Car {
     description,
     features,
     rentalTerms,
-    unavailableDates = []
+    unavailableDates = [],
+    availableStock = 1
   ) {
     this.id = id;
     this.brand = brand;
     this.model = model;
-    this.type = type; // SUV, Sedan, Hatchback, etc.
+    this.type = type;
     this.rentPerDay = rentPerDay;
     this.image = image;
     this.description = description;
-    this.features = features; // Array of car features
-    this.rentalTerms = rentalTerms; // Object containing rental terms
-    this.unavailableDates = unavailableDates; // Array of date ranges when car is unavailable
-    this.isAvailable = true; // General availability flag (can be set to false for maintenance)
-
-    // New properties for enhanced features
+    this.features = features;
+    this.rentalTerms = rentalTerms;
+    this.unavailableDates = [];
+    this.availableStock = availableStock;
+    this.isAvailable = this.availableStock > 0;
     this.averageRating = 0;
     this.reviewCount = 0;
-    this.categories = []; // Category IDs this car belongs to
+    this.categories = [];
     this.isFeatured = false;
-    this.tags = []; // Additional tags for filtering (e.g., "automatic", "navigation")
   }
 
   checkAvailability(startDate, endDate) {
-    if (!this.isAvailable) return false;
+    if (!this.isAvailable) {
+      return false;
+    }
 
-    const start = new Date(startDate).getTime();
-    const end = new Date(endDate).getTime();
+    if (this.availableStock <= 0) {
+      return false;
+    }
 
-    for (const dateRange of this.unavailableDates) {
-      const rangeStart = new Date(dateRange.start).getTime();
-      const rangeEnd = new Date(dateRange.end).getTime();
+    const requestStartDate = new Date(startDate).getTime();
+    const requestEndDate = new Date(endDate).getTime();
+    if (requestStartDate >= requestEndDate) {
+      window.alert(
+        `Requested end date (${new Date(
+          endDate
+        ).toDateString()}) is not after start date (${new Date(
+          startDate
+        ).toDateString()}).`
+      );
+      return false;
+    }
 
-      if (
-        (start >= rangeStart && start < rangeEnd) ||
-        (end > rangeStart && end <= rangeEnd) ||
-        (start <= rangeStart && end >= rangeEnd)
-      ) {
+    for (const unavailableDatesRange of this.unavailableDates) {
+      const unavailableStartDate = new Date(
+        unavailableDatesRange.start
+      ).getTime();
+      const unavailableEndDate = new Date(unavailableDatesRange.end).getTime();
+      const isOverlapping =
+        requestStartDate < unavailableEndDate &&
+        requestEndDate > unavailableStartDate;
+
+      if (isOverlapping) {
+        console.log(
+          `Car ${this.id} has an overlapping booking during [${new Date(
+            startDate
+          ).toDateString()} - ${new Date(endDate).toDateString()}]`
+        );
         return false;
       }
     }
 
     return true;
   }
-
-  markDatesUnavailable(startDate, endDate) {
-    this.unavailableDates.push({
-      start: startDate,
-      end: endDate,
-    });
-  }
 }
-
 export class Booking {
   constructor(
     id,
@@ -80,36 +93,58 @@ export class Booking {
     this.customerName = customerName;
     this.customerEmail = customerEmail;
     this.customerPhone = customerPhone;
-    this.pickupDate = pickupDate;
-    this.dropoffDate = dropoffDate;
-    this.status = status; // "confirmed", "pending", "cancelled"
+    this.pickupDate = new Date(pickupDate);
+    this.dropoffDate = new Date(dropoffDate);
+    this.status = status;
     this.totalAmount = totalAmount;
     this.createdAt = new Date().toISOString();
-    this.bookingReference = bookingReference || this.generateBookingReference();
-    this.userId = null; // Will be filled if user is logged in
-    this.additionalOptions = additionalOptions; // Extra services or options selected
-    this.promoCode = null; // Store applied promo code
-    this.discountAmount = 0; // Amount saved from promotion
+    this.bookingReference = bookingReference;
+    this.userId = null;
+    this.additionalOptions = additionalOptions;
+    this.promoCode = null;
+    this.discountAmount = 0;
   }
 
-  generateBookingReference() {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let result = "";
-    for (let i = 0; i < 8; i++) {
-      result += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return result;
+  getDurationInDays() {
+    const differenceInMilliseconds =
+      this.dropoffDate.getTime() - this.pickupDate.getTime();
+    const millisecondsPerDay = 1000 * 60 * 60 * 24;
+    const duration = differenceInMilliseconds / millisecondsPerDay;
+    return Math.ceil(duration);
   }
 }
 
 export class User {
-  constructor(id, username, email, password, role = "user") {
+  constructor(
+    id,
+    username,
+    email,
+    password,
+    imgUrl = "https://t3.ftcdn.net/jpg/07/24/59/76/360_F_724597608_pmo5BsVumFcFyHJKlASG2Y2KpkkfiYUU.jpg",
+    role = "user"
+  ) {
     this.id = id;
     this.username = username;
     this.email = email;
-    this.password = password; // In a real app, never store plain text passwords
-    this.role = role; // "admin"
+    this.password = password;
+    this.role = role;
+    this.userImg = imgUrl;
     this.registeredAt = new Date().toISOString();
+  }
+}
+export class Admin extends User {
+  constructor(id, username, email, password) {
+    super(id, username, email, password);
+    this.role = "admin";
+  }
+}
+
+export class Seller extends User {
+  constructor(id, username, email, password) {
+    super(id, username, email, password, "seller");
+    this.sellerRating = 0;
+    this.totalSales = 0;
+    this.productIds = [];
   }
 }
 
@@ -119,7 +154,7 @@ export class Report {
     this.month = month;
     this.totalBookings = totalBookings;
     this.totalRevenue = totalRevenue;
-    this.peakHours = peakHours; // Object containing peak booking hours
+    this.peakHours = peakHours;
   }
 }
 
@@ -135,10 +170,10 @@ export class Review {
     this.id = id;
     this.carId = carId;
     this.customerName = customerName;
-    this.rating = rating; // 1-5 stars
+    this.rating = rating;
     this.comment = comment;
     this.date = date;
-    this.helpful = 0; // Count of users who found this review helpful
+    this.helpful = 0;
   }
 }
 
@@ -147,8 +182,8 @@ export class Category {
     this.id = id;
     this.name = name;
     this.description = description;
-    this.icon = icon; // Font Awesome icon class
-    this.filters = filters; // { minPrice, maxPrice, types: [] }
+    this.icon = icon;
+    this.filters = filters;
   }
 }
 
@@ -170,45 +205,16 @@ export class Promotion {
     discount,
     validFrom,
     validTo,
-    applicableCarIds = [],
-    promoCode,
     imageUrl,
     isActive = true
   ) {
     this.id = id;
     this.title = title;
     this.description = description;
-    this.discount = discount; // percentage discount or fixed amount
-    this.discountType =
-      typeof discount === "number" && discount <= 1 ? "percentage" : "fixed";
+    this.discount = discount;
     this.validFrom = validFrom;
     this.validTo = validTo;
-    this.applicableCarIds = applicableCarIds; // Empty array means applies to all cars
-    this.promoCode = promoCode;
     this.imageUrl = imageUrl;
     this.isActive = isActive;
-  }
-
-  isValid() {
-    const now = new Date();
-    const startDate = new Date(this.validFrom);
-    const endDate = new Date(this.validTo);
-
-    return this.isActive && now >= startDate && now <= endDate;
-  }
-
-  appliesTo(carId) {
-    return (
-      this.applicableCarIds.length === 0 ||
-      this.applicableCarIds.includes(carId)
-    );
-  }
-
-  calculateDiscountedPrice(originalPrice) {
-    if (this.discountType === "percentage") {
-      return originalPrice * (1 - this.discount);
-    } else {
-      return Math.max(0, originalPrice - this.discount);
-    }
   }
 }
