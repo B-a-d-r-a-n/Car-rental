@@ -59,6 +59,7 @@ body {
     var(--clr-light) 10%
   );
   --border-color-accent: var(--clr-accent); /* Accent color border */
+  --clr-accent-opacity: rgba(var(--clr-accent), 1); /* Accent color border */
 }
 
 [data-bs-theme="dark"] {
