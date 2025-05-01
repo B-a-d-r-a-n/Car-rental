@@ -1,7 +1,3 @@
-// ==========================================================================
-// Setup & Initial Data Loading
-// ==========================================================================
-
 const loadingScreen = document.getElementById("loadingScreen");
 if (loadingScreen) {
   loadingScreen.classList.add("hidden");
@@ -19,17 +15,19 @@ function showToast(message, type = "success") {
   const isDark =
     document.documentElement.getAttribute("data-bs-theme") === "dark";
   const closeBtnClass = isDark ? "btn-close-white" : "";
-  const bgType = type === "error" ? "danger" : type === "info" ? "info" : type;
+  const bgType =
+    type === "error" ? "danger" : type === "info" ? "info" : "success";
 
   toastLiveExample.innerHTML = `
-        <div class="d-flex">
-            <div class="toast-body">${message}</div>
-            <button type="button" class="btn-close ${closeBtnClass} me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-    `;
+    <div class="d-flex">
+      <div class="toast-body"><i class="fas fa-info-circle me-1 icoo"></i> ${message}</div>
+      <button type="button" class="btn-close ${closeBtnClass} me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  `;
   toastLiveExample.className = `toast align-items-center border-0 text-bg-${bgType}`;
   globalToastInstance.show();
 }
+
 let savedTheme = "";
 let bookings = [];
 let users = [];
@@ -38,25 +36,18 @@ let currentAdmin = {};
 
 try {
   savedTheme = localStorage.getItem("theme");
-  bookings = JSON.parse(localStorage.getItem("bookings"));
-  users = JSON.parse(localStorage.getItem("users"));
-  reports = JSON.parse(localStorage.getItem("reports"));
-  currentAdmin = JSON.parse(localStorage.getItem("currUser"));
-  console.log(bookings);
-
+  bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+  users = JSON.parse(localStorage.getItem("users")) || [];
+  reports = JSON.parse(localStorage.getItem("reports")) || [];
+  currentAdmin = JSON.parse(localStorage.getItem("currUser")) || {};
   bookings.sort(
     (a, b) => new Date(b?.pickupDate || 0) - new Date(a?.pickupDate || 0)
   );
 } catch (error) {
-  console.error(error);
+  console.error("Error parsing localStorage data:", error);
 }
 
-// ==========================================================================
-// Constants & State
-// ==========================================================================
-
-const take = 8; // el max ele hyb2a fe el saf7a 3moman
-
+const take = 8;
 const bookingStatusOptions = [
   "Pending",
   "Confirmed",
@@ -65,13 +56,11 @@ const bookingStatusOptions = [
   "Cancelled",
 ];
 
-// bn3mel zy object 3shan negm3 feeh kol el 7agat ele hnfilter 3ala asasha 3shan yeb2a readable aktar w yet3ml kolo filter m3 b3do
-
 const bookingCriteria = {
   currentPage: 1,
   searchTerm: "",
   statusFilter: "",
-  filteredData: [...bookings], //et3mlo filter foo2
+  filteredData: [...bookings],
 };
 
 const userCriteria = {
@@ -80,14 +69,10 @@ const userCriteria = {
   filteredData: [...users],
 };
 
-// ==========================================================================
-// Element References
-// ==========================================================================
-
+const htmlElement = document.documentElement;
 const reportChartCanvas = document.getElementById("reportChart");
 const peakHoursChartCanvas = document.getElementById("peakHoursChart");
 const themeToggleBtn = document.getElementById("themeToggleBtn");
-const htmlElement = document.documentElement;
 const summaryCardElements = [
   document.getElementById("summaryCard1"),
   document.getElementById("summaryCard2"),
@@ -101,7 +86,7 @@ const adminNameEl = document.getElementById("adminName");
 const adminRegDateEl = document.getElementById("adminRegDate");
 const logoutBtn = document.getElementById("logoutBtn");
 const bookingsTableBody = document.getElementById("bookingsTableBody");
-const noBookingsFilteredMessageDiv = document.getElementById(
+const noBookingsMatchCriteria = document.getElementById(
   "noBookingsFilteredMessage"
 );
 const bookingSearchInput = document.getElementById("bookingSearchInp");
@@ -109,37 +94,31 @@ const bookingStatusFilterEl = document.getElementById("bookingStatFilter");
 const bookingClearFiltersBtn = document.getElementById("bookingCriteriaClear");
 const bookingPaginationContainer = document.getElementById("bookingPagination");
 const usersTableBody = document.getElementById("usersTblBody");
-const noUsersFilteredMessageDiv = document.getElementById(
-  "noUsersFilteredMessage"
-);
+const noUsersMatchCriteria = document.getElementById("noUsersFilteredMessage");
 const userSearchInput = document.getElementById("userSearchInput");
 const userClearFiltersBtn = document.getElementById("userClearFilters");
 const userPaginationContainer = document.getElementById("userPagination");
+const adminSidenavOffcanvas = document.getElementById("adminSidenavOffcanvas");
 const ctx = reportChartCanvas.getContext("2d");
 const ctxPeak = peakHoursChartCanvas.getContext("2d");
 
-let currentTheme =
-  document.documentElement.getAttribute("data-bs-theme") || "light";
+let currentTheme = htmlElement.getAttribute("data-bs-theme") || "light";
 let isDark = currentTheme === "dark";
 let styles = getComputedStyle(document.documentElement);
-let textColor = styles.getPropertyValue(
-  isDark ? "--clr-light" : "--text-secondary"
-);
-
-let gridColor = styles.getPropertyValue(
-  isDark ? "--clr-accent-rgb" : "--clr-accent-rgb"
-);
-
 let accentColor = styles.getPropertyValue("--clr-accent");
+let accentDarker = styles.getPropertyValue("--clr-accent-darker");
 let lightColor = styles.getPropertyValue("--clr-light");
 let darkColor = styles.getPropertyValue("--clr-dark");
+let textPrimary = styles.getPropertyValue("--text-primary");
+let textSecondary = styles.getPropertyValue("--text-secondary");
+let gridColor = `rgba(${
+  isDark
+    ? styles.getPropertyValue("--clr-light-rgb")
+    : styles.getPropertyValue("--clr-dark-rgb")
+}, 0.2)`;
 
 let reportChartInstance = null;
 let peakHoursChartInstance = null;
-
-// ==========================================================================
-// Utility Functions
-// ==========================================================================
 
 function getMonthLabel(month) {
   if (!month) return "N/A";
@@ -153,7 +132,6 @@ function formatDate(stringDate) {
   return date.toLocaleDateString("en-CA");
 }
 
-// el delay 3shan tlimit el listeners ele btfire kteer (input,scroll)
 function debounce(func, delay) {
   let timeoutId;
   return function (...args) {
@@ -164,58 +142,36 @@ function debounce(func, delay) {
   };
 }
 
-// ==========================================================================
-// Theme Management
-// ==========================================================================
-
 function setTheme(theme) {
   try {
     htmlElement.setAttribute("data-bs-theme", theme);
     localStorage.setItem("theme", theme);
-    if (themeToggleBtn) {
-      themeToggleBtn.textContent =
-        theme === "dark" ? "Light Mode" : "Dark Mode";
-    }
+    currentTheme = theme;
+    isDark = theme === "dark";
+    styles = getComputedStyle(document.documentElement);
+    accentColor = styles.getPropertyValue("--clr-accent");
+    accentDarker = styles.getPropertyValue("--clr-accent-darker");
+    lightColor = styles.getPropertyValue("--clr-light");
+    darkColor = styles.getPropertyValue("--clr-dark");
+    textPrimary = styles.getPropertyValue("--text-primary");
+    textSecondary = styles.getPropertyValue("--text-secondary");
+    gridColor = `rgba(${
+      isDark
+        ? styles.getPropertyValue("--clr-light-rgb")
+        : styles.getPropertyValue("--clr-dark-rgb")
+    }, 0.2)`;
+    themeToggleBtn.innerHTML = `<i class="fas ${
+      theme === "dark" ? " fa-moon " : " fa-sun "
+    } me-1 icoo"></i> ${theme === "dark" ? "Dark Mode" : "Light Mode"}`;
     const closeBtn = toastLiveExample?.querySelector(".btn-close");
     if (closeBtn) {
-      closeBtn.classList.toggle("btn-close-white", theme === "dark");
+      closeBtn.classList.toggle("btn-close-white", isDark);
     }
-    renderCharts(); // lazem te3mel Re render lel chart 3shan ye8yr lono
+    renderCharts();
   } catch (error) {
-    console.error(error);
+    console.error("Error setting theme:", error);
   }
 }
-
-const reportDbClr = isDark
-  ? {
-      bookBorder: `color-mix(in srgb, ${accentColor}, transparent 20%)`,
-      bookBg: `color-mix(in srgb, ${accentColor}, transparent 80%)`,
-      revBorder: `color-mix(in srgb, ${lightColor}, transparent 40%)`,
-      revBg: `color-mix(in srgb, ${lightColor}, transparent 90%)`,
-    }
-  : {
-      bookBorder: `color-mix(in srgb, ${accentColor}, ${lightColor} 10%)`,
-      bookBg: `color-mix(in srgb, ${accentColor}, transparent 70%)`,
-      revBorder: `color-mix(in srgb, ${lightColor}, transparent 40%)`,
-      revBg: `color-mix(in srgb, ${lightColor}, transparent 90%)`,
-    };
-const reportDatasetColors = isDark
-  ? {
-      bookBorder: `color-mix(in srgb, ${accentColor}, transparent 20%)`,
-      bookBg: `color-mix(in srgb, ${accentColor}, transparent 80%)`,
-      revBorder: `color-mix(in srgb, ${lightColor}, transparent 40%)`,
-      revBg: `color-mix(in srgb, ${lightColor}, transparent 90%)`,
-    }
-  : {
-      bookBorder: `color-mix(in srgb, ${accentColor}, ${lightColor} 10%)`,
-      bookBg: `color-mix(in srgb, ${accentColor}, transparent 70%)`,
-      revBorder: `color-mix(in srgb, ${lightColor}, transparent 40%)`,
-      revBg: `color-mix(in srgb, ${lightColor}, transparent 90%)`,
-    };
-
-// ==========================================================================
-// Component Rendering Functions
-// ==========================================================================
 
 const chartLabels = reports.map((report) => getMonthLabel(report?.month));
 const totalBookingsData = reports.map((report) => report?.totalBookings || 0);
@@ -223,9 +179,19 @@ const totalRevenueData = reports.map((report) => report?.totalRevenue || 0);
 
 function renderCharts() {
   try {
-    const reportLabels = reports.map((r) => getMonthLabel(r?.month));
-    const reportBookings = reports.map((r) => r?.totalBookings || 0);
-    const reportRevenue = reports.map((r) => r?.totalRevenue || 0);
+    const reportDatasetColors = isDark
+      ? {
+          bookBorder: `color-mix(in srgb, ${accentColor}, transparent 20%)`,
+          bookBg: `color-mix(in srgb, ${accentColor}, transparent 80%)`,
+          revBorder: `color-mix(in srgb, ${lightColor}, transparent 40%)`,
+          revBg: `color-mix(in srgb, ${lightColor}, transparent 90%)`,
+        }
+      : {
+          bookBorder: `color-mix(in srgb, ${accentColor}, ${lightColor} 10%)`,
+          bookBg: `color-mix(in srgb, ${accentColor}, transparent 70%)`,
+          revBorder: `color-mix(in srgb, ${darkColor}, transparent 40%)`,
+          revBg: `color-mix(in srgb, ${darkColor}, transparent 90%)`,
+        };
 
     if (reportChartInstance) reportChartInstance.destroy();
     reportChartInstance = new Chart(ctx, {
@@ -236,22 +202,22 @@ function renderCharts() {
           {
             label: "Total Bookings",
             data: totalBookingsData,
-            borderColor: reportDbClr.bookBorder,
-            backgroundColor: reportDbClr.bookBg,
+            borderColor: reportDatasetColors.bookBorder,
+            backgroundColor: reportDatasetColors.bookBg,
             tension: 0.1,
             fill: true,
             yAxisID: "yBookings",
-            pointBackgroundColor: reportDbClr.bookBorder,
+            pointBackgroundColor: reportDatasetColors.bookBorder,
           },
           {
             label: "Total Revenue ($)",
             data: totalRevenueData,
-            borderColor: reportDbClr.revBorder,
-            backgroundColor: reportDbClr.revBg,
+            borderColor: reportDatasetColors.revBorder,
+            backgroundColor: reportDatasetColors.revBg,
             tension: 0.1,
             fill: true,
             yAxisID: "yRevenue",
-            pointBackgroundColor: reportDbClr.revBorder,
+            pointBackgroundColor: reportDatasetColors.revBorder,
           },
         ],
       },
@@ -260,14 +226,21 @@ function renderCharts() {
         maintainAspectRatio: false,
         plugins: {
           title: { display: false },
-          legend: { position: "top", labels: { color: lightColor } },
+          legend: {
+            position: "top",
+            labels: { color: isDark ? lightColor : textPrimary },
+          },
           tooltip: { mode: "index", intersect: false },
         },
         scales: {
           x: {
             display: true,
-            title: { display: true, text: "Month", color: lightColor },
-            ticks: { color: lightColor },
+            title: {
+              display: true,
+              text: "Month",
+              color: isDark ? lightColor : textPrimary,
+            },
+            ticks: { color: isDark ? lightColor : textPrimary },
             grid: { color: gridColor },
           },
           yBookings: {
@@ -277,10 +250,10 @@ function renderCharts() {
             title: {
               display: true,
               text: "Total Bookings",
-              color: lightColor,
+              color: isDark ? lightColor : textPrimary,
             },
             beginAtZero: true,
-            ticks: { color: lightColor },
+            ticks: { color: isDark ? lightColor : textPrimary },
             grid: { color: gridColor },
           },
           yRevenue: {
@@ -290,10 +263,10 @@ function renderCharts() {
             title: {
               display: true,
               text: "Total Revenue ($)",
-              color: lightColor,
+              color: isDark ? lightColor : textPrimary,
             },
             beginAtZero: true,
-            ticks: { color: lightColor },
+            ticks: { color: isDark ? lightColor : textPrimary },
             grid: { drawOnChartArea: false },
           },
         },
@@ -301,7 +274,6 @@ function renderCharts() {
       },
     });
 
-    ////////
     const peakHourSlots = reports
       .reduce((slots, report) => {
         if (report?.peakHours) {
@@ -312,23 +284,25 @@ function renderCharts() {
         return slots;
       }, [])
       .sort();
+
     const barColors = isDark
       ? [
           `color-mix(in srgb, ${accentColor}, transparent 30%)`,
-          `color-mix(in srgb, ${lightColor}, transparent 50%)`,
           `color-mix(in srgb, ${accentColor}, transparent 50%)`,
-          `color-mix(in srgb, ${lightColor}, transparent 70%)`,
+          `color-mix(in srgb, ${accentDarker}, transparent 50%)`,
           `color-mix(in srgb, ${accentColor}, transparent 70%)`,
-          `color-mix(in srgb, ${lightColor}, transparent 85%)`,
+          `color-mix(in srgb, ${accentDarker}, transparent 70%)`,
+          `color-mix(in srgb, ${accentColor}, transparent 85%)`,
         ]
       : [
           `color-mix(in srgb, ${accentColor}, ${darkColor} 15%)`,
+          `color-mix(in srgb, ${accentColor}, ${darkColor} 25%)`,
           `color-mix(in srgb, ${accentColor}, ${darkColor} 35%)`,
           `color-mix(in srgb, ${accentColor}, ${darkColor} 50%)`,
           `color-mix(in srgb, ${accentColor}, ${darkColor} 65%)`,
-          `color-mix(in srgb, ${accentColor}, ${darkColor} 75%)`,
           `color-mix(in srgb, ${accentColor}, ${darkColor} 85%)`,
         ];
+
     const peakHoursDatasets = peakHourSlots.map((slot, index) => {
       const data = reports.map((report) => report?.peakHours?.[slot] || 0);
       return {
@@ -347,14 +321,21 @@ function renderCharts() {
         maintainAspectRatio: false,
         plugins: {
           title: { display: false },
-          legend: { position: "top", labels: { color: lightColor } },
+          legend: {
+            position: "top",
+            labels: { color: isDark ? lightColor : textPrimary },
+          },
           tooltip: { mode: "index", intersect: false },
         },
         scales: {
           x: {
             stacked: false,
-            title: { display: true, text: "Month", color: lightColor },
-            ticks: { color: lightColor },
+            title: {
+              display: true,
+              text: "Month",
+              color: isDark ? lightColor : textPrimary,
+            },
+            ticks: { color: isDark ? lightColor : textPrimary },
             grid: { color: gridColor },
           },
           y: {
@@ -363,9 +344,9 @@ function renderCharts() {
             title: {
               display: true,
               text: "Number of Bookings",
-              color: lightColor,
+              color: isDark ? lightColor : textPrimary,
             },
-            ticks: { color: lightColor },
+            ticks: { color: isDark ? lightColor : textPrimary },
             grid: { color: gridColor },
           },
         },
@@ -373,7 +354,7 @@ function renderCharts() {
       },
     });
   } catch (error) {
-    console.error(error);
+    console.error("Error rendering charts:", error);
   }
 }
 
@@ -390,35 +371,35 @@ function renderSummaryCards() {
     const latestMonthLabel = getMonthLabel(latestReport?.month);
 
     summaryCardElements[0].innerHTML = `
-            <div class="col-7">
-                <h4 class="mb-0 h6 text-clr-on-dark-bg">Total Bookings</h4>
-                <p class="mb-0 small text-clr-muted-on-dark-bg">Sum across reports</p>
-            </div>
-            <div class="col-5 text-center"><h2 class="summary-card-value mb-0">${totalBookings}</h2></div>`;
+      <div class="col-7">
+        <h4 class="mb-0 h6 text-clr-primary">Total Bookings</h4>
+        <p class="mb-0 small text-clr-secondary">Sum across reports</p>
+      </div>
+      <div class="col-5 text-center"><h2 class="summary-card-value mb-0">${totalBookings}</h2></div>`;
     summaryCardElements[1].innerHTML = `
-            <div class="col-7">
-                <h4 class="mb-0 h6 text-clr-on-dark-bg">Total Revenue</h4>
-                <p class="mb-0 small text-clr-muted-on-dark-bg">Sum across reports</p>
-            </div>
-            <div class="col-5 text-center"><h2 class="summary-card-value mb-0">$${totalRevenue}</h2></div>`;
+      <div class="col-7">
+        <h4 class="mb-0 h6 text-clr-primary">Total Revenue</h4>
+        <p class="mb-0 small text-clr-secondary">Sum across reports</p>
+      </div>
+      <div class="col-5 text-center"><h2 class="summary-card-value mb-0">$${totalRevenue}</h2></div>`;
     summaryCardElements[2].innerHTML = `
-            <div class="col-7">
-                <h4 class="mb-0 h6 text-clr-on-dark-bg">Total Users</h4>
-                <p class="mb-0 small text-clr-muted-on-dark-bg">Registered users count</p>
-            </div>
-            <div class="col-5 text-center"><h2 class="summary-card-value mb-0">${totalUsers}</h2></div>`;
+      <div class="col-7">
+        <h4 class="mb-0 h6 text-clr-primary">Total Users</h4>
+        <p class="mb-0 small text-clr-secondary">Registered users count</p>
+      </div>
+      <div class="col-5 text-center"><h2 class="summary-card-value mb-0">${totalUsers}</h2></div>`;
     summaryCardElements[3].innerHTML = `
-            <div class="col-7">
-                <h4 class="mb-0 h6 text-clr-on-dark-bg">Bookings (${
-                  latestReport ? latestMonthLabel : "N/A"
-                })</h4>
-                <p class="mb-0 small text-clr-muted-on-dark-bg">Latest report month</p>
-            </div>
-            <div class="col-5 text-center"><h2 class="summary-card-value mb-0">${
-              latestReport ? latestBookings : "N/A"
-            }</h2></div>`;
+      <div class="col-7">
+        <h4 class="mb-0 h6 text-clr-primary">Bookings (${
+          latestReport ? latestMonthLabel : "N/A"
+        })</h4>
+        <p class="mb-0 small text-clr-secondary">Latest report month</p>
+      </div>
+      <div class="col-5 text-center"><h2 class="summary-card-value mb-0">${
+        latestReport ? latestBookings : "N/A"
+      }</h2></div>`;
   } catch (error) {
-    console.error(error);
+    console.error("Error rendering summary cards:", error);
   }
 }
 
@@ -448,33 +429,33 @@ function renderTopCustomers() {
       .sort((a, b) => b.count - a.count || b.revenue - a.revenue)
       .slice(0, 5);
 
-    customerListDiv.innerHTML = ""; // Clear previous
+    customerListDiv.innerHTML = "";
     if (topCustomers.length > 0) {
       noCustomersMessageDiv.style.display = "none";
       topCustomers.forEach((customer) => {
         customerListDiv.innerHTML += `
-                    <div class="data-card d-flex flex-row justify-content-between align-items-center p-2 mb-2 rounded shadow-sm border-standard">
-                        <div class="col-7 col-md-8">
-                            <h6 class="mb-0 text-truncate text-clr-primary" title="${
-                              customer.name
-                            }">${customer.name}</h6>
-                            <p class="text-clr-secondary mb-0 small">${
-                              customer.count
-                            } booking${customer.count !== 1 ? "s" : ""}</p>
-                        </div>
-                        <div class="col-5 col-md-4 text-end">
-                            <h6 class="revenue-amount mb-0 fw-bold">$${customer.revenue.toFixed(
-                              2
-                            )}</h6>
-                        </div>
-                    </div>`;
+          <div class="data-card d-flex flex-row justify-content-between align-items-center p-2 mb-2 rounded shadow-sm border-standard">
+            <div class="col-7 col-md-8">
+              <h6 class="mb-0 text-truncate text-clr-primary" title="${
+                customer.name
+              }">${customer.name}</h6>
+              <p class="text-clr-secondary mb-0 small">${
+                customer.count
+              } booking${customer.count !== 1 ? "s" : ""}</p>
+            </div>
+            <div class="col-5 col-md-4 text-end">
+              <h6 class="revenue-amount mb-0 fw-bold text-clr-accent">$${customer.revenue.toFixed(
+                2
+              )}</h6>
+            </div>
+          </div>`;
       });
     } else {
       noCustomersMessageDiv.textContent = "No valid customer booking data.";
       noCustomersMessageDiv.style.display = "block";
     }
   } catch (error) {
-    console.error(error);
+    console.error("Error rendering top customers:", error);
   }
 }
 
@@ -491,7 +472,7 @@ function populateAdminInfo() {
     adminAvatarImg.src = avatar;
     adminAvatarImg.alt = `${name}'s Avatar`;
   } catch (error) {
-    console.error(error);
+    console.error("Error populating admin info:", error);
   }
 }
 
@@ -502,15 +483,14 @@ function renderPaginationControls(containerId, currentPage, totalPages) {
 
   let paginationHTML =
     '<ul class="pagination pagination-sm justify-content-center">';
-
   paginationHTML += `
-        <li class="page-item ${currentPage === 1 ? "disabled" : ""}">
-            <button class="page-link" data-page="${
-              currentPage - 1
-            }" aria-label="Previous">
-                <span aria-hidden="true">«</span>
-            </button>
-        </li>`;
+    <li class="page-item ${currentPage === 1 ? "disabled" : ""}">
+      <button class="page-link" data-page="${
+        currentPage - 1
+      }" aria-label="Previous">
+        <i class="fas fa-chevron-left icoo"></i>
+      </button>
+    </li>`;
 
   const maxPages = 5;
   let start = Math.max(1, currentPage - Math.floor(maxPages / 2));
@@ -531,6 +511,7 @@ function renderPaginationControls(containerId, currentPage, totalPages) {
       i === currentPage ? "active" : ""
     }"><button class="page-link" data-page="${i}">${i}</button></li>`;
   }
+
   if (end < totalPages) {
     if (end < totalPages - 1) {
       paginationHTML += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
@@ -539,14 +520,13 @@ function renderPaginationControls(containerId, currentPage, totalPages) {
   }
 
   paginationHTML += `
-        <li class="page-item ${currentPage === totalPages ? "disabled" : ""}">
-            <button class="page-link" data-page="${
-              currentPage + 1
-            }" aria-label="Next">
-                <span aria-hidden="true">»</span>
-            </button>
-        </li>`;
-
+    <li class="page-item ${currentPage === totalPages ? "disabled" : ""}">
+      <button class="page-link" data-page="${
+        currentPage + 1
+      }" aria-label="Next">
+        <i class="fas fa-chevron-right icoo"></i>
+      </button>
+    </li>`;
   paginationHTML += "</ul>";
   paginationContainer.innerHTML = paginationHTML;
 
@@ -566,7 +546,7 @@ function populateBookingStatusFilter() {
     bookingStatusFilterEl.innerHTML = optionsHTML;
     bookingStatusFilterEl.value = currentVal;
   } catch (error) {
-    console.error(error);
+    console.error("Error populating booking status filter:", error);
   }
 }
 
@@ -588,7 +568,7 @@ function filterAndPaginateBookings() {
     });
     renderBookingsPage(bookingCriteria.currentPage);
   } catch (error) {
-    console.error(error);
+    console.error("Error filtering bookings:", error);
   }
 }
 
@@ -596,7 +576,6 @@ function renderBookingsPage(pageNum) {
   try {
     const totalItems = bookingCriteria.filteredData.length;
     const totalPages = Math.ceil(totalItems / take);
-
     bookingCriteria.currentPage = Math.max(
       1,
       Math.min(pageNum, totalPages || 1)
@@ -611,7 +590,7 @@ function renderBookingsPage(pageNum) {
 
     let tableHTML = "";
     if (displayedBookings.length > 0) {
-      noBookingsFilteredMessageDiv.style.display = "none";
+      noBookingsMatchCriteria.style.display = "none";
       displayedBookings.forEach((booking) => {
         const currentStatus = (booking?.status || "pending").toLowerCase();
         const optionsHTML = bookingStatusOptions
@@ -623,38 +602,32 @@ function renderBookingsPage(pageNum) {
           )
           .join("");
         tableHTML += `
-                    <tr class="border-standard">
-                        <td class="text-clr-secondary">${
-                          booking?.id || "N/A"
-                        }</td>
-                        <td class="text-clr-primary">${
-                          booking?.customerName || "N/A"
-                        }</td>
-                        <td class="text-clr-secondary">${
-                          booking?.carId || "N/A"
-                        }</td>
-                        <td class="text-clr-secondary">${formatDate(
-                          booking?.pickupDate
-                        )}</td>
-                        <td class="text-clr-secondary">${formatDate(
-                          booking?.dropoffDate
-                        )}</td>
-                        <td class="booking-amount fw-bold">$${(
-                          booking?.totalAmount || 0
-                        ).toFixed(2)}</td>
-                        <td>
-                            <select class="form-select form-select-sm" data-booking-id="${
-                              booking?.id || ""
-                            }" aria-label="Booking Status">
-                                ${optionsHTML}
-                            </select>
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-action-primary btn-update-status" data-booking-id="${
-                              booking?.id || ""
-                            }">Update</button>
-                        </td>
-                    </tr>`;
+          <tr class="border-standard text-center">
+            <td class="text-clr-secondary">${booking?.id || "N/A"}</td>
+            <td class="text-clr-primary">${booking?.customerName || "N/A"}</td>
+            <td class="text-clr-secondary">${booking?.carId || "N/A"}</td>
+            <td class="text-clr-secondary">${formatDate(
+              booking?.pickupDate
+            )}</td>
+            <td class="text-clr-secondary">${formatDate(
+              booking?.dropoffDate
+            )}</td>
+            <td class="booking-amount fw-bold text-clr-accent">$${(
+              booking?.totalAmount || 0
+            ).toFixed(2)}</td>
+            <td>
+              <select class="form-select form-select-sm bg-clr-card text-clr-primary border-standard" data-booking-id="${
+                booking?.id || ""
+              }" aria-label="Booking Status">
+                ${optionsHTML}
+              </select>
+            </td>
+            <td>
+              <button class="btn btn-sm btn-action-primary btn-update-status" data-booking-id="${
+                booking?.id || ""
+              }"><i class="fas fa-sync-alt me-1 icoo"></i> Update</button>
+            </td>
+          </tr>`;
       });
     } else {
       tableHTML = `<tr><td colspan="8" class="text-center text-clr-muted-on-dark-bg p-3">No bookings found${
@@ -662,7 +635,7 @@ function renderBookingsPage(pageNum) {
           ? " matching filters"
           : ""
       }.</td></tr>`;
-      noBookingsFilteredMessageDiv.style.display = "none";
+      noBookingsMatchCriteria.style.display = "none";
     }
     bookingsTableBody.innerHTML = tableHTML;
     renderPaginationControls(
@@ -671,7 +644,7 @@ function renderBookingsPage(pageNum) {
       totalPages
     );
   } catch (error) {
-    console.error(error);
+    console.error("Error rendering bookings page:", error);
   }
 }
 
@@ -689,7 +662,7 @@ function filterAndPaginateUsers() {
     });
     renderUsersPage(userCriteria.currentPage);
   } catch (error) {
-    console.error(error);
+    console.error("Error filtering users:", error);
   }
 }
 
@@ -708,43 +681,39 @@ function renderUsersPage(pageNum) {
 
     let tableHTML = "";
     if (displayedUsers.length > 0) {
-      if (noUsersFilteredMessageDiv)
-        noUsersFilteredMessageDiv.style.display = "none";
+      if (noUsersMatchCriteria) noUsersMatchCriteria.style.display = "none";
       displayedUsers.forEach((user) => {
         const isAdmin = (user?.role || "").toLowerCase() === "admin";
         const badgeClass = isAdmin
           ? "bg-clr-accent text-clr-on-accent"
-          : "bg-secondary text-body-secondary";
-        const actionButtonHTML = !isAdmin
+          : "bg-clr-card text-clr-secondary";
+        const promoteBtn = !isAdmin
           ? `<button class="btn btn-sm btn-action-primary btn-promote-user" data-user-id="${
               user?.id || ""
-            }" title="Promote to Admin"><i class="fas fa-user-shield me-1"></i> Promote</button>`
-          : `<button class="btn btn-sm btn-secondary" disabled title="Already Admin"><i class="fas fa-check-circle me-1"></i> Admin</button>`;
+            }" title="Promote to Admin"><i class="fas fa-user-shield me-1 icoo"></i> Promote</button>`
+          : `<button class="btn btn-sm btn-secondary text-clr-muted-on-dark-bg" disabled title="Already Admin"><i class="fas fa-check-circle me-1 icoo"></i> Admin</button>`;
 
         tableHTML += `
-                    <tr class="border-standard">
-                        <td class="text-clr-secondary">${user?.id || "N/A"}</td>
-                        <td class="text-clr-primary fw-medium">${
-                          user?.username || "N/A"
-                        }</td>
-                        <td class="text-clr-secondary">${
-                          user?.email || "N/A"
-                        }</td>
-                        <td><span class="badge rounded-pill ${badgeClass}">${
+          <tr class="border-standard text-center">
+            <td class="text-clr-secondary">${user?.id || "N/A"}</td>
+            <td class="text-clr-primary fw-medium">${
+              user?.username || "N/A"
+            }</td>
+            <td class="text-clr-secondary">${user?.email || "N/A"}</td>
+            <td><span class="badge rounded-pill ${badgeClass}">${
           user?.role || "N/A"
         }</span></td>
-                        <td class="text-clr-secondary">${formatDate(
-                          user?.registeredAt
-                        )}</td>
-                        <td>${actionButtonHTML}</td>
-                    </tr>`;
+            <td class="text-clr-secondary">${formatDate(
+              user?.registeredAt
+            )}</td>
+            <td>${promoteBtn}</td>
+          </tr>`;
       });
     } else {
       tableHTML = `<tr><td colspan="6" class="text-center text-clr-muted-on-dark-bg p-3">No users found${
         userCriteria.searchTerm ? " matching search" : ""
       }.</td></tr>`;
-      if (noUsersFilteredMessageDiv)
-        noUsersFilteredMessageDiv.style.display = "none";
+      if (noUsersMatchCriteria) noUsersMatchCriteria.style.display = "none";
     }
     usersTableBody.innerHTML = tableHTML;
     renderPaginationControls(
@@ -753,13 +722,9 @@ function renderUsersPage(pageNum) {
       totalPages
     );
   } catch (error) {
-    console.error(error);
+    console.error("Error rendering users page:", error);
   }
 }
-
-// ==========================================================================
-// Event Handlers
-// ==========================================================================
 
 function handleUpdateBookingStatus(event) {
   try {
@@ -770,7 +735,6 @@ function handleUpdateBookingStatus(event) {
     const statusSelect = document.querySelector(
       `select[data-booking-id="${bookingId}"]`
     );
-
     const newStatus = statusSelect.value;
     const bookingIndex = bookings.findIndex((b) => b?.id === bookingId);
 
@@ -781,7 +745,7 @@ function handleUpdateBookingStatus(event) {
       filterAndPaginateBookings();
     }
   } catch (error) {
-    console.error(error);
+    console.error("Error updating booking status:", error);
   }
 }
 
@@ -791,7 +755,6 @@ function handlePromoteUser(event) {
     if (!button) return;
 
     const userId = parseInt(button.dataset.userId);
-
     const userIndex = users.findIndex((u) => u?.id === userId);
     if (userIndex > -1) {
       const username = users[userIndex]?.username || `ID: ${userId}`;
@@ -804,7 +767,7 @@ function handlePromoteUser(event) {
       }
     }
   } catch (error) {
-    console.error(error);
+    console.error("Error promoting user:", error);
   }
 }
 
@@ -818,7 +781,7 @@ function handlePaginationClick(event) {
       else if (containerId === "userPagination") renderUsersPage(pageNum);
     }
   } catch (error) {
-    console.error(error);
+    console.error("Error handling pagination click:", error);
   }
 }
 
@@ -834,26 +797,18 @@ function handleLogout() {
       }, 1500);
     }
   } catch (error) {
-    console.error(error);
+    console.error("Error handling logout:", error);
   }
 }
 
-// ==========================================================================
-// Event Listeners Setup
-// ==========================================================================
-
 function setupEventListeners() {
   try {
-    ///////////
     themeToggleBtn.addEventListener("click", () => {
-      currentTheme = htmlElement.getAttribute("data-bs-theme");
       setTheme(currentTheme === "dark" ? "light" : "dark");
     });
 
-    ////////////
     logoutBtn.addEventListener("click", handleLogout);
 
-    /////////////
     bookingSearchInput.addEventListener(
       "input",
       debounce(() => {
@@ -861,26 +816,23 @@ function setupEventListeners() {
         filterAndPaginateBookings();
       }, 350)
     );
-    ///////////
+
     bookingStatusFilterEl.addEventListener("change", () => {
       bookingCriteria.currentPage = 1;
       filterAndPaginateBookings();
     });
-    ///////////
+
     bookingClearFiltersBtn.addEventListener("click", () => {
-      if (bookingSearchInput) bookingSearchInput.value = "";
-      if (bookingStatusFilterEl) bookingStatusFilterEl.value = "";
+      bookingSearchInput.value = "";
+      bookingStatusFilterEl.value = "";
       bookingCriteria.currentPage = 1;
       bookingCriteria.searchTerm = "";
       bookingCriteria.statusFilter = "";
       filterAndPaginateBookings();
       showToast("Booking filters cleared.", "info");
     });
-    ////////
 
     bookingsTableBody.addEventListener("click", handleUpdateBookingStatus);
-
-    ///////
 
     userSearchInput.addEventListener(
       "input",
@@ -889,46 +841,31 @@ function setupEventListeners() {
         filterAndPaginateUsers();
       }, 350)
     );
-    ////////////
 
     userClearFiltersBtn.addEventListener("click", () => {
-      if (userSearchInput) userSearchInput.value = "";
+      userSearchInput.value = "";
       userCriteria.currentPage = 1;
       userCriteria.searchTerm = "";
       filterAndPaginateUsers();
       showToast("User filter cleared.", "info");
     });
-    ///////////
-
     usersTableBody.addEventListener("click", handlePromoteUser);
-
-    //////////////
-
-    if (!bookingPaginationContainer.dataset.listenerAttached) {
-      bookingPaginationContainer.addEventListener(
-        "click",
-        handlePaginationClick
-      );
-      bookingPaginationContainer.dataset.listenerAttached = "true";
-    }
-    if (!userPaginationContainer.dataset.listenerAttached) {
-      userPaginationContainer.addEventListener("click", handlePaginationClick);
-      userPaginationContainer.dataset.listenerAttached = "true";
-    }
   } catch (error) {
-    console.error(error);
+    console.error("Error setting up event listeners:", error);
   }
 }
-
-// ==========================================================================
-// Initialization
-// ==========================================================================
 
 function initializeDashboard() {
   console.log("Initializing dashboard...");
   try {
-    setTheme(savedTheme || (prefersDark ? "dark" : "light"));
+    setTheme(
+      savedTheme ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light")
+    );
     populateBookingStatusFilter();
+    renderCharts();
     renderSummaryCards();
     renderTopCustomers();
     populateAdminInfo();
@@ -936,7 +873,7 @@ function initializeDashboard() {
     renderUsersPage(1);
     setupEventListeners();
   } catch (error) {
-    console.error(error);
+    console.error("Error initializing dashboard:", error);
   }
 }
 

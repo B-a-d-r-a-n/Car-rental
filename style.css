@@ -4,101 +4,81 @@ body {
 }
 
 :root {
-  /* --- Base Colors (Unchanged) --- */
+  /* ===== LIGHT MODE ===== */
   --clr-accent: #f5b754; /* Warm yellow/orange */
   --clr-dark: #1b1b1b; /* Very dark gray */
   --clr-light: #ffffff; /* Pure white */
-
-  /* --- Derived & Utility Colors --- */
   --clr-light-darker: #f8f9fa; /* Slightly off-white for less glare */
   --clr-accent-rgb: 245, 183, 84;
   --clr-dark-rgb: 27, 27, 27;
   --clr-light-rgb: 255, 255, 255;
-  --clr-accent-darker: #d99a36; /* Slightly adjusted darker accent for potentially better contrast */
-
-  /* ===== LIGHT MODE ===== */
-
-  /* --- Text --- */
-  --text-primary: var(--clr-dark); /* Dark text */
-  --text-secondary: rgba(
-    var(--clr-dark-rgb),
-    0.7
-  ); /* Darker gray, slightly more opaque */
-  --text-accent: var(--clr-accent-darker); /* Darker accent color for text */
+  --clr-accent-darker: #e0a43f; /* Richer accent for better contrast */
+  --text-primary: var(--clr-dark); /* Dark text for high contrast */
+  --text-secondary: rgba(var(--clr-dark-rgb), 0.65); /* Softer dark gray */
+  --text-accent: var(--clr-accent); /* Accent for text */
   --text-on-accent: var(--clr-dark); /* Dark text on accent bg */
   --text-on-dark-bg: var(--clr-light); /* White text on dark elements */
-  --text-muted-on-dark-bg: rgba(
-    var(--clr-light-rgb),
-    0.75
-  ); /* Muted white on dark elements */
-
-  /* --- Backgrounds --- */
+  --text-muted-on-dark-bg: rgba(var(--clr-light-rgb), 0.7); /* Muted white */
   --bg-page: var(--clr-light-darker); /* Off-white page background */
-  --bg-panel: var(--clr-dark); /* Dark panel background */
+  --bg-panel: var(--clr-light); /* White panel background */
   --bg-card: var(--clr-light); /* White card background */
   --bg-table-header: var(--clr-dark); /* Dark table header */
-  --bg-table-row-odd: rgba(
-    var(--clr-dark-rgb),
-    0.04
-  ); /* Subtle dark tint for odd rows */
-
-  /* --- Borders --- */
-  --border-color: rgba(
-    var(--clr-dark-rgb),
-    0.15
-  ); /* Standard light gray border */
-  /* Panel border slightly lighter than panel bg to differentiate from page */
+  --bg-table-row-odd: rgba(var(--clr-dark-rgb), 0.05); /* Subtle dark tint */
+  --border-color: rgba(var(--clr-dark-rgb), 0.2); /* Light gray border */
   --border-color-panel: color-mix(
     in srgb,
-    var(--clr-dark),
-    var(--clr-light) 10%
+    var(--clr-light),
+    var(--clr-dark) 10%
   );
   --border-color-accent: var(--clr-accent); /* Accent color border */
-  --clr-accent-opacity: rgba(var(--clr-accent), 1); /* Accent color border */
+  --clr-accent-opacity: rgba(var(--clr-accent), 1); /* Full opacity accent */
 }
 
 [data-bs-theme="dark"] {
   /* ===== DARK MODE ===== */
-
-  /* --- Text --- */
-  --text-primary: var(--clr-light); /* White text */
-  --text-secondary: rgba(
-    var(--clr-light-rgb),
-    0.8
-  ); /* Brighter secondary text */
-  --text-accent: var(--clr-accent); /* Accent color for text */
+  --clr-accent: #f5b754;
+  --clr-dark: #1b1b1b;
+  --clr-light: #ffffff;
+  --clr-light-darker: #2a2a2a; /* Darker shade for panels */
+  --clr-accent-rgb: 245, 183, 84;
+  --clr-dark-rgb: 27, 27, 27;
+  --clr-light-rgb: 255, 255, 255;
+  --clr-accent-darker: #e0a43f; /* Richer accent */
+  --text-primary: #e0e0e0; /* Soft white */
+  --text-secondary: rgba(var(--clr-light-rgb), 0.65); /* Muted light gray */
+  --text-accent: var(--clr-accent); /* Vibrant accent */
   --text-on-accent: var(--clr-dark); /* Dark text on accent bg */
-  --text-on-dark-bg: var(
-    --clr-light
-  ); /* White text on dark (same as primary) */
+  --text-on-dark-bg: var(--clr-light); /* White text */
   --text-muted-on-dark-bg: rgba(
     var(--clr-light-rgb),
-    0.65
-  ); /* Dimmer muted text */
-
-  /* --- Backgrounds --- */
-  --bg-page: var(--clr-dark); /* Dark page background */
-  /* Slightly increased contrast steps for backgrounds */
-  --bg-panel: color-mix(in srgb, var(--clr-dark), var(--clr-light) 8%);
-  --bg-card: color-mix(in srgb, var(--clr-dark), var(--clr-light) 12%);
-  --bg-table-header: color-mix(in srgb, var(--clr-dark), var(--clr-light) 16%);
-  --bg-table-row-odd: rgba(
-    var(--clr-light-rgb),
-    0.05
-  ); /* Slightly more visible odd row tint */
-
-  /* --- Borders --- */
-  --border-color: rgba(
-    var(--clr-light-rgb),
-    0.2
-  ); /* More visible standard border */
-  --border-color-panel: rgba(
-    var(--clr-light-rgb),
-    0.2
-  ); /* Consistent panel border */
+    0.6
+  ); /* Softer muted text */
+  --bg-page: var(--clr-dark); /* Deep dark page background */
+  --bg-panel: var(--clr-light-darker); /* Lighter dark for panels */
+  --bg-card: #222222; /* Distinct dark for cards */
+  --bg-table-header: var(--clr-accent-darker); /* Accent-tinted table header */
+  --bg-table-row-odd: rgba(var(--clr-light-rgb), 0.05); /* Subtle light tint */
+  --border-color: rgba(var(--clr-light-rgb), 0.2); /* Light gray border */
+  --border-color-panel: color-mix(
+    in srgb,
+    var(--clr-light-darker),
+    var(--clr-light) 10%
+  );
   --border-color-accent: var(--clr-accent); /* Accent color border */
+  --clr-accent-opacity: rgba(
+    var(--clr-accent),
+    0.9
+  ); /* Slightly transparent accent */
 }
 
+body {
+  font-family: "Outfit", sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Utility Classes */
 .text-clr-primary {
   color: var(--text-primary) !important;
 }
@@ -117,13 +97,6 @@ body {
 .text-clr-muted-on-dark-bg {
   color: var(--text-muted-on-dark-bg) !important;
 }
-
-.bg-clr-primary {
-  background-color: var(--text-primary) !important;
-}
-.bg-clr-secondary {
-  background-color: var(--text-secondary) !important;
-}
 .bg-clr-accent {
   background-color: var(--clr-accent) !important;
 }
@@ -136,7 +109,6 @@ body {
 .bg-clr-card {
   background-color: var(--bg-card) !important;
 }
-
 .border-clr-accent {
   border-color: var(--border-color-accent) !important;
 }
@@ -144,23 +116,19 @@ body {
   border: 1px solid var(--border-color);
 }
 
-body {
-  background-color: var(--bg-page);
-  color: var(--text-primary);
-}
-
+/* Loading Screen */
 .loading-screen {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(var(--clr-light-rgb), 0.95);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  transition: opacity 1s ease-out;
+  transition: opacity 0.5s ease-out;
 }
 
 .loading-screen.hidden {
@@ -169,12 +137,12 @@ body {
 }
 
 .spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid var(--clr-accent-darker);
-  border-top: 5px solid var(--clr-light);
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--clr-accent-darker);
+  border-top: 4px solid var(--clr-light);
   border-radius: 50%;
-  animation: spin 2s linear infinite;
+  animation: spin 1.5s linear infinite;
 }
 
 @keyframes spin {
@@ -185,15 +153,48 @@ body {
     transform: rotate(360deg);
   }
 }
-.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-.bd-example-toasts {
-  top: 0;
-  right: 0;
+
+/* Toast Container */
+.toast-container {
+  z-index: 1055;
 }
 
+.toast {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.toast.text-bg-success {
+  background-color: var(--clr-accent) !important;
+  color: var(--text-on-accent) !important;
+}
+
+.toast.text-bg-success .icoo {
+  color: var(--text-on-accent) !important;
+}
+
+.toast.text-bg-danger {
+  background-color: #dc3545 !important;
+  color: var(--clr-light) !important;
+}
+
+.toast.text-bg-danger .icoo {
+  color: var(--clr-light) !important;
+}
+
+.toast.text-bg-info {
+  background-color: var(--bg-panel) !important;
+  color: var(--text-primary) !important;
+}
+
+.toast.text-bg-info .icoo {
+  color: var(--text-accent) !important;
+}
+
+.toast .btn-close {
+  filter: brightness(1.5);
+}
 /*   Specific  */
 
 html {
