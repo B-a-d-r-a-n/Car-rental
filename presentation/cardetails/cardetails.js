@@ -1,7 +1,45 @@
+const urlParams = new URLSearchParams(window.location.search);
+const carId = urlParams.get('id');
+document.querySelector(".rent-now-btn").setAttribute("data-id", carId);
+
+// Get cars data from localStorage
+const cars = JSON.parse(localStorage.getItem('cars'));
+const car = cars.find(c => c.id == carId); // Find the car by id
+
+if (car) {
+  // Update page content with car data
+  document.getElementById('rentalByDay').innerText = car.rentPerDay + "$";
+  document.getElementById('car-brands').innerText = car.brand;
+  document.getElementById('car-model').innerText = car.model;
+  document.getElementById('car-type').innerText = car.type;
+  document.getElementById('car-deposit').innerText = car.rentalTerms.deposit + "$";
+  document.getElementById('car-age').innerText = car.rentalTerms.minAge;
+
+  const gallery = document.getElementById('car-gallery');
+  const image = document.createElement("img");
+  image.setAttribute("src", car.image);
+  gallery.append(image);
+} else {
+  // Handle case where no car is found with the given id
+  alert('Car not found!');
+}
+
 document.querySelectorAll(".rent-now-btn").forEach((button) => {
   button.addEventListener("click", function (e) {
     e.preventDefault();
     const carId = this.getAttribute("data-id");
-    window.location.href = `../bookingForm/bookingForm.html?carId=${carId}`;
+    const car = cars.find(c => c.id == carId); // Get car data again on button click
+
+    if (car && car.isAvailable) {
+      // If car is available, redirect to booking form
+      window.location.href = `../bookingForm/bookingForm.html?carId=${carId}`;
+    } else {
+      // Show SweetAlert if the car is not available
+      Swal.fire({
+        icon: "error",
+        title: "Sorry!",
+        text: "This car is no longer available. Please choose another one.",
+      });
+    }
   });
 });

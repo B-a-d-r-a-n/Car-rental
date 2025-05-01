@@ -1,68 +1,58 @@
+// Load bookings, users, and cars from localStorage
 const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+const users = JSON.parse(localStorage.getItem("users")) || [];
+const cars = JSON.parse(localStorage.getItem("cars")) || [];
 
-const historyContainer = document.getElementById("history-list");
+// Assuming user is logged in and we have their userId stored in localStorage
+const userId = localStorage.getItem("userId");  // Correct way to get userId
 
-if (bookings.length === 0) {
-  historyContainer.innerHTML = `
-    <div class="alert alert-warning text-center">
-      You have no bookings history yet.
-    </div>
-  `;
-} else {
-  const cars = JSON.parse(localStorage.getItem("cars")) || [];
+if (!userId) {
+  alert("User is not logged in.");
+  return;  // Stop execution if user is not logged in
+}
 
-  let tableHTML = `
-    <div class="table-responsive">
-      <table class="table table-striped align-middle text-center">
-        <thead class="table-dark">
-          <tr>
-            <th>Car</th>
-            <th>Customer Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Pickup Date</th>
-            <th>Return Date</th>
-            <th>Total Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-  `;
+// Filter bookings for the logged-in user
+const userBookings = bookings.filter(booking => booking.userId === userId);
 
-  bookings.forEach((booking) => {
-    const selectedCar = cars.find((car) => car.id == booking.carId);
+// Display user bookings
+if (userBookings.length > 0) {
+  const bookingsList = document.getElementById("bookings-list");
 
-    if (selectedCar) {
-      const pickupDate = new Date(booking.pickupDate);
-      const dropoffDate = new Date(booking.dropoffDate);
-      tableHTML += `
-        <tr>
-          <td>${selectedCar.brand} ${selectedCar.model}</td>
-          <td>${booking.customerName}</td>
-          <td>${booking.customerEmail}</td>
-          <td>${booking.customerPhone}</td>
-<td>${pickupDate.getFullYear()}/${(pickupDate.getMonth() + 1)
-        .toString()
-        .padStart(2, "0")}/${pickupDate
-        .getDate()
-        .toString()
-        .padStart(2, "0")}</td>
-<td>${dropoffDate.getFullYear()}/${(dropoffDate.getMonth() + 1)
-        .toString()
-        .padStart(2, "0")}/${dropoffDate
-        .getDate()
-        .toString()
-        .padStart(2, "0")}</td>
-          <td>$${booking.totalAmount}</td>
-        </tr>
+  userBookings.forEach(booking => {
+    // Find the car details for this booking
+    const car = cars.find(car => car.id === booking.carId);
+    if (car) {
+      // Create a div for each booking item
+      const bookingItem = document.createElement("div");
+      bookingItem.classList.add("booking-item");
+      bookingItem.innerHTML = `
+        <h3>Booking Reference: ${booking.bookingReference}</h3>
+        <p><strong>Car:</strong> ${car.brand} ${car.model}</p>
+        <p><strong>Status:</strong> ${booking.status}</p>
+        <p><strong>Pickup Date:</strong> ${booking.pickupDate}</p>
+        <p><strong>Dropoff Date:</strong> ${booking.dropoffDate}</p>
+        <p><strong>Total Amount:</strong> $${booking.totalAmount}</p>
       `;
+      bookingsList.appendChild(bookingItem);
+    } else {
+      console.log("Car not found for booking:", booking);
     }
   });
-
-  tableHTML += `
-        </tbody>
-      </table>
-    </div>
-  `;
-
-  historyContainer.innerHTML = tableHTML;
+} else {
+  document.getElementById("bookings-list").innerHTML = "<p>No bookings found.</p>";
 }
+
+// Decrease available stock for cars based on completed bookings
+userBookings.forEach(booking => {
+  const car = cars.find(car => car.id === booking.carId);
+  if (car && car.availableStock > 0) {
+    car.availableStock--;
+    // If no cars left, mark as unavailable
+    if (car.availableStock === 0) {
+      car.isAvailable = false;
+    }
+  }
+});
+
+// Save updated cars array to localStorage
+localStorage.setItem("cars", JSON.stringify(cars));

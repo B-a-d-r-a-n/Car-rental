@@ -295,6 +295,12 @@ body.dark-mode .custom-button:hover {
   background-color: #333;
   color: #fff;
 }
+body.dark-mode h5{
+  color: #fff;
+}
+body.dark-mode footer .contact-info span{
+  color: #ccc;
+}
 body.dark-mode .btn-double a {
   background-color: #f5b754;
   color: black;
