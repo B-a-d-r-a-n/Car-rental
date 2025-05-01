@@ -127,7 +127,7 @@ let textColor = styles.getPropertyValue(
 );
 
 let gridColor = styles.getPropertyValue(
-  isDark ? "--border-color-panel" : "--border-color"
+  isDark ? "--clr-accent-rgb" : "--clr-accent-rgb"
 );
 
 let accentColor = styles.getPropertyValue("--clr-accent");
