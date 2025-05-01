@@ -6,7 +6,6 @@ const carId = params.get("carId");
 
 // Load cars from localStorage
 const cars = JSON.parse(localStorage.getItem("cars"));
-// Find selected car
 const selectedCar = cars.find((car) => car.id == carId);
 
 // Display car details
@@ -23,55 +22,115 @@ if (selectedCar) {
   `;
 }
 
+// Handle form submission
+function showError(id, message) {
+  document.getElementById(id).textContent = message;
+}
 
+function clearError(id) {
+  document.getElementById(id).textContent = "";
+}
 
-// Handle form submission on booking-form.js
-document
-  .getElementById("booking-form")
-  .addEventListener("submit", function (e) {
-    e.preventDefault();
+// Validation functions
+const nameRegex = /^[A-Za-z\s]{3,}$/;
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phoneRegex = /^01[0-2,5]{1}[0-9]{8}$/;
+const locationRegex = /^[A-Za-z\s]{3,}$/;
 
-    const customerName = document.getElementById("fullName").value.trim();
-    const customerEmail = document.getElementById("email").value.trim();
-    const customerPhone = document.getElementById("phone").value.trim();
-    const pickupLocation = document.getElementById("pickupLocation").value.trim();
-    const pickupDate = document.getElementById("pickupDate").value;
-    const dropoffLocation = document.getElementById("dropoffLocation").value.trim();
-    const dropoffDate = document.getElementById("returnDate").value;
+function validateField(id, value, regex, errorId, errorMsg) {
+  if (!regex.test(value.trim())) {
+    showError(errorId, errorMsg);
+    return false;
+  } else {
+    clearError(errorId);
+    return true;
+  }
+}
 
-    // Validation for required fields
-    if (!customerName || !customerEmail || !customerPhone || !pickupLocation || !pickupDate || !dropoffLocation || !dropoffDate) {
-      alert("Please fill in all required fields.");
-      return;
-    }
+document.getElementById("fullName").addEventListener("input", (e) =>
+  validateField("fullName", e.target.value, nameRegex, "fullName-error", "Enter a valid name (letters only).")
+);
 
-    // Calculate rental days and total amount
-    const rentalDays = (new Date(dropoffDate) - new Date(pickupDate)) / (1000 * 60 * 60 * 24);
-    const totalAmount = selectedCar.rentPerDay * rentalDays;
+document.getElementById("email").addEventListener("input", (e) =>
+  validateField("email", e.target.value, emailRegex, "email-error", "Enter a valid email.")
+);
 
-    const newBooking = new Booking(
-      Date.now(),
-      selectedCar.id,
-      customerName,
-      customerEmail,
-      customerPhone,
-      pickupDate,
-      dropoffDate,
-      "confirmed",
-      totalAmount
-    );
+document.getElementById("phone").addEventListener("input", (e) =>
+  validateField("phone", e.target.value, phoneRegex, "phone-error", "Enter a valid Egyptian phone number.")
+);
 
-    // Save the booking to localStorage
-    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-    bookings.push(newBooking);
-    localStorage.setItem("bookings", JSON.stringify(bookings));
+document.getElementById("pickupLocation").addEventListener("input", (e) =>
+  validateField("pickupLocation", e.target.value, locationRegex, "pickupLocation-error", "Enter a valid pickup location.")
+);
 
-    // Show success toast
-    const successToast = new bootstrap.Toast(document.getElementById("successToast"));
-    successToast.show();
+document.getElementById("dropoffLocation").addEventListener("input", (e) =>
+  validateField("dropoffLocation", e.target.value, locationRegex, "dropoffLocation-error", "Enter a valid dropoff location.")
+);
 
-    // Redirect after a delay
-    setTimeout(() => {
-      window.location.href = "../BookingHistory/bookingHistory.html";
-    }, 1500);
-  });
+// Booking form submit
+document.getElementById("booking-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const customerName = document.getElementById("fullName").value.trim();
+  const customerEmail = document.getElementById("email").value.trim();
+  const customerPhone = document.getElementById("phone").value.trim();
+  const pickupLocation = document.getElementById("pickupLocation").value.trim();
+  const pickupDate = document.getElementById("pickupDate").value;
+  const dropoffLocation = document.getElementById("dropoffLocation").value.trim();
+  const dropoffDate = document.getElementById("returnDate").value;
+
+  let isValid = true;
+
+  if (!validateField("fullName", customerName, nameRegex, "fullName-error", "Enter a valid name.")) isValid = false;
+  if (!validateField("email", customerEmail, emailRegex, "email-error", "Enter a valid email.")) isValid = false;
+  if (!validateField("phone", customerPhone, phoneRegex, "phone-error", "Enter a valid Egyptian phone number.")) isValid = false;
+  if (!validateField("pickupLocation", pickupLocation, locationRegex, "pickupLocation-error", "Enter a valid pickup location.")) isValid = false;
+  if (!validateField("dropoffLocation", dropoffLocation, locationRegex, "dropoffLocation-error", "Enter a valid dropoff location.")) isValid = false;
+
+  if (!pickupDate) {
+    showError("pickupDate-error", "Please select a pickup date.");
+    isValid = false;
+  } else {
+    clearError("pickupDate-error");
+  }
+
+  if (!dropoffDate) {
+    showError("returnDate-error", "Please select a return date.");
+    isValid = false;
+  } else if (new Date(dropoffDate) <= new Date(pickupDate)) {
+    showError("returnDate-error", "Return date must be after pickup date.");
+    isValid = false;
+  } else {
+    clearError("returnDate-error");
+  }
+
+  if (!isValid) return;
+
+  const rentalDays = (new Date(dropoffDate) - new Date(pickupDate)) / (1000 * 60 * 60 * 24);
+  const totalAmount = selectedCar.rentPerDay * rentalDays;
+
+  const newBooking = new Booking(
+    Date.now(),
+    selectedCar.id,
+    customerName,
+    customerEmail,
+    customerPhone,
+    pickupDate,
+    dropoffDate,
+    "confirmed",
+    totalAmount
+  );
+
+  let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+  bookings.push(newBooking);
+  localStorage.setItem("bookings", JSON.stringify(bookings));
+
+  const successToast = new bootstrap.Toast(document.getElementById("successToast"));
+  successToast.show();
+  
+  localStorage.setItem("currentCustomerEmail", newBooking.customerEmail);
+
+  setTimeout(() => {
+    window.location.href = "../BookingHistory/bookingHistory.html";
+  }, 1500);
+});

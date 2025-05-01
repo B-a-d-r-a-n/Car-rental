@@ -1,8 +1,27 @@
 /* === GENERAL === */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  background-color: #fdfdfd;
-  color: #111;
-  transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.history-container {
+  flex: 1;
+  padding-top: 100px; /* بسبب الـ navbar الثابت */
+  padding-bottom: 40px;
+}
+
+footer.site-footer {
+  background-color: #222;
+  color: white;
+  margin-bottom: 0 !important;
+  padding-bottom: 1rem !important;
 }
 
 .dark-mode {

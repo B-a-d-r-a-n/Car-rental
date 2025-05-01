@@ -1,4 +1,6 @@
-/* ========= Light Mode ========= */
+/* Light Mode*/
+
+/* Layout */
 body {
   display: flex;
   flex-direction: column;
@@ -6,6 +8,37 @@ body {
   padding-top: 80px;
   color: #222;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar */
+nav {
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+nav ul li a {
+  color: #000 !important;
+}
+
+nav ul li a:hover {
+  color: #f4a300 !important;
+}
+
+/* Car Details */
+#car-details {
+  background-color: #fff;
+  color: #000;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+#car-details img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  object-fit: cover;
 }
 
 /* Rent Form */
@@ -16,6 +49,7 @@ body {
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   margin-top: 50px;
 }
+
 .rent-form h2 {
   color: #f4a300;
   margin-bottom: 30px;
@@ -30,7 +64,17 @@ textarea {
   color: #000;
   border: 1px solid #ccc;
 }
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
 
+input:focus, textarea:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #f4a300 !important; 
+}
 /* Buttons */
 .btn-custom {
   background-color: #f4a300;
@@ -39,6 +83,7 @@ textarea {
   padding: 10px 40px;
   border: none;
 }
+
 .btn-custom:hover {
   background-color: #d48806;
 }
@@ -54,76 +99,114 @@ textarea {
 .site-footer p {
   color: #333;
 }
+
 .site-footer a:hover {
   color: #f5b754;
 }
 
+
 /* ========= Dark Mode ========= */
+
+/* Layout */
 body.dark-mode {
   background-color: #1a1a1a;
   color: #e0e0e0;
 }
-body.dark-mode nav{
+
+/* Navbar */
+body.dark-mode nav {
   background-color: #070707;
+  box-shadow: 0 2px 10px rgba(255,255,255,0.05);
 }
+
+body.dark-mode nav ul li a {
+  color: #fff !important;
+}
+
+body.dark-mode nav ul li a:hover {
+  color: #f5b754 !important;
+}
+body.dark-mode #mode-toggle{
+  background-color: rgb(33, 32, 32) !important;
+}
+/* Car Details */
+body.dark-mode #car-details {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  box-shadow: 0 4px 12px rgba(255,255,255,0.05);
+}
+
 /* Rent Form */
 body.dark-mode .rent-form {
   background-color: #2b2b2b;
   box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.05);
 }
+
 body.dark-mode .rent-form h2 {
   color: #f5b754;
-}
-body.dark-mode .fw-semibold {
-  background-color: #fff;
 }
 
 /* Inputs */
 body.dark-mode .form-control,
-body.dark-mode textarea {
-  background-color: #2c2c2c;
-  color: #f5f5f5;
-  border: 1px solid #444;
+body.dark-mode textarea,
+body.dark-mode input,
+body.dark-mode select {
+  background-color: #3a3a3a !important;
+  color: #f5f5f5 !important;
+  border: 1px solid #555 !important;
+}
+
+body.dark-mode .form-control::placeholder,
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #ccc !important;
+}
+
+body.dark-mode label {
+  color: #eee !important;
 }
 
 /* Buttons */
-body.dark-mode .btn-custom {
-  background-color: #f5b754;
-  color: #1e1e1e;
+body.dark-mode .btn-custom,
+body.dark-mode .btn {
+  background-color: #f5b754 !important;
+  color: #1e1e1e !important;
+  font-weight: bold;
 }
 
-body.dark-mode .btn-custom:hover {
-  background-color: #d48806;
-  color: #000;
+body.dark-mode .btn-custom:hover,
+body.dark-mode .btn:hover {
+  background-color: #d48806 !important;
+  color: #000 !important;
 }
 
 /* Footer */
 body.dark-mode .site-footer {
   background-color: #070707;
-}
-body.dark-mode footer {
   color: #f5f5f5;
 }
-body.dark-mode footer a {
-  color: #ccc;
-}
-body.dark-mode .col-12 p{
+
+body.dark-mode .site-footer a,
+body.dark-mode .site-footer p,
+body.dark-mode .col-12 p,
+body.dark-mode footer .contact-info,
+body.dark-mode footer .text-center p,
+body.dark-mode h5 {
   color: #fff;
 }
-body.dark-mode h5{
-  color: #fff;
-}
-body.dark-mode footer .contact-info{
-  color: #fff;
-}
+
 body.dark-mode footer a:hover {
   color: #f5b754;
 }
-body.dark-mode footer .text-center p{
-  color: #fff;
-}
+
 body.dark-mode footer i {
   color: #f5b754;
 }
 
-
+/* Form Backgrounds */
+body.dark-mode form,
+body.dark-mode .form-container,
+body.dark-mode .booking-form {
+  background-color: #2a2a2a !important;
+  color: #fff !important;
+}
