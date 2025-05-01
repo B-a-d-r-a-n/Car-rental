@@ -50,7 +50,6 @@ const userCriteria = {
 //#endregion
 //#region dom elements
 const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-
 const htmlElement = document.documentElement;
 const reportChartCanvas = document.getElementById("reportChart");
 const peakHoursChartCanvas = document.getElementById("peakHoursChart");
@@ -749,13 +748,19 @@ function handleUpdateBookingStatus(event) {
   try {
     const button = event.target.closest(".btn-update-status");
     if (!button) return;
-
     const bookingId = parseInt(button.dataset.bookingId);
+    const bookingIndex = bookings.findIndex((b) => b?.id === bookingId);
+    const currentStatus = bookings[bookingIndex].status;
     const statusSelect = document.querySelector(
       `select[data-booking-id="${bookingId}"]`
     );
+
     const newStatus = statusSelect.value;
-    const bookingIndex = bookings.findIndex((b) => b?.id === bookingId);
+
+    if (currentStatus === newStatus) {
+      showToast(`Booking #${bookingId} status remained the same.`, "info");
+      return;
+    }
 
     if (bookingIndex > -1) {
       bookings[bookingIndex].status = newStatus;
