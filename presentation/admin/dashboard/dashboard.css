@@ -97,11 +97,6 @@ body {
   border-color: var(--border-color);
 }
 
-body {
-  background-color: var(--bg-page);
-  color: var(--text-primary);
-}
-
 .offcanvas-body .admin-avatar {
   width: 80px;
   height: 80px;
@@ -126,8 +121,14 @@ body {
 .offcanvas-body .nav-link.active {
   background-color: var(--clr-accent);
   color: var(--text-on-accent);
+  i {
+    color: var(--text-on-accent);
+  }
 }
 
+.offcanvas-body i {
+  transition: all 0.2s;
+}
 .offcanvas-header {
   border-bottom: 1px solid var(--border-color-panel);
   padding: 1rem 1rem;
@@ -138,7 +139,7 @@ body {
 }
 
 .offcanvas-header .btn-close {
-  filter: var(--bs-btn-close-white-filter);
+  color: var(--text-on-accent) !important;
 }
 .chart-container {
   position: relative;
