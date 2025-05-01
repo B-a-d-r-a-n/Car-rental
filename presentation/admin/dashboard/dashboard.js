@@ -1,3 +1,4 @@
+//#region overhead
 const loadingScreen = document.getElementById("loadingScreen");
 if (loadingScreen) {
   loadingScreen.classList.add("hidden");
@@ -5,29 +6,6 @@ if (loadingScreen) {
     loadingScreen.remove();
   }, 1000);
 }
-
-const toastLiveExample = document.getElementById("liveToast");
-const globalToastInstance = new bootstrap.Toast(toastLiveExample, {
-  delay: 4000,
-});
-
-function showToast(message, type = "success") {
-  const isDark =
-    document.documentElement.getAttribute("data-bs-theme") === "dark";
-  const closeBtnClass = isDark ? "btn-close-white" : "";
-  const bgType =
-    type === "error" ? "danger" : type === "info" ? "info" : "success";
-
-  toastLiveExample.innerHTML = `
-    <div class="d-flex">
-      <div class="toast-body"><i class="fas fa-info-circle me-1 icoo"></i> ${message}</div>
-      <button type="button" class="btn-close ${closeBtnClass} me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-  `;
-  toastLiveExample.className = `toast align-items-center border-0 text-bg-${bgType}`;
-  globalToastInstance.show();
-}
-
 let savedTheme = "";
 let bookings = [];
 let users = [];
@@ -46,7 +24,8 @@ try {
 } catch (error) {
   console.error("Error parsing localStorage data:", error);
 }
-
+//#endregion
+//#region specifications
 const take = 8;
 const bookingStatusOptions = [
   "Pending",
@@ -68,6 +47,9 @@ const userCriteria = {
   searchTerm: "",
   filteredData: [...users],
 };
+//#endregion
+//#region dom elements
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
 const htmlElement = document.documentElement;
 const reportChartCanvas = document.getElementById("reportChart");
@@ -117,7 +99,29 @@ let gridColor = `rgba(${
 
 let reportChartInstance = null;
 let peakHoursChartInstance = null;
+//#endregion
+//#region utility methods
+const toastLiveExample = document.getElementById("liveToast");
+const globalToastInstance = new bootstrap.Toast(toastLiveExample, {
+  delay: 4000,
+});
 
+function showToast(message, type = "success") {
+  const isDark =
+    document.documentElement.getAttribute("data-bs-theme") === "dark";
+  const closeBtnClass = isDark ? "btn-close-white" : "";
+  const bgType =
+    type === "error" ? "danger" : type === "info" ? "info" : "success";
+
+  toastLiveExample.innerHTML = `
+    <div class="d-flex">
+      <div class="toast-body"><i class="fas fa-info-circle me-1 icoo"></i> ${message}</div>
+      <button type="button" class="btn-close ${closeBtnClass} me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  `;
+  toastLiveExample.className = `toast align-items-center border-0 text-bg-${bgType}`;
+  globalToastInstance.show();
+}
 function getMonthLabel(month) {
   if (!month) return "N/A";
   const date = new Date(month);
@@ -180,10 +184,13 @@ function setTheme(theme) {
   }
 }
 
+//#endregion
+
 const chartLabels = reports.map((report) => getMonthLabel(report?.month));
 const totalBookingsData = reports.map((report) => report?.totalBookings || 0);
 const totalRevenueData = reports.map((report) => report?.totalRevenue || 0);
 
+//#region Display Module
 function renderCharts() {
   try {
     const reportDatasetColors = isDark
@@ -364,7 +371,6 @@ function renderCharts() {
     console.error("Error rendering charts:", error);
   }
 }
-
 function renderSummaryCards() {
   try {
     const totalBookings =
@@ -728,7 +734,17 @@ function renderUsersPage(pageNum) {
     console.error("Error rendering users page:", error);
   }
 }
-
+//#endregion
+//#region handlers
+const handleScroll = debounce(() => {
+  if (window.scrollY > 100) {
+    scrollToTopBtn.classList.remove("d-none");
+    scrollToTopBtn.classList.add("show");
+  } else {
+    scrollToTopBtn.classList.remove("show");
+    scrollToTopBtn.classList.add("d-none");
+  }
+}, 100);
 function handleUpdateBookingStatus(event) {
   try {
     const button = event.target.closest(".btn-update-status");
@@ -803,7 +819,8 @@ function handleLogout() {
     console.error("Error handling logout:", error);
   }
 }
-
+//#endregion
+//#region event listner setup
 function setupEventListeners() {
   try {
     themeToggleBtn.addEventListener("click", () => {
@@ -845,6 +862,15 @@ function setupEventListeners() {
       }, 350)
     );
 
+    window.addEventListener("scroll", handleScroll);
+
+    scrollToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+
     userClearFiltersBtn.addEventListener("click", () => {
       userSearchInput.value = "";
       userCriteria.currentPage = 1;
@@ -857,7 +883,8 @@ function setupEventListeners() {
     console.error("Error setting up event listeners:", error);
   }
 }
-
+//#endregion
+//#region initializer
 function initializeDashboard() {
   console.log("Initializing dashboard...");
   try {
@@ -885,3 +912,4 @@ if (document.readyState === "loading") {
 } else {
   initializeDashboard();
 }
+//#endregion
