@@ -227,7 +227,118 @@ nav {
 /* التأثير عند الـ hover */
 
 
+/* ========================footer=========================== */
+.footer {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 60px 0 30px;
+}
+/* .nav-link {
+  color: whitesmoke;
+}
+.nav-link:hover {
+  color: gray;
+} */
 
+.footer h1,
+.footer h2,
+.footer h3 {
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.footer h1::after,
+.footer h2::after,
+.footer h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 2px;
+  background: #f5b754;
+}
+
+.footer p,
+.footer a {
+  color: #b3b3b3;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #f5b754;
+}
+
+.contact-info {
+  margin-bottom: 15px;
+}
+
+.contact-info i {
+  color: #f5b754;
+  margin-right: 10px;
+}
+
+.subscribe-input {
+  background: #2e2e2e;
+  border: none;
+  color: #ffffff;
+}
+
+.subscribe-btn {
+  background: #f5b754;
+  color: #ffffff;
+  border: none;
+}
+
+.subscribe-btn:hover {
+  background: #f5b754;
+}
+
+.divider {
+  height: 1px;
+  background: #333333;
+  margin: 30px 0;
+}
+
+footer i {
+  color: #f5b754;
+}
+
+footer span {
+  color: whitesmoke;
+}
+
+footer h1 {
+  margin-top: 2rem;
+  margin-bottom: 1em;
+  color: white;
+  font-size: 1.5rem;
+}
+
+footer p {
+  color: whitesmoke;
+}
+
+.fotter-list i {
+  font-size: 2rem;
+  width: 4rem;
+}
+
+footer i:hover {
+  color: #b3b3b3;
+  transition: 0.5s;
+}
+
+footer a {
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+footer a:hover {
+  color: #f5b754;
+}
 
 /* ==========================dark mode======================= */
 body.dark-mode {
