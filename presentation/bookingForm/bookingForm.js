@@ -67,6 +67,7 @@ document.getElementById("dropoffLocation").addEventListener("input", (e) =>
   validateField("dropoffLocation", e.target.value, locationRegex, "dropoffLocation-error", "Enter a valid dropoff location.")
 );
 
+
 // Booking form submit
 document.getElementById("booking-form").addEventListener("submit", function (e) {
   e.preventDefault();
@@ -109,6 +110,7 @@ document.getElementById("booking-form").addEventListener("submit", function (e) 
   const rentalDays = (new Date(dropoffDate) - new Date(pickupDate)) / (1000 * 60 * 60 * 24);
   const totalAmount = selectedCar.rentPerDay * rentalDays;
 
+  // Create a new booking object
   const newBooking = new Booking(
     Date.now(),
     selectedCar.id,
@@ -121,15 +123,22 @@ document.getElementById("booking-form").addEventListener("submit", function (e) 
     totalAmount
   );
 
+  // Save the booking to localStorage
   let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
   bookings.push(newBooking);
   localStorage.setItem("bookings", JSON.stringify(bookings));
 
+  // Update the car's available stock in localStorage
+  selectedCar.availableStock -= 1; // Reduce the available stock by 1
+  localStorage.setItem("cars", JSON.stringify(cars)); // Save the updated cars to localStorage
+
   const successToast = new bootstrap.Toast(document.getElementById("successToast"));
   successToast.show();
   
+  // Save the current customer email
   localStorage.setItem("currentCustomerEmail", newBooking.customerEmail);
 
+  // Redirect to the booking history page 
   setTimeout(() => {
     window.location.href = "../BookingHistory/bookingHistory.html";
   }, 1500);
