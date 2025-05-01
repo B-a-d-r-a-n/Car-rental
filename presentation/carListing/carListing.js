@@ -20,9 +20,11 @@ function renderCars(cars) {
                 <img src="${car.image}" class="card-img-top" alt="${car.brand} ${car.model}">
                 <div class="card-body d-flex flex-column">
                 <h5 class="card-title">${car.brand} ${car.model}</h5>
-                <p class="card-text">Type: ${car.type}</p>
-                <p class="card-text">Rent per day: <span>$${car.rentPerDay}</span></p>
-                <a href="../carDetails/carDetails.html?id=${car.id}" class="btn btn-outline-primary mt-auto">View Details</a>
+                  <p class="card-text">Type: ${car.type}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <p class="card-text mt-auto"><span>$${car.rentPerDay}</span>/day</p>
+                    <a href="../carDetails/carDetails.html?id=${car.id}" class="btn btn-outline-primary">Details</a>
+                  </div> 
                 </div>
             </div>
         `;
@@ -60,3 +62,26 @@ document.getElementById("applyFilters").addEventListener("click", applyFilters);
 
 // renderCars(getCarsFromLocalStorage());
 renderCars(cars);
+
+
+
+
+
+// dark mode
+const toggleButton = document.getElementById("toggleDarkMode");
+  const body = document.body;
+
+  // Check if mode is saved in localStorage
+  if (localStorage.getItem("dark-mode") === "enabled") {
+    body.classList.add("dark-mode");
+  }
+
+  toggleButton.addEventListener("click", () => {
+    body.classList.toggle("dark-mode");
+
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("dark-mode", "enabled");
+    } else {
+      localStorage.setItem("dark-mode", "disabled");
+    }
+  });

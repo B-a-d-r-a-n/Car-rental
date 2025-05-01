@@ -1,3 +1,29 @@
+
+/* Navbar & Nav Link */
+nav {
+  color: white;
+}
+.navbar {
+  background-color: none !important;
+  /* background-color: #ffffff; */
+  transition: background-color 0.3s ease;
+}
+.nav-link {
+  color: #333;
+  color: white;
+}
+.nav-link:hover {
+  color: #f5b754;
+
+}
+.nav-underline .nav-link.active,
+.nav-underline .show > .nav-link {
+  font-weight: 700;
+  color: #F5B754;
+  border-bottom-color: currentcolor;
+}
+
+/* ------banner---------- */
 .banner-header {
   background-image: url(../../assets/images/11a.jpg);
   height: 70vh;
@@ -5,51 +31,103 @@
   background-size: cover;
   background-repeat: no-repeat;
   margin-bottom: 120px;
+  color: white;
+}
+.banner-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* height: 100%; */
+  height: 70vh;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 1;
+}
+.v-middle {
+  position: relative;
+  z-index: 2;
+}
+
+
+.banner-header h6 {
+  font-size: 10px;
+  line-height: 10px;
+  font-family: Outfit, sans-serif;
+  font-weight: 300;
+  color: rgb(245, 183, 84);
+  margin-bottom: 15px;
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+}
+.banner-header span{
+  color: #f5b754;
 }
 
 /* =========================================cards======================================= */
+#cars{
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
 #carList .card {
   border-radius: 20px;
   overflow: hidden;
 }
+
 #carList .card .card-body {
   padding: 30px;
   background: #f2f2f2;
   border-radius: 0 0 20px 20px;
 }
+
 #carList .card-body h5 {
   font-size: 21px;
   font-weight: 700;
   margin-bottom: 10px;
 }
-#carList .card .card-body p:nth-of-type(2) {
-  font-size: 21px;
+
+#carList .card .card-body div {
+  margin-top: 3rem;
 }
-#carList .card .card-body p:nth-of-type(2) span {
+
+#carList .card .card-body div p {
   font-size: 21px;
+
+}
+
+#carList .card .card-body div p span {
+  font-size: 34px;
   line-height: 1.2em;
   color: #f5b754;
   font-weight: 700;
 }
+
 #carList .card img {
   border-radius: 20px 20px 0 0;
   height: 250px;
   transition: all 0.5s;
   object-fit: cover;
 }
+
 #carList .card img:hover {
   transform: scale(1.1);
 }
+
 #carList .card a {
-  padding: 10px 20px;
-  margin-top: 20px !important;
+  padding: 14px 42px;
+  margin-top: 40px !important;
   border: 1px solid #f5b754;
   border-radius: 30px;
   background-color: #f5b754;
   color: #1b1b1b;
+  margin-left: auto;
   /* transition: border-color 300ms ease, transform 300ms ease, background-color 300ms ease, color 300ms ease;
     transform-style: preserve-3d; */
 }
+
 #carList .card a:hover {
   background-color: #1b1b1b;
   border-color: #1b1b1b;
@@ -61,17 +139,20 @@
 #items {
   padding: 30px;
 }
+
 #search {
   position: relative;
   background-color: #f5b754;
   border-radius: 30px 30px 0 0;
 }
+
 #search input {
   padding: 17px 15px;
   border-radius: 30px;
   border: 1px solid #f2f2f2;
   box-shadow: none;
 }
+
 #search button {
   position: absolute;
   right: 35px;
@@ -89,6 +170,7 @@
   width: 50px !important;
   height: 50px;
 }
+
 #search button:hover {
   background-color: #f5b754;
   color: #1b1b1b;
@@ -107,7 +189,7 @@
 #maxPrice {
   border-radius: 30px;
   padding: 10px 20px;
-  margin-bottom: 30px;
+  margin-bottom: 60px;
   border: 1px solid #f2f2f2;
   box-shadow: none;
 }
@@ -124,6 +206,7 @@
   margin-right: 10px;
   border-radius: 5px;
 }
+
 .form-check-label {
   color: #1b1b1b;
 }
@@ -142,3 +225,65 @@
  */
 
 /* التأثير عند الـ hover */
+
+
+
+
+/* ==========================dark mode======================= */
+body.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+body.dark-mode .card,
+body.dark-mode .card-body{
+  background-color: #222 !important;
+  border-color: #222;
+  color: white;
+}
+body.dark-mode .card a:hover {
+  background-color: white !important;
+  color: #222 !important;
+}
+
+body.dark-mode .filter-label{
+  color: white;
+}
+body.dark-mode .form-check-label {
+  color: white;
+}
+
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+  background-color: #222;
+  /* color: white; */
+  border-color: #444;
+}
+body.dark-mode .form-select {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+body.dark-mode .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+body.dark-mode #items {
+  background-color: #222;
+  color: white;
+}
+
+body.dark-mode #search {
+  background-color: #f5b754; 
+}
+body.dark-mode #search button{
+  background-color: #f5b754;
+  color: #222;
+}
+body.dark-mode #search input {
+  background-color: #222;
+  color: white;
+  border-color: #222;
+}
+body.dark-mode #search input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
