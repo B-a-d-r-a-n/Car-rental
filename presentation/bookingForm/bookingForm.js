@@ -111,7 +111,7 @@ document.getElementById("booking-form").addEventListener("submit", function (e) 
     customerPhone,
     pickupDate,
     dropoffDate,
-    "confirmed",
+    "pending",
     totalAmount
   );
 

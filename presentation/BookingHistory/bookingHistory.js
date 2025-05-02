@@ -15,7 +15,7 @@ if (userBookings.length === 0) {
   historyList.innerHTML = `<div class="alert alert-warning text-center">No bookings found for your email.</div>`;
 } else {
   const table = document.createElement("table");
-  table.className = "table table-striped table-bordered table-responsive";
+  table.className = "table table-striped table-bordered table-responsive fs-6";
 
   table.innerHTML = `
     <thead class="table-dark">
@@ -41,7 +41,7 @@ if (userBookings.length === 0) {
               <td>${carName}</td>
               <td>${new Date(b.pickupDate).toLocaleDateString()}</td>
               <td>${new Date(b.dropoffDate).toLocaleDateString()}</td>
-              <td><span class="badge bg-success">${b.status}</span></td>
+              <td><span class="badge fs-6">${b.status}</span></td>
               <td>$${b.totalAmount.toFixed(2)}</td>
               
             </tr>
