@@ -178,3 +178,23 @@
 .pagination .page-item.active .page-link .icoo {
   color: var(--text-on-accent);
 }
+
+#scrollToTopBtn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+#scrollToTopBtn.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#scrollToTopBtn:hover {
+  background-color: var(--clr-accent-darker) !important;
+  transform: scale(1.1);
+}

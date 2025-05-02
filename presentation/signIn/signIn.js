@@ -1,3 +1,5 @@
+const user = localStorage.getItem("currUser");
+user ? (window.location.href = "../../index.html") : null;
 const loadingScreen = document.getElementById("loadingScreen");
 loadingScreen.classList.add("hidden");
 setTimeout(() => {

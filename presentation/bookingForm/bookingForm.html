@@ -26,18 +26,19 @@
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#">
-        <img src="../../assets/images/logo.png" alt="Bootstrap" width="200" height="50">
+        <img src="https://duruthemes.com/demo/html/renax/light/img/logo-light.png" alt="Bootstrap" width="200px"
+          height="30px" />
       </a>
-      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto nav-underline">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Cars</a></li>
-          <li class="nav-item"><a class="nav-link" href="#pricee">Pricing</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../carListing/carListing.html">Cars</a></li>
+          
+          <li class="nav-item"><a class="nav-link" href="../contactUs/contact.html">Contact Us</a></li>
           <li class="nav-item">
             <a class="btn btn-primary rounded-4 btn-lg ms-2" href="../signIn/signIn.html" style="background-color: #f5b754; border: none;">Log in</a>
           </li>
@@ -60,38 +61,46 @@
       <!-- Booking Form -->
       <div class="col-lg-6">
         <form id="booking-form" class="p-3 border rounded bg-white shadow-sm">
-          <h4 class="mb-3 fw-bold">Book this Car</h4>
+          <h4 class="mb-3 fw-bold text-center" style="color: #f4a300;">Book this Car</h4>
         
           <div class="row gy-3">
             <!-- Full Name & Email -->
+             
             <div class="col-md-6">
               <input type="text" id="fullName" class="form-control" placeholder="Full Name *" required />
+              <div class="error-message" id="fullName-error"></div>
             </div>
             <div class="col-md-6">
               <input type="email" id="email" class="form-control" placeholder="Email *" required />
+              <div class="error-message" id="email-error"></div>
             </div>
         
             <!-- Phone -->
             <div class="col-md-6">
               <input type="text" id="phone" class="form-control" placeholder="Phone *" required />
+              <div class="error-message" id="phone-error"></div>
             </div>
         
             <!-- Pick Up Info -->
             <div class="col-12 fw-semibold">Pick Up</div>
             <div class="col-md-6">
               <input type="text" id="pickupLocation" class="form-control" placeholder="Pick Up Location *" required />
+              <div class="error-message" id="pickupLocation-error"></div>
             </div>
             <div class="col-md-6">
               <input type="date" id="pickupDate" class="form-control" required />
+              <div class="error-message" id="pickupDate-error"></div>
             </div>
         
             <!-- Drop Off Info -->
             <div class="col-12 fw-semibold mt-2">Drop Off</div>
             <div class="col-md-6">
               <input type="text" id="dropoffLocation" class="form-control" placeholder="Drop Off Location *" required />
+              <div class="error-message" id="dropoffLocation-error"></div>
             </div>
             <div class="col-md-6">
               <input type="date" id="returnDate" class="form-control" required />
+              <div class="error-message" id="returnDate-error"></div>
             </div>
         
             <!-- Note -->
@@ -101,7 +110,7 @@
         
             <!-- Submit -->
             <div class="text-center">
-              <button type="submit" class="btn btn-warning px-4 mt-2">Rent Now</button>
+              <button type="submit" class=" btn btn-warning px-4 mt-2">Rent Now</button>
             </div>
           </div>
         </form>

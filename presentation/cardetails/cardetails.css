@@ -7,26 +7,12 @@ body {
 color: #000;
 
 }
-/* Main Section */
-.maindev {
-  background: url(../../assets/images/mainsection.webp) center fixed;
-  background-size: cover;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-}
 
-.s {
-  background-color: rgba(0, 0, 0, 0.532);
-  width: 100%;
-  height: 100vh;
-  padding: 1rem;
-}
-
-/* Navbar & Nav Link */
+/* Navbar */
 .navbar {
-  background-color: #ffffff;
-  transition: background-color 0.3s ease;
+  background-color: #f6f6f6;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background-color 0.3s;
 }
 .nav-link {
   color: #333;
@@ -236,38 +222,25 @@ footer a {
   background-color: #F5B754;
 }
 
-/* ========== DARK MODE ========== */
+
 body.dark-mode {
-  background-color:#1e1e1e;
+  background-color:#1a1a1a;
   color: #f1f1f1;
 }
 body.dark-mode #mode-icon{
   color:#ccc
   }
 body.dark-mode .navbar {
-  background-color: #1a1a1a;
+  background-color: #2c2c2c;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-body.dark-mode .site-footer {
-  background-color: #1a1a1a;
-  color: #f1f1f1;
-}
-body.dark-mode .site-footer a,
-body.dark-mode .site-footer p {
-  color: #ccc;
-}
-body.dark-mode .site-footer a:hover {
-  color: #f5b754;
-}
+
+
+
 body.dark-mode .section-padding ul li{
   color: #dcdcdc;
 }
 
-/* body.dark-mode .section-padding,
-body.dark-mode .container,
-body.dark-mode .row,
-body.dark-mode .container-fluid {
-  background-color: #1e1e1e !important;
-} */
 body.dark-mode .car-details{
   background-color: #1e1e1e;
 }
@@ -298,6 +271,17 @@ body.dark-mode .custom-button:hover {
 body.dark-mode h5{
   color: #fff;
 }
+body.dark-mode .site-footer {
+  background-color:#2c2c2c;
+  color: #f1f1f1;
+}
+body.dark-mode .site-footer a,
+body.dark-mode .site-footer p {
+  color: #ccc;
+}
+body.dark-mode .site-footer a:hover {
+  color: #f5b754;
+}
 body.dark-mode footer .contact-info span{
   color: #ccc;
 }
@@ -318,4 +302,5 @@ body.dark-mode .title {
   background-color: #f5b754;
   color: black;
 }
+
 

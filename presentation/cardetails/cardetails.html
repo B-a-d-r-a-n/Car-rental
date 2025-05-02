@@ -1,252 +1,403 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Car Details - RENAX Style</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="cardetails.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Details - RENAX Style</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="cardetails.css" />
+    <link rel="stylesheet" href="reviews/reviews.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
 
-</head>
+  <body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="https://duruthemes.com/demo/html/renax/light/img/logo-light.png" alt="Bootstrap" width="200px"
+            height="30px" />
+        </a>
+        <button
+          class="navbar-toggler text-white"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon" style="filter: invert(1)"></span>
+        </button>
 
-<body>
-  <nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <img src="../../assets/images/logo.png" alt="Bootstrap" width="200" height="50">
-      </a>
-      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
-      </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto nav-underline">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../carListing/carListing.html">Cars</a>
+            </li>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto nav-underline">
-          <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="../carListing/carListing.html">Cars</a></li>
-          
-          <li class="nav-item"><a class="nav-link" href="../contactUs/contact.html">Contact Us</a></li>
-          <li class="nav-item">
-            <a class="btn btn-primary rounded-4 btn-lg ms-2" href="../signIn/signIn.html" style="background-color: #f5b754; border: none;">Log in</a>
-          </li>
-          <li class="nav-item">
-            <button id="mode-toggle" class="btn btn-outline-dark ms-2">
-              <i id="mode-icon" class="fas fa-moon"></i>
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  
-  <div class="container-fluid maindev  mb-5">
-    <div class="container-fluid s">
-      <div class="container mainbutton">
-        <h1 class=" main-header">Rental Car</h1>
-        <p style="font-weight:bold;">The best car for you</p>
-        <button type="button" class="btn btn-primary btn-lg custom-button">View
-            Details</button>
-        <button type="button" class="btn btn-lg custom-button"
-            style="border: 2px solid white;background-color: transparent;color: whitesmoke;">Rent Now</button>
-      </div>
-    </div>
-  </div>
-
-  <section class="car-details section-padding">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-12 mb-4">
-          <h3>General Information</h3>
-          <p id="car-description"></p>
-          <ul class="list-unstyled">
-            <li><i class="bi bi-check-circle-fill"></i> 24/7 Roadside Assistance</li>
-            <li><i class="bi bi-check-circle-fill"></i> Free Cancellation & Return</li>
-            <li><i class="bi bi-check-circle-fill"></i> Rent Now Pay When You Arrive</li>
-          </ul>
-
-          <h3 class="mt-5">Image Gallery</h3>
-          <div class="row" id="car-gallery">
-            <!-- Car images will be dynamically added here -->
-          </div>
-
-          <h3 class="mt-5">Rental Conditions</h3>
-          <div class="custom-accordion" id="rentalAccordion">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                  1. Contract and Annexes
-                  <i class="bi bi-chevron-right ms-auto"></i>
-                </button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#rentalAccordion">
-                <div class="accordion-body">
-                  A credit card is required from individual customers.
-                </div>
-              </div>
-            </div>
-
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                  2. Driving License and Age
-                  <i class="bi bi-chevron-right ms-auto"></i>
-                </button>
-              </h2>
-              <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#rentalAccordion">
-                <div class="accordion-body">
-                  Must be 25 years old with a 5-year valid license.
-                </div>
-              </div>
-            </div>
-
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
-                  3. Fuel Policy
-                  <i class="bi bi-chevron-right ms-auto"></i>
-                </button>
-              </h2>
-              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#rentalAccordion">
-                <div class="accordion-body">
-                  Vehicle must be returned with the same fuel level as at the time of rental.
-                </div>
-              </div>
-            </div>
-
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingFour">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
-                  4. Insurance Coverage
-                  <i class="bi bi-chevron-right ms-auto"></i>
-                </button>
-              </h2>
-              <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#rentalAccordion">
-                <div class="accordion-body">
-                  Basic insurance is included, additional coverage is optional.
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Sidebar -->
-        <div class="col-lg-4 col-md-12">
-          <div class="sidebar-car">
-            <div class="title" id="rentalByDay">
-              <span style="font-size:14px;">/ rent per day</span>
-            </div>
-            <div class="item mt-4">
-              <div class="features"><span><i class="bi bi-door-open-fill"></i> Brand</span> <p id="car-brands"></p></div>
-              <div class="features"><span><i class="bi bi-people-fill"></i> Model</span> <p id="car-model"></p></div>
-              <div class="features"><span><i class="bi bi-gear-fill"></i> Type</span> <p id="car-type"></p></div>
-              <div class="features"><span><i class="bi bi-wind"></i> Deposit</span> <p id="car-deposit"></p></div>
-              <div class="features"><span><i class="bi bi-person-badge-fill"></i> Age</span> <p id="car-age"></p></div>
-
-              <div class="btn-double mt-4">
-                <a href="book.html" class="rent-now-btn">Rent Now</a>
-                <a href="https://api.whatsapp.com/send?phone=8551004444" target="_blank">
-                  <i class="bi bi-whatsapp"></i> WhatsApp
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <footer   id="fot" class="site-footer mt-5 pt-5 pb-3 px-3">
-    <div class="container">
-      <div class="row gy-4 justify-content-between">
-  
-        <!-- Contact Info Column -->
-        <div class="col-12 col-md-6 col-lg-3">
-          <h5>Call Us</h5>
-          <div class="contact-info mb-2">
-            <i class="fas fa-phone me-2"></i>
-            <span>+201032200182</span>
-          </div>
-          <div class="contact-info mb-2">
-            <i class="fas fa-envelope me-2"></i>
-            <span>Iti@gmail.com</span>
-          </div>
-          <div class="contact-info mb-2">
-            <i class="fas fa-map-marker-alt me-2"></i>
-            <span>Egypt, Mansoura, Elgama</span>
-          </div>
-        </div>
-  
-        <!-- Social Column -->
-        <div class="col-12 col-md-6 col-lg-3">
-          <h5>Our Social</h5>
-          <p>Rent a car imperdiet sapien parturient bibendum elementum commodo erat.</p>
-          <div class="d-flex gap-3">
-            <a href="https://facebook.com" target="_blank" class="text-white fs-4"><i class="fab fa-facebook"></i></a>
-            <a href="https://youtube.com" target="_blank" class="text-white fs-4"><i class="fab fa-youtube"></i></a>
-            <a href="https://wa.me/201032200182" target="_blank" class="text-white fs-4"><i class="fab fa-whatsapp"></i></a>
-          </div>
-        </div>
-  
-        <!-- Quick Links Column -->
-        <div class="col-12 col-md-6 col-lg-2">
-          <h5>Quick Links</h5>
-          <ul class="list-unstyled">
-            <li class="mb-2"><a href="contact.html" class=" text-decoration-none"><i class="fas fa-chevron-right me-2"></i>About</a></li>
-            <li class="mb-2"><a href="#" class=" text-decoration-none"><i class="fas fa-chevron-right me-2"></i>Cars</a></li>
-            <li class="mb-2"><a href="#" class=" text-decoration-none"><i class="fas fa-chevron-right me-2"></i>Car Types</a></li>
-            <li class="mb-2"><a href="#" class=" text-decoration-none"><i class="fas fa-chevron-right me-2"></i>Team</a></li>
-            <li class="mb-2"><a href="#" class=" text-decoration-none"><i class="fas fa-chevron-right me-2"></i>Contact</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="../contactUs/contact.html"
+                >Contact Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="btn btn-primary rounded-4 btn-lg ms-2"
+                href="../signIn/signIn.html"
+                style="background-color: #f5b754; border: none"
+                >Log in</a
+              >
+            </li>
+            <li class="nav-item">
+              <button id="mode-toggle" class="btn btn-outline-dark ms-2">
+                <i id="mode-icon" class="fas fa-moon"></i>
+              </button>
+            </li>
           </ul>
         </div>
-  
       </div>
-  
-      <hr class="my-4" style="border-color: #666;">
-      <div class="text-center">
-        <p class="mb-0">&copy; 2025 ITI. All Rights Reserved.</p>
+    </nav>
+
+
+    <section class="car-details section-padding mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-12 mb-4">
+            <h3>General Information</h3>
+            <p id="car-description"></p>
+            <ul class="list-unstyled">
+              <li>
+                <i class="bi bi-check-circle-fill"></i> 24/7 Roadside Assistance
+              </li>
+              <li>
+                <i class="bi bi-check-circle-fill"></i> Free Cancellation &
+                Return
+              </li>
+              <li>
+                <i class="bi bi-check-circle-fill"></i> Rent Now Pay When You
+                Arrive
+              </li>
+            </ul>
+
+            <h3 class="mt-5">Image Of The Car</h3>
+            <div class="row" id="car-gallery">
+              
+            </div>
+
+            <h3 class="mt-5">Rental Conditions</h3>
+            <div class="custom-accordion" id="rentalAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne"
+                  >
+                    1. Minum Age
+                    <i class="bi bi-chevron-right ms-auto"></i>
+                  </button>
+                </h2>
+                <div
+                  id="collapseOne"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#rentalAccordion"
+                >
+                  <div class="accordion-body age">
+                   
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo"
+                  >
+                    2.Mile Age
+                    <i class="bi bi-chevron-right ms-auto"></i>
+                  </button>
+                </h2>
+                <div
+                  id="collapseTwo"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#rentalAccordion"
+                >
+                  <div class="accordion-body mile">
+                   
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree"
+                  >
+                    3. Fuel Policy
+                    <i class="bi bi-chevron-right ms-auto"></i>
+                  </button>
+                </h2>
+                <div
+                  id="collapseThree"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#rentalAccordion"
+                >
+                  <div class="accordion-body policy">
+                   
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFour">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseFour"
+                  >
+                    4. Insurance Coverage
+                    <i class="bi bi-chevron-right ms-auto"></i>
+                  </button>
+                </h2>
+                <div
+                  id="collapseFour"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#rentalAccordion"
+                >
+                  <div class="accordion-body insurance">
+                  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sidebar -->
+          <div class="col-lg-4 col-md-12">
+            <div class="sidebar-car">
+              <div class="title" id="rentalByDay">
+                <span style="font-size: 14px">/ rent per day</span>
+              </div>
+              <div class="item mt-4">
+                <div class="features">
+                  <span><i class="bi bi-door-open-fill"></i> Brand</span>
+                  <p id="car-brands"></p>
+                </div>
+                <div class="features">
+                  <span><i class="bi bi-people-fill"></i> Model</span>
+                  <p id="car-model"></p>
+                </div>
+                <div class="features">
+                  <span><i class="bi bi-gear-fill"></i> Type</span>
+                  <p id="car-type"></p>
+                </div>
+                <div class="features">
+                  <span><i class="bi bi-wind"></i> Deposit</span>
+                  <p id="car-deposit"></p>
+                </div>
+               
+
+                <div class="btn-double mt-4">
+                  <a href="book.html" class="rent-now-btn">Rent Now</a>
+                  <a
+                    href="https://api.whatsapp.com/send?phone=8551004444"
+                    target="_blank"
+                  >
+                    <i class="bi bi-whatsapp"></i> WhatsApp
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </footer>
+    </section>
+    <section class="banner-header"></section>
 
+    <section id="reviews-section" class="container mt-5">
+      <h2>What Clients Say</h2>
 
+      <div id="reviews-list" class="row mt-4"></div>
+    </section>
 
+    <!-- Add Review Section -->
 
+    <section id="add-review-section" class="container mt-5 mb-5">
+      <h3>Write a Review</h3>
 
+      <form id="review-form" class="mt-4">
+        <input
+          type="text"
+          id="customerName"
+          class="form-control mb-2"
+          placeholder="Your Name"
+          required
+        />
 
+        <select id="rating" class="form-select mb-2" required>
+          <option value="">Rating</option>
 
-<!--dark mode js-->
-<script>
-  const toggleBtn = document.getElementById("mode-toggle");
-  const icon = document.getElementById("mode-icon");
-  const body = document.body;
+          <option value="5">5 - Excellent</option>
 
-  if (localStorage.getItem("theme") === "dark") {
-    body.classList.add("dark-mode");
-    icon.classList.remove("fa-moon");
-    icon.classList.add("fa-sun");
-  }
+          <option value="4">4 - Good</option>
 
-  toggleBtn.addEventListener("click", () => {
-    body.classList.toggle("dark-mode");
+          <option value="3">3 - Average</option>
 
-    if (body.classList.contains("dark-mode")) {
-      icon.classList.remove("fa-moon");
-      icon.classList.add("fa-sun");
-      localStorage.setItem("theme", "dark");
-    } else {
-      icon.classList.remove("fa-sun");
-      icon.classList.add("fa-moon");
-      localStorage.setItem("theme", "light");
-    }
-  });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="cardetails.js"></script>
-</body>
+          <option value="2">2 - Poor</option>
+
+          <option value="1">1 - Terrible</option>
+        </select>
+
+        <textarea
+          id="comment"
+          class="form-control mb-2"
+          placeholder="Your Review"
+          rows="4"
+          required
+        ></textarea>
+
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+      </form>
+    </section>
+    <footer id="fot" class="site-footer mt-5 pt-5 pb-3 px-3">
+      <div class="container">
+        <div class="row gy-4 justify-content-between">
+          <!-- Contact Info Column -->
+          <div class="col-12 col-md-6 col-lg-3">
+            <h5>Call Us</h5>
+            <div class="contact-info mb-2">
+              <i class="fas fa-phone me-2"></i>
+              <span>+201032200182</span>
+            </div>
+            <div class="contact-info mb-2">
+              <i class="fas fa-envelope me-2"></i>
+              <span>Iti@gmail.com</span>
+            </div>
+            <div class="contact-info mb-2">
+              <i class="fas fa-map-marker-alt me-2"></i>
+              <span>Egypt, Mansoura, Elgama</span>
+            </div>
+          </div>
+
+          <!-- Social Column -->
+          <div class="col-12 col-md-6 col-lg-3">
+            <h5>Our Social</h5>
+            <p>
+              Rent a car imperdiet sapien parturient bibendum elementum commodo
+              erat.
+            </p>
+            <div class="d-flex gap-3">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                class="text-white fs-4"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                class="text-white fs-4"
+                ><i class="fab fa-youtube"></i
+              ></a>
+              <a
+                href="https://wa.me/201032200182"
+                target="_blank"
+                class="text-white fs-4"
+                ><i class="fab fa-whatsapp"></i
+              ></a>
+            </div>
+          </div>
+
+          <!-- Quick Links Column -->
+          <div class="col-12 col-md-6 col-lg-2">
+            <h5>Quick Links</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a href="contact.html" class="text-decoration-none"
+                  ><i class="fas fa-chevron-right me-2"></i>About</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none"
+                  ><i class="fas fa-chevron-right me-2"></i>Cars</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none"
+                  ><i class="fas fa-chevron-right me-2"></i>Car Types</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none"
+                  ><i class="fas fa-chevron-right me-2"></i>Team</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none"
+                  ><i class="fas fa-chevron-right me-2"></i>Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <hr class="my-4" style="border-color: #666" />
+        <div class="text-center">
+          <p class="mb-0">&copy; 2025 ITI. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!--dark mode js-->
+    <script>
+      const toggleBtn = document.getElementById("mode-toggle");
+      const icon = document.getElementById("mode-icon");
+      const body = document.body;
+
+      if (localStorage.getItem("theme") === "dark") {
+        body.classList.add("dark-mode");
+        icon.classList.remove("fa-moon");
+        icon.classList.add("fa-sun");
+      }
+
+      toggleBtn.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+
+        if (body.classList.contains("dark-mode")) {
+          icon.classList.remove("fa-moon");
+          icon.classList.add("fa-sun");
+          localStorage.setItem("theme", "dark");
+        } else {
+          icon.classList.remove("fa-sun");
+          icon.classList.add("fa-moon");
+          localStorage.setItem("theme", "light");
+        }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="reviews/reviews.js"></script>
+    <script src="cardetails.js"></script>
+  </body>
 </html>
-
-

@@ -1,3 +1,4 @@
+//#region overhead
 const loadingScreen = document.getElementById("loadingScreen");
 if (loadingScreen) {
   loadingScreen.classList.add("hidden");
@@ -5,29 +6,6 @@ if (loadingScreen) {
     loadingScreen.remove();
   }, 1000);
 }
-
-const toastLiveExample = document.getElementById("liveToast");
-const globalToastInstance = new bootstrap.Toast(toastLiveExample, {
-  delay: 4000,
-});
-
-function showToast(message, type = "success") {
-  const isDark =
-    document.documentElement.getAttribute("data-bs-theme") === "dark";
-  const closeBtnClass = isDark ? "btn-close-white" : "";
-  const bgType =
-    type === "error" ? "danger" : type === "info" ? "info" : "success";
-
-  toastLiveExample.innerHTML = `
-    <div class="d-flex">
-      <div class="toast-body"><i class="fas fa-info-circle me-1 icoo"></i> ${message}</div>
-      <button type="button" class="btn-close ${closeBtnClass} me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-  `;
-  toastLiveExample.className = `toast align-items-center border-0 text-bg-${bgType}`;
-  globalToastInstance.show();
-}
-
 let savedTheme = "";
 let bookings = [];
 let users = [];
@@ -46,7 +24,8 @@ try {
 } catch (error) {
   console.error("Error parsing localStorage data:", error);
 }
-
+//#endregion
+//#region specifications
 const take = 8;
 const bookingStatusOptions = [
   "Pending",
@@ -68,7 +47,9 @@ const userCriteria = {
   searchTerm: "",
   filteredData: [...users],
 };
-
+//#endregion
+//#region dom elements
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 const htmlElement = document.documentElement;
 const reportChartCanvas = document.getElementById("reportChart");
 const peakHoursChartCanvas = document.getElementById("peakHoursChart");
@@ -86,21 +67,19 @@ const adminNameEl = document.getElementById("adminName");
 const adminRegDateEl = document.getElementById("adminRegDate");
 const logoutBtn = document.getElementById("logoutBtn");
 const bookingsTableBody = document.getElementById("bookingsTableBody");
-const noBookingsMatchCriteria = document.getElementById(
-  "noBookingsFilteredMessage"
-);
+
 const bookingSearchInput = document.getElementById("bookingSearchInp");
 const bookingStatusFilterEl = document.getElementById("bookingStatFilter");
 const bookingClearFiltersBtn = document.getElementById("bookingCriteriaClear");
 const bookingPaginationContainer = document.getElementById("bookingPagination");
 const usersTableBody = document.getElementById("usersTblBody");
-const noUsersMatchCriteria = document.getElementById("noUsersFilteredMessage");
 const userSearchInput = document.getElementById("userSearchInput");
 const userClearFiltersBtn = document.getElementById("userClearFilters");
 const userPaginationContainer = document.getElementById("userPagination");
-const adminSidenavOffcanvas = document.getElementById("adminSidenavOffcanvas");
+const offCanvasNav = document.getElementById("offCanvasNav");
 const ctx = reportChartCanvas.getContext("2d");
 const ctxPeak = peakHoursChartCanvas.getContext("2d");
+const plainTextEls = document.querySelectorAll(".plain-text");
 
 let currentTheme = htmlElement.getAttribute("data-bs-theme") || "light";
 let isDark = currentTheme === "dark";
@@ -119,7 +98,29 @@ let gridColor = `rgba(${
 
 let reportChartInstance = null;
 let peakHoursChartInstance = null;
+//#endregion
+//#region utility methods
+const toastLiveExample = document.getElementById("liveToast");
+const globalToastInstance = new bootstrap.Toast(toastLiveExample, {
+  delay: 4000,
+});
 
+function showToast(message, type = "success") {
+  const isDark =
+    document.documentElement.getAttribute("data-bs-theme") === "dark";
+  const closeBtnClass = isDark ? "btn-close-white" : "";
+  const bgType =
+    type === "error" ? "danger" : type === "info" ? "info" : "success";
+
+  toastLiveExample.innerHTML = `
+    <div class="d-flex">
+      <div class="toast-body"><i class="fas fa-info-circle me-1 icoo"></i> ${message}</div>
+      <button type="button" class="btn-close ${closeBtnClass} me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  `;
+  toastLiveExample.className = `toast align-items-center border-0 text-bg-${bgType}`;
+  globalToastInstance.show();
+}
 function getMonthLabel(month) {
   if (!month) return "N/A";
   const date = new Date(month);
@@ -167,16 +168,28 @@ function setTheme(theme) {
     if (closeBtn) {
       closeBtn.classList.toggle("btn-close-white", isDark);
     }
+    plainTextEls.forEach((element) => {
+      if (isDark) {
+        element.classList.add("text-clr-muted-on-dark-bg");
+        element.classList.remove("text-clr-primary");
+      } else {
+        element.classList.add("text-clr-primary");
+        element.classList.remove("text-clr-muted-on-dark-bg");
+      }
+    });
     renderCharts();
   } catch (error) {
     console.error("Error setting theme:", error);
   }
 }
 
+//#endregion
+
 const chartLabels = reports.map((report) => getMonthLabel(report?.month));
 const totalBookingsData = reports.map((report) => report?.totalBookings || 0);
 const totalRevenueData = reports.map((report) => report?.totalRevenue || 0);
 
+//#region Display Module
 function renderCharts() {
   try {
     const reportDatasetColors = isDark
@@ -357,7 +370,6 @@ function renderCharts() {
     console.error("Error rendering charts:", error);
   }
 }
-
 function renderSummaryCards() {
   try {
     const totalBookings =
@@ -481,9 +493,9 @@ function renderPaginationControls(containerId, currentPage, totalPages) {
   paginationContainer.innerHTML = "";
   if (totalPages <= 1) return;
 
-  let paginationHTML =
+  let paginationBox =
     '<ul class="pagination pagination-sm justify-content-center">';
-  paginationHTML += `
+  paginationBox += `
     <li class="page-item ${currentPage === 1 ? "disabled" : ""}">
       <button class="page-link" data-page="${
         currentPage - 1
@@ -500,26 +512,26 @@ function renderPaginationControls(containerId, currentPage, totalPages) {
   }
 
   if (start > 1) {
-    paginationHTML += `<li class="page-item"><button class="page-link" data-page="1">1</button></li>`;
+    paginationBox += `<li class="page-item"><button class="page-link" data-page="1">1</button></li>`;
     if (start > 2) {
-      paginationHTML += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
+      paginationBox += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
     }
   }
 
   for (let i = start; i <= end; i++) {
-    paginationHTML += `<li class="page-item ${
+    paginationBox += `<li class="page-item ${
       i === currentPage ? "active" : ""
     }"><button class="page-link" data-page="${i}">${i}</button></li>`;
   }
 
   if (end < totalPages) {
     if (end < totalPages - 1) {
-      paginationHTML += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
+      paginationBox += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
     }
-    paginationHTML += `<li class="page-item"><button class="page-link" data-page="${totalPages}">${totalPages}</button></li>`;
+    paginationBox += `<li class="page-item"><button class="page-link" data-page="${totalPages}">${totalPages}</button></li>`;
   }
 
-  paginationHTML += `
+  paginationBox += `
     <li class="page-item ${currentPage === totalPages ? "disabled" : ""}">
       <button class="page-link" data-page="${
         currentPage + 1
@@ -527,8 +539,8 @@ function renderPaginationControls(containerId, currentPage, totalPages) {
         <i class="fas fa-chevron-right icoo"></i>
       </button>
     </li>`;
-  paginationHTML += "</ul>";
-  paginationContainer.innerHTML = paginationHTML;
+  paginationBox += "</ul>";
+  paginationContainer.innerHTML = paginationBox;
 
   if (!paginationContainer.dataset.listenerAttached) {
     paginationContainer.addEventListener("click", handlePaginationClick);
@@ -539,11 +551,11 @@ function renderPaginationControls(containerId, currentPage, totalPages) {
 function populateBookingStatusFilter() {
   try {
     const currentVal = bookingCriteria.statusFilter;
-    let optionsHTML = '<option value="">All Statuses</option>';
+    let optionsBox = '<option value="">All Statuses</option>';
     bookingStatusOptions.forEach((status) => {
-      optionsHTML += `<option value="${status.toLowerCase()}">${status}</option>`;
+      optionsBox += `<option value="${status.toLowerCase()}">${status}</option>`;
     });
-    bookingStatusFilterEl.innerHTML = optionsHTML;
+    bookingStatusFilterEl.innerHTML = optionsBox;
     bookingStatusFilterEl.value = currentVal;
   } catch (error) {
     console.error("Error populating booking status filter:", error);
@@ -588,12 +600,11 @@ function renderBookingsPage(pageNum) {
       endIndex
     );
 
-    let tableHTML = "";
+    let tableBox = "";
     if (displayedBookings.length > 0) {
-      noBookingsMatchCriteria.style.display = "none";
       displayedBookings.forEach((booking) => {
         const currentStatus = (booking?.status || "pending").toLowerCase();
-        const optionsHTML = bookingStatusOptions
+        const optionsBox = bookingStatusOptions
           .map(
             (status) =>
               `<option value="${status.toLowerCase()}" ${
@@ -601,7 +612,7 @@ function renderBookingsPage(pageNum) {
               }>${status}</option>`
           )
           .join("");
-        tableHTML += `
+        tableBox += `
           <tr class="border-standard text-center">
             <td class="text-clr-secondary">${booking?.id || "N/A"}</td>
             <td class="text-clr-primary">${booking?.customerName || "N/A"}</td>
@@ -619,7 +630,7 @@ function renderBookingsPage(pageNum) {
               <select class="form-select form-select-sm bg-clr-card text-clr-primary border-standard" data-booking-id="${
                 booking?.id || ""
               }" aria-label="Booking Status">
-                ${optionsHTML}
+                ${optionsBox}
               </select>
             </td>
             <td>
@@ -630,14 +641,13 @@ function renderBookingsPage(pageNum) {
           </tr>`;
       });
     } else {
-      tableHTML = `<tr><td colspan="8" class="text-center text-clr-muted-on-dark-bg p-3">No bookings found${
+      tableBox = `<tr><td colspan="8" class="text-center plain-text p-3">No bookings found${
         bookingCriteria.searchTerm || bookingCriteria.statusFilter
           ? " matching filters"
           : ""
       }.</td></tr>`;
-      noBookingsMatchCriteria.style.display = "none";
     }
-    bookingsTableBody.innerHTML = tableHTML;
+    bookingsTableBody.innerHTML = tableBox;
     renderPaginationControls(
       "bookingPagination",
       bookingCriteria.currentPage,
@@ -679,9 +689,8 @@ function renderUsersPage(pageNum) {
       endIndex
     );
 
-    let tableHTML = "";
+    let tableBox = "";
     if (displayedUsers.length > 0) {
-      if (noUsersMatchCriteria) noUsersMatchCriteria.style.display = "none";
       displayedUsers.forEach((user) => {
         const isAdmin = (user?.role || "").toLowerCase() === "admin";
         const badgeClass = isAdmin
@@ -693,7 +702,7 @@ function renderUsersPage(pageNum) {
             }" title="Promote to Admin"><i class="fas fa-user-shield me-1 icoo"></i> Promote</button>`
           : `<button class="btn btn-sm btn-secondary text-clr-muted-on-dark-bg" disabled title="Already Admin"><i class="fas fa-check-circle me-1 icoo"></i> Admin</button>`;
 
-        tableHTML += `
+        tableBox += `
           <tr class="border-standard text-center">
             <td class="text-clr-secondary">${user?.id || "N/A"}</td>
             <td class="text-clr-primary fw-medium">${
@@ -710,12 +719,11 @@ function renderUsersPage(pageNum) {
           </tr>`;
       });
     } else {
-      tableHTML = `<tr><td colspan="6" class="text-center text-clr-muted-on-dark-bg p-3">No users found${
+      tableBox = `<tr><td colspan="6" class="text-center plain-text p-3">No users found${
         userCriteria.searchTerm ? " matching search" : ""
       }.</td></tr>`;
-      if (noUsersMatchCriteria) noUsersMatchCriteria.style.display = "none";
     }
-    usersTableBody.innerHTML = tableHTML;
+    usersTableBody.innerHTML = tableBox;
     renderPaginationControls(
       "userPagination",
       userCriteria.currentPage,
@@ -725,18 +733,34 @@ function renderUsersPage(pageNum) {
     console.error("Error rendering users page:", error);
   }
 }
-
+//#endregion
+//#region handlers
+const handleScroll = debounce(() => {
+  if (window.scrollY > 100) {
+    scrollToTopBtn.classList.remove("d-none");
+    scrollToTopBtn.classList.add("show");
+  } else {
+    scrollToTopBtn.classList.remove("show");
+    scrollToTopBtn.classList.add("d-none");
+  }
+}, 100);
 function handleUpdateBookingStatus(event) {
   try {
     const button = event.target.closest(".btn-update-status");
     if (!button) return;
-
     const bookingId = parseInt(button.dataset.bookingId);
+    const bookingIndex = bookings.findIndex((b) => b?.id === bookingId);
+    const currentStatus = bookings[bookingIndex].status;
     const statusSelect = document.querySelector(
       `select[data-booking-id="${bookingId}"]`
     );
+
     const newStatus = statusSelect.value;
-    const bookingIndex = bookings.findIndex((b) => b?.id === bookingId);
+
+    if (currentStatus === newStatus) {
+      showToast(`Booking #${bookingId} status remained the same.`, "info");
+      return;
+    }
 
     if (bookingIndex > -1) {
       bookings[bookingIndex].status = newStatus;
@@ -800,7 +824,8 @@ function handleLogout() {
     console.error("Error handling logout:", error);
   }
 }
-
+//#endregion
+//#region event listner setup
 function setupEventListeners() {
   try {
     themeToggleBtn.addEventListener("click", () => {
@@ -842,6 +867,15 @@ function setupEventListeners() {
       }, 350)
     );
 
+    window.addEventListener("scroll", handleScroll);
+
+    scrollToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+
     userClearFiltersBtn.addEventListener("click", () => {
       userSearchInput.value = "";
       userCriteria.currentPage = 1;
@@ -854,7 +888,8 @@ function setupEventListeners() {
     console.error("Error setting up event listeners:", error);
   }
 }
-
+//#endregion
+//#region initializer
 function initializeDashboard() {
   console.log("Initializing dashboard...");
   try {
@@ -882,3 +917,4 @@ if (document.readyState === "loading") {
 } else {
   initializeDashboard();
 }
+//#endregion

@@ -13,7 +13,12 @@ if (car) {
   document.getElementById('car-model').innerText = car.model;
   document.getElementById('car-type').innerText = car.type;
   document.getElementById('car-deposit').innerText = car.rentalTerms.deposit + "$";
-  document.getElementById('car-age').innerText = car.rentalTerms.minAge;
+
+ //update rental condition
+ document.querySelector('.age').innerText=car.rentalTerms.minAge;
+ document.querySelector('.mile').innerText=car.rentalTerms.mileage;
+ document.querySelector('.policy').innerText=car.rentalTerms.fuelPolicy;
+ document.querySelector('.insurance').innerText=car.rentalTerms.insurance;
 
   const gallery = document.getElementById('car-gallery');
   const image = document.createElement("img");
