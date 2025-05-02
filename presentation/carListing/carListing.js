@@ -1,6 +1,4 @@
-// function getCarsFromLocalStorage() {
-//   return JSON.parse(localStorage.getItem("cars")) || [];
-// }
+
 
 const cars = JSON.parse(localStorage.getItem("cars")) || [];
 
