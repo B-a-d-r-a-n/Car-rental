@@ -1,0 +1,85 @@
+body {
+    background-color: var(--clr-bg);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 70px;
+    height: 100vh;
+    background-color: var(--clr-light-darker);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    z-index: 1000;
+}
+
+.sidebar button {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    margin: 10px 0;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.sidebar button:hover {
+    color: var(--clr-accent);
+}
+
+.content {
+    margin-left: 80px;
+    padding: 30px;
+}
+
+.profile-card {
+    background: var(--clr-light-darker);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.profile-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--clr-accent);
+}
+
+.form-label {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.form-control {
+    border-radius: 12px;
+    background: var(--clr-bg);
+    color: var(--text-primary);
+}
+
+.section-title {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.edit-btn {
+    border-radius: 20px;
+    background-color: var(--clr-accent);
+    color: var(--text-on-accent);
+}
+
+.email-box {
+    background: var(--clr-bg);
+    border-radius: 10px;
+    padding: 15px;
+    color: var(--text-primary);
+}

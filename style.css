@@ -202,7 +202,8 @@ html {
 }
 
 body {
-  background-color: #ffffff;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
 }
 
 .maindev {
@@ -215,8 +216,8 @@ body {
 
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-  color: var(--bs-nav-pills-link-active-color);
-  background-color: #f5b754;
+  color: var(--text-on-accent);
+  background-color: var(--clr-accent);
 }
 
 .s {
@@ -230,32 +231,33 @@ body {
   font-family: "Boldonse", system-ui;
   font-weight: 700;
   font-size: 70px;
-  color: whitesmoke;
+  color: var(--text-on-dark-bg);
   letter-spacing: 5px;
-  font-weight: bold;
 }
 
 .mainbutton {
   position: relative;
   top: 30%;
 }
+
 .mainbutton h5 {
-  color: #d99a36;
+  color: var(--text-accent);
   letter-spacing: 5px;
 }
 
 .custom-button {
-  background-color: #f5b754;
+  background-color: var(--clr-accent);
   width: 12rem;
   height: 4rem;
   border-radius: 30px;
   border: none;
   margin: 8px;
+  color: var(--text-on-accent);
 }
 
 .custom-button:hover {
   background-color: gray;
-  color: whitesmoke;
+  color: var(--clr-light);
   transform: translateY(-10%);
 }
 
@@ -264,12 +266,12 @@ body {
 }
 
 .title-yellow {
-  color: #f5b754;
+  color: var(--clr-accent);
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  background-color: #f5b754;
+  background-color: var(--clr-accent);
   border-radius: 50%;
 }
 
@@ -281,6 +283,8 @@ body {
   font-size: 18px;
   border-radius: 50%;
   text-align: center;
+  background-color: var(--clr-accent);
+  color: var(--text-on-accent);
 }
 
 .catogry-title:hover {
@@ -290,13 +294,15 @@ body {
 }
 
 .footer {
-  background-color: #1a1a1a;
-  color: #ffffff;
+  background-color: var(--bg-panel);
+  color: var(--text-on-dark-bg);
   padding: 60px 0 30px;
 }
+
 .nav-link {
-  color: whitesmoke;
+  color: var(--text-on-dark-bg);
 }
+
 .nav-link:hover {
   color: gray;
 }
@@ -304,7 +310,7 @@ body {
 .footer h1,
 .footer h2,
 .footer h3 {
-  color: #ffffff;
+  color: var(--text-on-dark-bg);
   position: relative;
   padding-bottom: 10px;
   margin-bottom: 20px;
@@ -319,17 +325,17 @@ body {
   bottom: 0;
   width: 50px;
   height: 2px;
-  background: #f5b754;
+  background: var(--clr-accent);
 }
 
 .footer p,
 .footer a {
-  color: #b3b3b3;
+  color: var(--text-muted-on-dark-bg);
   text-decoration: none;
 }
 
 .footer a:hover {
-  color: #f5b754;
+  color: var(--clr-accent);
 }
 
 .contact-info {
@@ -337,24 +343,24 @@ body {
 }
 
 .contact-info i {
-  color: #f5b754;
+  color: var(--clr-accent);
   margin-right: 10px;
 }
 
 .subscribe-input {
   background: #2e2e2e;
   border: none;
-  color: #ffffff;
+  color: var(--clr-light);
 }
 
 .subscribe-btn {
-  background: #f5b754;
-  color: #ffffff;
+  background: var(--clr-accent);
+  color: var(--text-on-accent);
   border: none;
 }
 
 .subscribe-btn:hover {
-  background: #f5b754;
+  background: var(--clr-accent-darker);
 }
 
 .divider {
@@ -364,22 +370,20 @@ body {
 }
 
 i {
-  color: #f5b754;
+  color: var(--clr-accent);
 }
 
-footer span {
-  color: whitesmoke;
+footer span,
+footer p,
+footer a {
+  color: var(--text-muted-on-dark-bg);
 }
 
 footer h1 {
   margin-top: 2rem;
   margin-bottom: 1em;
-  color: white;
+  color: var(--text-on-dark-bg);
   font-size: 1.5rem;
-}
-
-footer p {
-  color: whitesmoke;
 }
 
 .fotter-list i {
@@ -392,29 +396,28 @@ footer i:hover {
   transition: 0.5s;
 }
 
-footer a {
-  text-decoration: none;
-  color: whitesmoke;
+footer a:hover {
+  color: var(--clr-accent);
 }
 
-footer a:hover {
-  color: #f5b754;
-}
+
+
 .nav-underline .nav-link.active,
 .nav-underline .show > .nav-link {
   font-weight: 700;
-  color: #f5b754;
+  color: var(--clr-accent);
   border-bottom-color: currentcolor;
 }
+
 .contactt {
   height: 15em;
   border-radius: 20px;
-  background-color: #f5b754;
+  background-color: var(--clr-accent);
 }
 
 .genral-btn {
   background-color: #d99a36;
-  color: whitesmoke;
+  color: var(--clr-light);
   border: none;
 }
 
@@ -423,7 +426,7 @@ footer a:hover {
   top: 0;
   font-weight: bolder;
   font-size: 40px;
-  color: whitesmoke;
+  color: var(--text-on-dark-bg);
   margin-left: 15px;
 }
 
@@ -431,3 +434,143 @@ footer a:hover {
   transform: scale(1.05);
   transition: 500ms ease;
 }
+
+
+
+.carousel-container {
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+}
+
+.carousel-container {
+  width: 95%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.car-slide {
+  position: relative;
+}
+
+.image-wrapper {
+  position: relative;
+}
+
+.car-img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 30px;
+}
+
+.car-info-float {
+  position: relative;
+  margin-top: -50px; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 11rem;
+  background-color:var(--bg-panel);
+  padding: 15px 20px;
+  border-radius: 30px;
+  text-align: center;
+  color: var(--text-primary);
+   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+;}
+
+.car-info-float .icons span{
+  color: var(--text-primary);
+}
+
+.car-info-float .icons p{
+  color: var(--text-primary);
+}
+
+.car-info-float h5 {
+  margin: 0;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.car-info-float p {
+  margin: 5px 0;
+  color: #444;
+  font-size: 20px;
+}
+
+.info-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #007bff;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+
+
+
+.car-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.car-details h3 {
+  margin: 0 0 10px;
+  font-weight: bold;
+}
+
+.icons span {
+  margin-right: 15px;
+  font-size: 14px;
+  color: #666;
+}
+
+.car-price {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.details-btn {
+  background-color:#d99a36;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.price {
+  color:#e0a43f;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.per-day {
+  font-size: 14px;
+  color: #666;
+  margin-left: 3px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

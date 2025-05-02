@@ -1,24 +1,28 @@
-*{
+* {
     box-sizing: border-box;
     padding: 0px;
     margin: 0px;
-}
-.contactimg{
+  }
+  
+  .contactimg {
     height: 80vh;
-    background: url(../contact.jpg) no-repeat center ;
+    background: url(../../assets/images/contact.jpg) no-repeat center;
     background-size: cover;
-}
-
-
-.overlay{
+  }
+  .overlay {
     height: 80vh;
-    background-color: rgba(0, 0, 0, 0.557);
-}
+    background-color: rgba(var(--clr-dark-rgb), 0.55); 
+  }
+  
+  i {
+    font-size: 25px;
+    color: var(--clr-accent); 
+  }
+  
+  i:hover {
+    color: gray; 
+  }
+  .cards{
+    background: var(--clr-light-darker);
 
-i{
-    font-size: 40px;
-}
-i:hover{
-    color: black;
-}
-
+  }

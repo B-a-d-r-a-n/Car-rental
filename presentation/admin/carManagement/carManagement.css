@@ -5,3 +5,68 @@ form .btn-primary{
     width: 120px;
     height: 50px;
 }
+.btn-success{
+    background-color: #F5B754;
+}
+.btn-success:hover{
+    background-color: gray;
+}
+
+body{
+    background-color: var(--bg-page);
+    color: var(--text-primary);}
+.table thead th {
+    background-color: var(--bg-table-header);
+    color: var(--text-on-dark-bg);
+    border: none;
+    font-weight: 600;
+  }
+  
+  .table tbody tr {
+    background-color: var(--bg-card);
+    box-shadow: 0 2px 12px rgba(var(--clr-dark-rgb), 0.05);
+    transition: 0.3s;
+    border-radius: 12px;
+    color: var(--text-primary);
+  }
+  
+  .table tbody tr:hover {
+    transform: scale(1.01);
+    box-shadow: 0 4px 20px rgba(var(--clr-dark-rgb), 0.1);
+  }
+  
+  .table td {
+    vertical-align: middle;
+    border: none;
+  }
+  
+  .table img {
+    width: 100px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(var(--clr-dark-rgb), 0.2);
+  }
+  
+  .card.card-body {
+    background: var(--bg-panel);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+  }
+  
+  button.btn-outline-warning,
+  button.btn-outline-danger {
+    min-width: 100px;
+    font-weight: 500;
+    color: var(--text-primary);
+    border-color: var(--clr-accent);
+  }
+  
+  .modal-content {
+    border-radius: 12px;
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    box-shadow: 0 0 30px rgba(var(--clr-dark-rgb), 0.1);
+  }
+  

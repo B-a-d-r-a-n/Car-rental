@@ -1,3 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+
 let brand = document.querySelector('input[name="brand"]');
 let model = document.querySelector('input[name="model"]');
 let type = document.querySelector('input[name="type"]');
@@ -133,5 +144,14 @@ function updatecar(index) {
     localStorage.setItem("cars", JSON.stringify(parsedcarList));
   });
 }
+const toggleTheme = () => {
+  const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+  
+  if (currentTheme === 'dark') {
+    document.documentElement.setAttribute('data-bs-theme', 'light');
+  } else {
+    document.documentElement.setAttribute('data-bs-theme', 'dark');
+  }
+};
 
 displayCars();
