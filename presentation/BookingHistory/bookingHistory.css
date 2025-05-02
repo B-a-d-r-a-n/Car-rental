@@ -13,7 +13,7 @@ body {
 
 .history-container {
   flex: 1;
-  padding-top: 100px; /* بسبب الـ navbar الثابت */
+  padding-top: 100px; 
   padding-bottom: 40px;
 }
 
@@ -31,7 +31,7 @@ footer.site-footer {
 
 /* === NAVBAR === */
 .navbar {
-  background-color: #ffffff;
+  background-color: #f6f6f6;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: background-color 0.3s;
 }
