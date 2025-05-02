@@ -53,7 +53,21 @@ color: #000;
   color: whitesmoke;
   transform: translateY(-10%);
 }
+section img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-width: 500px;
+  max-height: 500px; 
+}
 
+@media (max-width: 768px) {
+  section img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
 /* Car Details Section */
 .section-padding {
   padding: 60px 0;

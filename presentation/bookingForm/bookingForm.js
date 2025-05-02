@@ -7,13 +7,13 @@ const carId = params.get("carId");
 // Load cars from localStorage
 const cars = JSON.parse(localStorage.getItem("cars"));
 const selectedCar = cars.find((car) => car.id == carId);
-
+let pendingBooking = null;
 // Display car details
 if (selectedCar) {
   document.getElementById("car-details").innerHTML = `
     <div class="car-details-container">
-      <h2 class="car-title">${selectedCar.brand} ${selectedCar.model}</h2>
-      <img src="${selectedCar.image}" alt="${selectedCar.model}" class="car-image" />
+      <h2 class="car-title text-center mb-2">${selectedCar.brand} ${selectedCar.model}</h2>
+      <img src="${selectedCar.image}" alt="${selectedCar.model}" class="car-image " />
       <div class="car-info">
         <p><strong>Description:</strong> ${selectedCar.description}</p>
         <p><strong>Price per day:</strong> $${selectedCar.rentPerDay}</p>
@@ -72,6 +72,7 @@ document.getElementById("dropoffLocation").addEventListener("input", (e) =>
 document.getElementById("booking-form").addEventListener("submit", function (e) {
   e.preventDefault();
 
+  
   const customerName = document.getElementById("fullName").value.trim();
   const customerEmail = document.getElementById("email").value.trim();
   const customerPhone = document.getElementById("phone").value.trim();
@@ -80,38 +81,29 @@ document.getElementById("booking-form").addEventListener("submit", function (e) 
   const dropoffLocation = document.getElementById("dropoffLocation").value.trim();
   const dropoffDate = document.getElementById("returnDate").value;
 
+  // validation 
   let isValid = true;
-
   if (!validateField("fullName", customerName, nameRegex, "fullName-error", "Enter a valid name.")) isValid = false;
   if (!validateField("email", customerEmail, emailRegex, "email-error", "Enter a valid email.")) isValid = false;
   if (!validateField("phone", customerPhone, phoneRegex, "phone-error", "Enter a valid Egyptian phone number.")) isValid = false;
   if (!validateField("pickupLocation", pickupLocation, locationRegex, "pickupLocation-error", "Enter a valid pickup location.")) isValid = false;
   if (!validateField("dropoffLocation", dropoffLocation, locationRegex, "dropoffLocation-error", "Enter a valid dropoff location.")) isValid = false;
-
-  if (!pickupDate) {
-    showError("pickupDate-error", "Please select a pickup date.");
-    isValid = false;
-  } else {
-    clearError("pickupDate-error");
-  }
-
-  if (!dropoffDate) {
-    showError("returnDate-error", "Please select a return date.");
-    isValid = false;
-  } else if (new Date(dropoffDate) <= new Date(pickupDate)) {
-    showError("returnDate-error", "Return date must be after pickup date.");
-    isValid = false;
+  if (!pickupDate) { showError("pickupDate-error", "Please select a pickup date."); isValid = false; } else { clearError("pickupDate-error"); }
+  if (!dropoffDate) { showError("returnDate-error", "Please select a return date."); isValid = false; }
+  else if (new Date(dropoffDate) <= new Date(pickupDate)) {
+    showError("returnDate-error", "Return date must be after pickup date."); isValid = false;
   } else {
     clearError("returnDate-error");
   }
 
   if (!isValid) return;
 
+  // display price
   const rentalDays = (new Date(dropoffDate) - new Date(pickupDate)) / (1000 * 60 * 60 * 24);
   const totalAmount = selectedCar.rentPerDay * rentalDays;
 
-  // Create a new booking object
-  const newBooking = new Booking(
+  // save  new booking in class
+  pendingBooking = new Booking(
     Date.now(),
     selectedCar.id,
     customerName,
@@ -123,23 +115,43 @@ document.getElementById("booking-form").addEventListener("submit", function (e) 
     totalAmount
   );
 
-  // Save the booking to localStorage
+ 
+  document.getElementById("booking-summary").innerHTML = `
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><strong>Car:</strong> ${selectedCar.brand} ${selectedCar.model}</li>
+    <li class="list-group-item"><strong>Name:</strong> ${customerName}</li>
+    <li class="list-group-item"><strong>Email:</strong> ${customerEmail}</li>
+    <li class="list-group-item"><strong>Phone:</strong> ${customerPhone}</li>
+    <li class="list-group-item"><strong>Pickup:</strong> ${pickupLocation} (${pickupDate})</li>
+    <li class="list-group-item"><strong>Drop-off:</strong> ${dropoffLocation} (${dropoffDate})</li>
+    <li class="list-group-item"><strong>Total:</strong> $${totalAmount}</li>
+  </ul>
+`;
+
+ 
+  const confirmModal = new bootstrap.Modal(document.getElementById("confirmBookingModal"));
+  confirmModal.show();
+});
+document.getElementById("confirmBookingBtn").addEventListener("click", function () {
+  if (!pendingBooking) return;
+
+  //save in local storage
   let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-  bookings.push(newBooking);
+  bookings.push(pendingBooking);
   localStorage.setItem("bookings", JSON.stringify(bookings));
 
-  // Update the car's available stock in localStorage
-  selectedCar.availableStock -= 1; // Reduce the available stock by 1
-  localStorage.setItem("cars", JSON.stringify(cars)); // Save the updated cars to localStorage
+  // decrease available stock
+  selectedCar.availableStock -= 1;
+  localStorage.setItem("cars", JSON.stringify(cars));
 
+  localStorage.setItem("currentCustomerEmail", pendingBooking.customerEmail);
+
+  // Toast 
   const successToast = new bootstrap.Toast(document.getElementById("successToast"));
   successToast.show();
-  
-  // Save the current customer email
-  localStorage.setItem("currentCustomerEmail", newBooking.customerEmail);
 
-  // Redirect to the booking history page 
   setTimeout(() => {
     window.location.href = "../BookingHistory/bookingHistory.html";
   }, 1500);
 });
+

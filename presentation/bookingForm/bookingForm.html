@@ -54,7 +54,7 @@
 
   <!-- Main Content -->
   <main class="container my-5 pt-5">
-    <div class="row justify-content-center align-items-start gy-4">
+    <div class="row car-book justify-content-center align-items-start gy-5">
       <!-- Car Details -->
       <div class="col-lg-6" id="car-details"></div>
 
@@ -162,7 +162,31 @@
       <div class="text-center"><p class="mb-0">&copy; 2025 ITI. All Rights Reserved.</p></div>
     </div>
   </footer>
+<!--model for confirm book-->
 
+<div class="modal fade" id="confirmBookingModal" tabindex="-1" aria-labelledby="confirmBookingModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content shadow rounded-4 border-0">
+      <div class="modal-header  text-white rounded-top-4" style="background-color: #f4a300;">
+        <h5 class="modal-title" id="confirmBookingModalLabel">🚗 Booking Summary</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body p-4" id="booking-summary">
+       
+      </div>
+
+      <div class="modal-footer justify-content-between px-4 pb-4">
+        <button type="button" class="btn btn-outline-secondary rounded-pill px-4" style="background-color: #f4a300;color: white;" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" id="confirmBookingBtn" class="btn btn-success rounded-pill px-4" style="background-color: #f4a300;color: white;">
+          Confirm Booking
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
   <!-- Dark Mode -->
   <script>
     const toggleBtn = document.getElementById("mode-toggle");
