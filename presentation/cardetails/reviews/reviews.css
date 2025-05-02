@@ -41,6 +41,9 @@ body.dark-mode #reviews-list .card {
   background-color: #2c2c2c;
   color: white;
 }
+body.dark-mode #reviews-list .card small{
+  color: #f1f1f1 !important;
+}
 
 body.dark-mode #review-form input,
 body.dark-mode #review-form select,
@@ -62,5 +65,7 @@ body.dark-mode #review-form button {
 }
 body.dark-mode #review-form button:hover {
   background-color: white;
+  border-color: white;
   color: black;
 }
+
