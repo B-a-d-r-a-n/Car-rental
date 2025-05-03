@@ -69,22 +69,28 @@ nav {
 
 /* =========================================cards======================================= */
 #cars{
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
 }
 #carList .card {
   border-radius: 20px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 #carList .card .card-body {
-  padding: 30px;
+  padding: 1.875rem;
   background: #f2f2f2;
   border-radius: 0 0 20px 20px;
 }
+@media screen and (max-width: 768px) {
+  #carList .card .card-body {
+    padding: 1.2rem;
+  }
+  
+}
 
 #carList .card-body h5 {
-  font-size: 21px;
+  font-size: 1.3125rem;
   font-weight: 700;
   margin-bottom: 10px;
 }
@@ -94,13 +100,11 @@ nav {
 }
 
 #carList .card .card-body div p {
-  font-size: 21px;
-
+  font-size: 1.3rem;
 }
 
 #carList .card .card-body div p span {
-  font-size: 34px;
-  line-height: 1.2em;
+  font-size: 2rem;
   color: #f5b754;
   font-weight: 700;
 }
@@ -117,13 +121,13 @@ nav {
 }
 
 #carList .card a {
-  padding: 14px 42px;
+  padding: 1.2rem 1.9rem;
   margin-top: 40px !important;
   border: 1px solid #f5b754;
-  border-radius: 30px;
+  border-radius: 40px;
   background-color: #f5b754;
   color: #1b1b1b;
-  margin-left: auto;
+  /* margin-left: auto; */
   /* transition: border-color 300ms ease, transform 300ms ease, background-color 300ms ease, color 300ms ease;
     transform-style: preserve-3d; */
 }
@@ -210,22 +214,6 @@ nav {
 .form-check-label {
   color: #1b1b1b;
 }
-
-/*  زر البحث */
-/* #applyFilters {
-    background-color: #1b1b1b;
-    color: #f5b754;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-weight: bold;
-    font-size: 16px;
-    transition: 0.3s ease;
-}
- */
-
-/* التأثير عند الـ hover */
-
 
 /* ========================footer=========================== */
 .footer {

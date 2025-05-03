@@ -12,14 +12,14 @@ function renderCars(cars) {
   }
   cars.forEach((car) => {
     const card = document.createElement("div");
-    card.className = " col-lg-6";
+    card.className = " col-md-6";
     card.innerHTML = `
             <div class="card h-100">
                 <img src="${car.image}" class="card-img-top" alt="${car.brand} ${car.model}">
                 <div class="card-body d-flex flex-column">
                 <h5 class="card-title">${car.brand} ${car.model}</h5>
                   <p class="card-text">Type: ${car.type}</p>
-                  <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex  justify-content-between align-items-center">
                     <p class="card-text mt-auto"><span>$${car.rentPerDay}</span>/day</p>
                     <a href="../carDetails/carDetails.html?id=${car.id}" class="btn btn-outline-primary">Details</a>
                   </div> 
