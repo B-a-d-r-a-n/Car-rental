@@ -29,50 +29,6 @@ export class Car {
     this.categories = [];
     this.isFeatured = false;
   }
-
-  checkAvailability(startDate, endDate) {
-    if (!this.isAvailable) {
-      return false;
-    }
-
-    if (this.availableStock <= 0) {
-      return false;
-    }
-
-    const requestStartDate = new Date(startDate).getTime();
-    const requestEndDate = new Date(endDate).getTime();
-    if (requestStartDate >= requestEndDate) {
-      window.alert(
-        `Requested end date (${new Date(
-          endDate
-        ).toDateString()}) is not after start date (${new Date(
-          startDate
-        ).toDateString()}).`
-      );
-      return false;
-    }
-
-    for (const unavailableDatesRange of this.unavailableDates) {
-      const unavailableStartDate = new Date(
-        unavailableDatesRange.start
-      ).getTime();
-      const unavailableEndDate = new Date(unavailableDatesRange.end).getTime();
-      const isOverlapping =
-        requestStartDate < unavailableEndDate &&
-        requestEndDate > unavailableStartDate;
-
-      if (isOverlapping) {
-        console.log(
-          `Car ${this.id} has an overlapping booking during [${new Date(
-            startDate
-          ).toDateString()} - ${new Date(endDate).toDateString()}]`
-        );
-        return false;
-      }
-    }
-
-    return true;
-  }
 }
 export class Booking {
   constructor(
@@ -103,14 +59,6 @@ export class Booking {
     this.additionalOptions = additionalOptions;
     this.promoCode = null;
     this.discountAmount = 0;
-  }
-
-  getDurationInDays() {
-    const differenceInMilliseconds =
-      this.dropoffDate.getTime() - this.pickupDate.getTime();
-    const millisecondsPerDay = 1000 * 60 * 60 * 24;
-    const duration = differenceInMilliseconds / millisecondsPerDay;
-    return Math.ceil(duration);
   }
 }
 

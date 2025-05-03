@@ -1,4 +1,3 @@
-// Import classes (adjust path as needed)
 import * as Entities from "./Entities.js";
 
 function getData(key) {

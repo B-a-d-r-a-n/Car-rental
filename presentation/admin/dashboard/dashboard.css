@@ -36,19 +36,6 @@
   color: var(--text-accent);
 }
 
-/* Ensure offcanvas backdrop fades out */
-.offcanvas-backdrop {
-  transition: opacity 0.3s ease;
-}
-
-.offcanvas-backdrop.show {
-  opacity: 0.5;
-}
-
-.offcanvas-backdrop.fade {
-  opacity: 0;
-}
-
 /* Dashboard Panels */
 .dashboard-panel {
   background-color: var(--bg-panel);
@@ -179,6 +166,7 @@
   color: var(--text-on-accent);
 }
 
+/* Scroll Button */
 #scrollToTopBtn {
   position: fixed;
   bottom: 20px;

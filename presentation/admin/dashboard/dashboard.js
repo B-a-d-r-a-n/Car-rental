@@ -79,7 +79,7 @@ const userPaginationContainer = document.getElementById("userPagination");
 const offCanvasNav = document.getElementById("offCanvasNav");
 const ctx = reportChartCanvas.getContext("2d");
 const ctxPeak = peakHoursChartCanvas.getContext("2d");
-const plainTextEls = document.querySelectorAll(".plain-text");
+const plainTextElements = document.querySelectorAll(".plain-text");
 
 let currentTheme = htmlElement.getAttribute("data-bs-theme") || "light";
 let isDark = currentTheme === "dark";
@@ -168,7 +168,7 @@ function setTheme(theme) {
     if (closeBtn) {
       closeBtn.classList.toggle("btn-close-white", isDark);
     }
-    plainTextEls.forEach((element) => {
+    plainTextElements.forEach((element) => {
       if (isDark) {
         element.classList.add("text-clr-muted-on-dark-bg");
         element.classList.remove("text-clr-primary");
@@ -747,14 +747,13 @@ const handleScroll = debounce(() => {
 function handleUpdateBookingStatus(event) {
   try {
     const button = event.target.closest(".btn-update-status");
-    if (!button) return;
+
     const bookingId = parseInt(button.dataset.bookingId);
     const bookingIndex = bookings.findIndex((b) => b?.id === bookingId);
     const currentStatus = bookings[bookingIndex].status;
     const statusSelect = document.querySelector(
       `select[data-booking-id="${bookingId}"]`
     );
-
     const newStatus = statusSelect.value;
 
     if (currentStatus === newStatus) {
@@ -776,7 +775,6 @@ function handleUpdateBookingStatus(event) {
 function handlePromoteUser(event) {
   try {
     const button = event.target.closest(".btn-promote-user");
-    if (!button) return;
 
     const userId = parseInt(button.dataset.userId);
     const userIndex = users.findIndex((u) => u?.id === userId);
