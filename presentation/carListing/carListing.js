@@ -1,5 +1,3 @@
-
-
 const cars = JSON.parse(localStorage.getItem("cars")) || [];
 
 function renderCars(cars) {
@@ -14,8 +12,9 @@ function renderCars(cars) {
     const card = document.createElement("div");
     card.className = " col-md-6";
     card.innerHTML = `
-            <div class="card h-100">
-                <img src="${car.image}" class="card-img-top" alt="${car.brand} ${car.model}">
+            <div class="card h-100 ">
+            <div class="overflow-hidden rounded-top-4">                <img src="${car.image}" class="card-img-top" alt="${car.brand} ${car.model}">
+</div>
                 <div class="card-body d-flex flex-column">
                 <h5 class="card-title">${car.brand} ${car.model}</h5>
                   <p class="card-text">Type: ${car.type}</p>
@@ -31,10 +30,14 @@ function renderCars(cars) {
 }
 
 function applyFilters() {
-  const searchQuery = document.getElementById("searchInput").value.trim().toLowerCase();
+  const searchQuery = document
+    .getElementById("searchInput")
+    .value.trim()
+    .toLowerCase();
   const type = document.getElementById("filterType").value;
   const minPrice = parseFloat(document.getElementById("minPrice").value) || 0;
-  const maxPrice = parseFloat(document.getElementById("maxPrice").value) || Infinity;
+  const maxPrice =
+    parseFloat(document.getElementById("maxPrice").value) || Infinity;
   const availableOnly = document.getElementById("availableOnly").checked;
 
   // const cars = getCarsFromLocalStorage();
@@ -61,25 +64,21 @@ document.getElementById("applyFilters").addEventListener("click", applyFilters);
 // renderCars(getCarsFromLocalStorage());
 renderCars(cars);
 
-
-
-
-
 // dark mode
 const toggleButton = document.getElementById("toggleDarkMode");
-  const body = document.body;
+const body = document.body;
 
-  // Check if mode is saved in localStorage
-  if (localStorage.getItem("dark-mode") === "enabled") {
-    body.classList.add("dark-mode");
+// Check if mode is saved in localStorage
+if (localStorage.getItem("dark-mode") === "enabled") {
+  body.classList.add("dark-mode");
+}
+
+toggleButton.addEventListener("click", () => {
+  body.classList.toggle("dark-mode");
+
+  if (body.classList.contains("dark-mode")) {
+    localStorage.setItem("dark-mode", "enabled");
+  } else {
+    localStorage.setItem("dark-mode", "disabled");
   }
-
-  toggleButton.addEventListener("click", () => {
-    body.classList.toggle("dark-mode");
-
-    if (body.classList.contains("dark-mode")) {
-      localStorage.setItem("dark-mode", "enabled");
-    } else {
-      localStorage.setItem("dark-mode", "disabled");
-    }
-  });
+});

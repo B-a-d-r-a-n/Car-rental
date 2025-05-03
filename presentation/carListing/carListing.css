@@ -1,4 +1,3 @@
-
 /* Navbar & Nav Link */
 nav {
   color: white;
@@ -14,12 +13,11 @@ nav {
 }
 .nav-link:hover {
   color: #f5b754;
-
 }
 .nav-underline .nav-link.active,
 .nav-underline .show > .nav-link {
   font-weight: 700;
-  color: #F5B754;
+  color: #f5b754;
   border-bottom-color: currentcolor;
 }
 
@@ -41,14 +39,13 @@ nav {
   width: 100%;
   /* height: 100%; */
   height: 70vh;
-  background-color: rgba(0, 0, 0, 0.5); 
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
 .v-middle {
   position: relative;
   z-index: 2;
 }
-
 
 .banner-header h6 {
   font-size: 10px;
@@ -63,12 +60,12 @@ nav {
   text-transform: uppercase;
   letter-spacing: 6px;
 }
-.banner-header span{
+.banner-header span {
   color: #f5b754;
 }
 
 /* =========================================cards======================================= */
-#cars{
+#cars {
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
 }
@@ -86,7 +83,6 @@ nav {
   #carList .card .card-body {
     padding: 1.2rem;
   }
-  
 }
 
 #carList .card-body h5 {
@@ -335,7 +331,7 @@ body.dark-mode {
 }
 
 body.dark-mode .card,
-body.dark-mode .card-body{
+body.dark-mode .card-body {
   background-color: #222 !important;
   border-color: #222;
   color: white;
@@ -345,7 +341,7 @@ body.dark-mode .card a:hover {
   color: #222 !important;
 }
 
-body.dark-mode .filter-label{
+body.dark-mode .filter-label {
   color: white;
 }
 body.dark-mode .form-check-label {
@@ -372,9 +368,9 @@ body.dark-mode #items {
 }
 
 body.dark-mode #search {
-  background-color: #f5b754; 
+  background-color: #f5b754;
 }
-body.dark-mode #search button{
+body.dark-mode #search button {
   background-color: #f5b754;
   color: #222;
 }

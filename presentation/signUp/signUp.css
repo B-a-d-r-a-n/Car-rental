@@ -36,11 +36,7 @@ a.color-primary:hover {
 }
 
 .shade {
-  background-image: linear-gradient(
-    45deg,
-    rgba(0, 0, 0, 0.6),
-    rgba(0, 0, 0, 0.6)
-  );
+  background-image: linear-gradient(45deg, var(--shade), var(--shade));
 }
 .btn-secondary {
   background-color: #1b1b1b !important;
@@ -54,7 +50,7 @@ button.bg-primary:hover {
   background-color: #1b1b1b !important;
   color: white !important;
 }
-textarea:focus,
+
 input:focus,
 input[type]:focus,
 .uneditable-input:focus {
@@ -102,7 +98,9 @@ input[type]:focus,
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
-
+.col-form-label {
+  color: var(--text-primary);
+}
 @keyframes spin {
   0% {
     transform: rotate(0deg);
