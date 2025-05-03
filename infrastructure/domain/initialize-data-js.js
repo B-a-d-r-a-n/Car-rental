@@ -126,7 +126,7 @@ const sampleCars = [
       "CR-V",
       "SUV",
       85,
-      "https://images.pexels.com/photos/627665/pexels-photo-627665.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=600",
       "Versatile SUV with ample space for passengers and cargo. Perfect for family trips and outdoor adventures.",
       [
         "All-Wheel Drive",
@@ -267,7 +267,8 @@ const sampleCars = [
       "Wrangler",
       "Off-Road",
       95,
-      "https://images.pexels.com/photos/1429748/pexels-photo-1429748.jpeg?auto=compress&cs=tinysrgb&w=600",
+
+      "https://images.pexels.com/photos/627678/pexels-photo-627678.jpeg?auto=compress&cs=tinysrgb&w=600",
       "Rugged 4x4 vehicle built for off-road adventures. Removable doors and roof for open-air experience.",
       ["4x4", "Removable Top", "Bluetooth", "Navigation", "All-Terrain Tires"],
       {
@@ -347,7 +348,7 @@ const sampleCars = [
       "Suburban",
       "SUV",
       110,
-      "https://images.pexels.com/photos/3807376/pexels-photo-3807376.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&cs=tinysrgb&w=600",
       "Full-size SUV with seating for up to 8 passengers. Ideal for large families or group travel with plenty of cargo space.",
       [
         "Three-Row Seating",
@@ -374,7 +375,7 @@ const sampleCars = [
       "F-150",
       "Truck",
       90,
-      "https://images.pexels.com/photos/1402790/pexels-photo-1402790.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/100656/pexels-photo-100656.jpeg?auto=compress&cs=tinysrgb&w=600",
       "America's best-selling truck. Powerful, versatile, and ready for work or play. Great towing capacity.",
       [
         "4x4",
@@ -401,7 +402,7 @@ const sampleCars = [
       "Elantra",
       "Sedan",
       55,
-      "https://images.pexels.com/photos/15888408/pexels-photo-15888408.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/225841/pexels-photo-225841.jpeg?auto=compress&cs=tinysrgb&w=600",
       "Stylish and affordable compact sedan with excellent fuel economy and modern safety features.",
       [
         "Bluetooth",
@@ -428,7 +429,7 @@ const sampleCars = [
       "Telluride",
       "SUV",
       100,
-      "https://images.pexels.com/photos/14569470/pexels-photo-14569470.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/112452/pexels-photo-112452.jpeg?auto=compress&cs=tinysrgb&w=600",
       "Award-winning mid-size SUV known for its upscale interior, spacious seating for 8, and advanced tech.",
       [
         "Three-Row Seating",
@@ -456,7 +457,7 @@ const sampleCars = [
       "MX-5 Miata",
       "Convertible",
       105,
-      "https://images.pexels.com/photos/6980675/pexels-photo-6980675.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/136872/pexels-photo-136872.jpeg?auto=compress&cs=tinysrgb&w=600",
       "The quintessential fun-to-drive roadster. Lightweight, agile, and perfect for scenic drives.",
       [
         "Convertible",
@@ -537,7 +538,7 @@ const sampleCars = [
       "Outback",
       "SUV",
       88,
-      "https://images.pexels.com/photos/14604784/pexels-photo-14604784.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/892522/pexels-photo-892522.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       "Rugged yet refined wagon/SUV crossover known for its standard AWD and safety features. Great for all weather.",
       [
         "Symmetrical All-Wheel Drive",
@@ -591,7 +592,7 @@ const sampleCars = [
       "Ioniq 5",
       "Electric",
       115,
-      "https://images.pexels.com/photos/16081277/pexels-photo-16081277.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/575386/pexels-photo-575386.jpeg?auto=compress&cs=tinysrgb&w=600",
       "Distinctively styled electric crossover with a spacious, futuristic interior and fast-charging capabilities.",
       [
         "Electric",

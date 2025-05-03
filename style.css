@@ -16,6 +16,7 @@ body {
   --text-primary: var(--clr-dark); /* Dark text for high contrast */
   --text-secondary: rgba(var(--clr-dark-rgb), 0.65); /* Softer dark gray */
   --text-accent: var(--clr-accent); /* Accent for text */
+  --clr-accent-darker-on-white-bg: rgb(26, 23, 19);
   --text-on-accent: var(--clr-dark); /* Dark text on accent bg */
   --text-on-dark-bg: var(--clr-light); /* White text on dark elements */
   --text-muted-on-dark-bg: rgba(var(--clr-light-rgb), 0.7); /* Muted white */
@@ -25,6 +26,7 @@ body {
   --bg-table-header: var(--clr-dark); /* Dark table header */
   --bg-table-row-odd: rgba(var(--clr-dark-rgb), 0.05); /* Subtle dark tint */
   --border-color: rgba(var(--clr-dark-rgb), 0.2); /* Light gray border */
+  --shade: rgba(var(--clr-light-rgb), 0.6);
   --border-color-panel: color-mix(
     in srgb,
     var(--clr-light),
@@ -46,13 +48,12 @@ body {
   --clr-accent-darker: #e0a43f; /* Richer accent */
   --text-primary: #e0e0e0; /* Soft white */
   --text-secondary: rgba(var(--clr-light-rgb), 0.65); /* Muted light gray */
+  --clr-accent-darker-on-white-bg: #e0a43f;
   --text-accent: var(--clr-accent); /* Vibrant accent */
   --text-on-accent: var(--clr-dark); /* Dark text on accent bg */
   --text-on-dark-bg: var(--clr-light); /* White text */
-  --text-muted-on-dark-bg: rgba(
-    var(--clr-light-rgb),
-    0.6
-  ); /* Softer muted text */
+  --text-muted-on-dark-bg: rgba(var(--clr-light-rgb), 0.6);
+  --shade: rgba(var(--clr-dark-rgb), 0.6); /* Softer muted text */
   --bg-page: var(--clr-dark); /* Deep dark page background */
   --bg-panel: var(--clr-light-darker); /* Lighter dark for panels */
   --bg-card: #222222; /* Distinct dark for cards */
@@ -88,6 +89,9 @@ body {
 .text-clr-accent {
   color: var(--text-accent) !important;
 }
+.text-clr-darker-accent-on-white-bg {
+  color: var(--clr-accent-darker-on-white-bg) !important;
+}
 .text-clr-on-accent {
   color: var(--text-on-accent) !important;
 }
@@ -115,7 +119,6 @@ body {
 .border-standard {
   border: 1px solid var(--border-color);
 }
-
 
 /* Loading Screen */
 .loading-screen {
@@ -234,6 +237,7 @@ body {
   font-size: 70px;
   color: var(--text-on-dark-bg);
   letter-spacing: 5px;
+  line-height: 100px;
 }
 
 .mainbutton {
@@ -273,6 +277,8 @@ body {
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   background-color: var(--clr-accent);
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
 }
 
@@ -298,10 +304,6 @@ body {
   background-color: var(--bg-panel);
   color: var(--text-on-dark-bg);
   padding: 60px 0 30px;
-}
-
-.nav-link {
-  color: var(--text-on-dark-bg);
 }
 
 .nav-link:hover {
@@ -338,7 +340,9 @@ body {
 .footer a:hover {
   color: var(--clr-accent);
 }
-
+.catograycard {
+  transition: all 0.5s;
+}
 .contact-info {
   margin-bottom: 15px;
 }
@@ -401,8 +405,6 @@ footer a:hover {
   color: var(--clr-accent);
 }
 
-
-
 .nav-underline .nav-link.active,
 .nav-underline .show > .nav-link {
   font-weight: 700;
@@ -436,8 +438,6 @@ footer a:hover {
   transition: 500ms ease;
 }
 
-
-
 .carousel-container {
   width: 90%;
   max-width: 800px;
@@ -468,29 +468,29 @@ footer a:hover {
 .car-info-float {
   display: flex;
   flex-direction: column;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
-  height: 100%; 
+  height: 100%;
   text-align: center;
   position: relative;
-  margin-top: -50px; 
+  margin-top: -50px;
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
   height: 11rem;
-  background-color:var(--bg-panel);
+  background-color: var(--bg-panel);
   padding: 15px 20px;
   border-radius: 30px;
   text-align: center;
   color: var(--text-primary);
-   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-;}
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
 
-.car-info-float .icons span{
+.car-info-float .icons span {
   color: var(--text-primary);
 }
 
-.car-info-float .icons p{
+.car-info-float .icons p {
   color: var(--text-primary);
 }
 
@@ -515,12 +515,9 @@ footer a:hover {
   cursor: pointer;
 }
 
-.btn .btn-primary .rounded-4 .btn-lg .ms-2 .login:hover{
-  color:black;
-
-
+.btn .btn-primary .rounded-4 .btn-lg .ms-2 .login:hover {
+  color: black;
 }
-
 
 .car-box {
   display: flex;
@@ -547,7 +544,7 @@ footer a:hover {
 }
 
 .details-btn {
-  background-color:#d99a36;
+  background-color: #d99a36;
   border: none;
   border-radius: 20px;
   padding: 8px 16px;
@@ -556,7 +553,7 @@ footer a:hover {
 }
 
 .price {
-  color:#e0a43f;
+  color: #e0a43f;
   font-size: 30px;
   font-weight: bold;
 }
@@ -566,22 +563,3 @@ footer a:hover {
   color: #666;
   margin-left: 3px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

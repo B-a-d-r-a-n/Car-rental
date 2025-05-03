@@ -44,7 +44,9 @@ a.color-primary {
 a.color-primary:hover {
   color: var(--tertiary-color) !important;
 }
-
+.col-form-label {
+  color: var(--text-primary);
+}
 textarea:focus,
 input:focus,
 input[type]:focus {
@@ -53,11 +55,7 @@ input[type]:focus {
     0 0 8px var(--primary-color);
 }
 .shade {
-  background-image: linear-gradient(
-    45deg,
-    rgba(0, 0, 0, 0.6),
-    rgba(0, 0, 0, 0.6)
-  );
+  background-image: linear-gradient(45deg, var(--shade), var(--shade));
 }
 .color-primary {
   color: var(--primary-color) !important;

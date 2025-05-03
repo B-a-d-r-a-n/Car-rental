@@ -28,23 +28,14 @@
   </head>
   <body>
     <nav
-      class="navbar navbar-expand-lg"
-      style="
-        background-color: #1a1a1a;
-        position: fixed;
-        z-index: 20;
-        right: 0;
-        left: 0;
-      "
+      class="navbar navbar-expand-lg bg-clr-panel text-center"
+      style="position: fixed; z-index: 20; right: 0; left: 0"
     >
       <div class="container">
-        <a class="navbar-brand" href="#">
-          <img
-            src="../../assets/images/logo.png"
-            alt="Bootstrap"
-            width="200px"
-            height="50px"
-          />
+        <a class="navbar-brand" href="../../index.html">
+          <h1 class="text-clr-primary">
+            <span class="text-clr-accent">R</span>entol
+          </h1>
         </a>
         <button
           class="navbar-toggler text-white"
@@ -57,27 +48,72 @@
         >
           <span class="navbar-toggler-icon" style="filter: invert(1)"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto nav-underline">
-            <li class="nav-item">
+          <ul class="navbar-nav ms-auto nav-underline" id="navContainer">
+            <li class="nav-item text-clr-primary">
               <a class="nav-link" aria-current="page" href="../../index.html"
-                >Homee</a
+                >Home</a
               >
             </li>
-            <li class="nav-item">
+            <li class="nav-item text-clr-primary">
               <a class="nav-link" href="../carListing/carListing.html">Cars</a>
             </li>
-            <li class="nav-item">
-              <a href="#pricee" class="nav-link">Pricing</a>
-            </li>
-            <li class="nav-item">
+
+            <li class="nav-item text-clr-primary">
               <a
                 href="../contactUs/contact.html"
                 class="nav-link"
                 aria-disabled="true"
                 >Contact Us</a
               >
+            </li>
+            <li class="nav-item text-clr-primary">
+              <a
+                class="btn btn-primary rounded-4 btn-lg ms-2 login"
+                id="loginBtn"
+                href="./signIn.html"
+                role="button"
+                style="background-color: #f5b754; border: none"
+                >Log in</a
+              >
+            </li>
+            <li class="nav-item" id="Logout" hidden>
+              <a
+                class="btn btn-primary rounded-4 btn-lg ms-2 login text-clr-on-accent"
+                id="logout"
+                href="./signIn.html"
+                role="button"
+                style="background-color: #f5b754; border: none"
+                >Log out</a
+              >
+            </li>
+            <li class="nav-item text-clr-primary" id="adminButton" hidden>
+              <a
+                class="btn btn-primary rounded-4 btn-lg ms-2 text-clr-on-accent"
+                href="../admin//dashboard/dashboard.html"
+                role="button"
+                style="background-color: #f5b754; border: none"
+                >Dashboard</a
+              >
+            </li>
+            <li class="nav-item profIcon" hidden style="font-size: 30px">
+              <i
+                class="fa-regular fa-circle-user"
+                onclick="window.location.href='../userProfile/profile.html'"
+              ></i>
+            </li>
+
+            <li>
+              <i
+                id="theme-toggle-button"
+                class="fas fa-moon"
+                style="
+                  font-size: 30px;
+                  margin-top: 8px;
+                  margin-left: 10px;
+                  cursor: pointer;
+                "
+              ></i>
             </li>
           </ul>
         </div>
@@ -114,7 +150,7 @@
             >
               <form
                 id="signIn"
-                class="col-md-8 col-12 col-lg-6 text-white border border-2 p-3 rounded-2 border-black opacity-75 shade"
+                class="col-md-8 col-12 col-lg-6 text-white border border-2 p-3 rounded-2 border-black shade"
               >
                 <div class="row mb-3">
                   <label for="inputEmail" class="col-12 col-form-label"
@@ -161,10 +197,10 @@
                       >Sign up</a
                     >
                   </div>
-                  <p class="fs-6">
+                  <p class="fs-6 text-clr-primary">
                     Forgot password ?
                     <a
-                      class="color-primary"
+                      class="text-clr-darker-accent-on-white-bg"
                       style="text-decoration: none"
                       href="../signUp/signUp.html"
                       >Reset it</a

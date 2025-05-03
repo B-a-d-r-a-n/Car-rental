@@ -5,8 +5,13 @@ window.onload = function () {
 const root = document.documentElement;
 function toggleTheme() {
   if (root.getAttribute("data-bs-theme") === "dark") {
+    document.querySelector(".fas").classList.remove("fa-sun");
+    document.querySelector(".fas").classList.add("fa-moon");
+
     root.setAttribute("data-bs-theme", "light");
   } else {
+    document.querySelector(".fas").classList.add("fa-sun");
+    document.querySelector(".fas").classList.remove("fa-moon");
     root.setAttribute("data-bs-theme", "dark");
   }
 }
@@ -25,10 +30,11 @@ function handleactive(element) {
 }
 
 function initimg() {
-  console.log(JSON.parse(localStorage.getItem("cars")));
   let paresed = JSON.parse(localStorage.getItem("cars"));
-
-  paresed.forEach(function (car) {
+  let featured = paresed.filter((c) => {
+    return c.isFeatured == true;
+  });
+  featured.forEach(function (car) {
     let c = document.querySelector(".featuredCar");
     const newSlide = document.createElement("div");
     c.insertAdjacentHTML(
@@ -37,7 +43,7 @@ function initimg() {
       <div class="carousel-item ">
           <div class="car-slide">
             <div class="image-wrapper">
-              <img src="${car.image}" class="car-img" alt="Car Image">
+              <img src="${car.image}" class="car-img w-100 object-fit-cover" style="max-height:600px" alt="Car Image">
               <div class="car-info-float" style="height: auto;">
   <div class="car-box "  >
     <div class="car-details col-12 col-md-6 d-flex flex-column">
@@ -61,9 +67,7 @@ function initimg() {
 
               
               
-            </div>
-          </div>
-        </div>
+
       `
     );
   });
@@ -118,26 +122,22 @@ function displayOffers() {
 function dynamicNavbarFor_user() {
   const navLogin = document.querySelector("#loginBtn");
   const navLogout = document.querySelector("#Logout");
-  
+
   const profileIcon = document.querySelector(".profIcon");
   const userData = localStorage.getItem("currUser");
   const user = JSON.parse(userData);
-  console.log(profileIcon);
-  console.log(user);
-  if (user.role === "user") {
+
+  if (user && (user.role === "user" || user.role === "admin")) {
     navLogin.setAttribute("hidden", "");
     profileIcon.removeAttribute("hidden");
     navLogout.removeAttribute("hidden");
   } else {
     navLogin.removeAttribute("hidden");
-    
-
   }
   profileIcon.addEventListener("click", () => {
     window.location.href = "./presentation/userProfile/profile.html";
   });
 }
-
 
 document.querySelector("#logout").addEventListener("click", () => {
   localStorage.removeItem("currUser");
