@@ -16,7 +16,12 @@ nav {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: background-color 0.3s;
 }
-
+.text-clr-primary{
+  color: #1b1b1b;
+}
+.text-clr-accent{
+  color: #f5b754;
+}
 nav ul li a {
   color: #000 !important;
 }
@@ -141,7 +146,9 @@ body.dark-mode nav {
 body.dark-mode nav ul li a {
   color: #fff !important;
 }
-
+body.dark-mode .text-clr-primary{
+  color: #ccc !important;
+}
 body.dark-mode nav ul li a:hover {
   color: #f5b754 !important;
 }

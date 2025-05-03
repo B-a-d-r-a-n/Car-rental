@@ -25,7 +25,7 @@ if (car) {
   image.setAttribute("src", car.image);
   gallery.append(image);
 } else {
-  // Handle case where no car is found with the given id
+ 
   alert('Car not found!');
 }
 
@@ -33,7 +33,7 @@ document.querySelectorAll(".rent-now-btn").forEach((button) => {
   button.addEventListener("click", function (e) {
     e.preventDefault();
     const carId = this.getAttribute("data-id");
-    const car = cars.find(c => c.id == carId); // Get car data again on button click
+    const car = cars.find(c => c.id == carId); 
 
     if (car && car.isAvailable) {
       // If car is available, redirect to booking form

@@ -20,6 +20,15 @@ color: #000;
 .nav-link:hover {
   color: #f5b754;
 }
+#mode-toggle:hover{
+  background-color: #d88e00 !important;
+}
+.text-clr-primary{
+  color: #1b1b1b;
+}
+.text-clr-accent{
+  color: #f5b754;
+}
 .nav-underline .nav-link.active,
 .nav-underline .show > .nav-link {
   font-weight: 700;
@@ -236,19 +245,24 @@ footer a {
   background-color: #F5B754;
 }
 
-
+/*dark mode*/
 body.dark-mode {
   background-color:#1a1a1a;
   color: #f1f1f1;
 }
 body.dark-mode #mode-icon{
-  color:#ccc
-  }
+  color:#d88e00;
+}
+body.dark-mode #mode-toggle:hover{
+  background-color:#dcdcdc !important;
+}
 body.dark-mode .navbar {
   background-color: #2c2c2c;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-
+body.dark-mode .text-clr-primary{
+  color: #ccc;
+}
 
 
 body.dark-mode .section-padding ul li{
