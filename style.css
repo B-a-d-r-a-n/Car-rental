@@ -116,6 +116,7 @@ body {
   border: 1px solid var(--border-color);
 }
 
+
 /* Loading Screen */
 .loading-screen {
   position: fixed;
@@ -465,6 +466,12 @@ footer a:hover {
 }
 
 .car-info-float {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+  height: 100%; 
+  text-align: center;
   position: relative;
   margin-top: -50px; 
   left: 50%;
@@ -508,7 +515,11 @@ footer a:hover {
   cursor: pointer;
 }
 
+.btn .btn-primary .rounded-4 .btn-lg .ms-2 .login:hover{
+  color:black;
 
+
+}
 
 
 .car-box {

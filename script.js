@@ -38,8 +38,8 @@ function initimg() {
           <div class="car-slide">
             <div class="image-wrapper">
               <img src="${car.image}" class="car-img" alt="Car Image">
-              <div class="car-info-float" style="height: auto;>
-  <div class="car-box row "  >
+              <div class="car-info-float" style="height: auto;">
+  <div class="car-box "  >
     <div class="car-details col-12 col-md-6 d-flex flex-column">
       <h3>${car.brand}</h3>
       <div class="icons">
@@ -105,7 +105,7 @@ function displayOffers() {
     con.innerHTML = `<img src="${element.imageUrl}" class="d-block w-100 rounded-4"
               style="height: 500px; object-fit: cover; filter: brightness(60%);" alt="Hero Offer">
 
-            <div class="position-absolute top-50 sssss translate-middle-y text-white px-5" style="max-width: 600px;left:20%;"    >
+            <div  class="position-absolute top-50 start-50 translate-middle text-white px-5 text-center"   >
               <h2 class="fw-bold display-5">${element.title}</h2>
               <p class="mt-3">
                 <a href="#" class="btn btn-light btn-lg fw-bold rounded-pill">${element.description}</a>
@@ -117,6 +117,8 @@ function displayOffers() {
 
 function dynamicNavbarFor_user() {
   const navLogin = document.querySelector("#loginBtn");
+  const navLogout = document.querySelector("#Logout");
+  
   const profileIcon = document.querySelector(".profIcon");
   const userData = localStorage.getItem("currUser");
   const user = JSON.parse(userData);
@@ -125,14 +127,20 @@ function dynamicNavbarFor_user() {
   if (user.role === "user") {
     navLogin.setAttribute("hidden", "");
     profileIcon.removeAttribute("hidden");
-
+    navLogout.removeAttribute("hidden");
   } else {
     navLogin.removeAttribute("hidden");
+    
+
   }
   profileIcon.addEventListener("click", () => {
     window.location.href = "./presentation/userProfile/profile.html";
   });
 }
+
+
+document.querySelector("#logout").addEventListener("click", () => {
+  localStorage.removeItem("currUser");
+  window.location.href = "./presentation/signIn/signIn.html";
+});
 dynamicNavbarFor_user();
-
-
