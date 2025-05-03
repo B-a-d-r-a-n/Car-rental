@@ -85,7 +85,7 @@ function dynamicNavbarInsertion() {
     '#navContainer .nav-item a[href="./presentation/signIn/signIn.html"]'
   ).parentElement;
 
-  if (user.role === "admin") {
+  if (user && user.role === "admin") {
     adminButton.removeAttribute("hidden");
     adminButton.querySelector("a").textContent = "Dashboard";
     loginButton.setAttribute("hidden", "");
