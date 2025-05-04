@@ -94,19 +94,19 @@ form.addEventListener("submit", (e) => {
 //////////////////
 
 const root = document.documentElement;
-function toggleTheme() {
-  if (root.getAttribute("data-bs-theme") === "dark") {
-    document.querySelector(".fas").classList.remove("fa-sun");
-    document.querySelector(".fas").classList.add("fa-moon");
+let savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") {
+  document.querySelector(".fas").classList.add("fa-sun");
+  document.querySelector(".fas").classList.remove("fa-moon");
+  localStorage.setItem("theme", "dark");
+  root.setAttribute("data-bs-theme", "dark");
+} else {
+  document.querySelector(".fas").classList.remove("fa-sun");
+  document.querySelector(".fas").classList.add("fa-moon");
 
-    root.setAttribute("data-bs-theme", "light");
-  } else {
-    document.querySelector(".fas").classList.add("fa-sun");
-    document.querySelector(".fas").classList.remove("fa-moon");
-    root.setAttribute("data-bs-theme", "dark");
-  }
+  localStorage.setItem("theme", "light");
+  root.setAttribute("data-bs-theme", "light");
 }
-
 document
   .getElementById("theme-toggle-button")
   .addEventListener("click", toggleTheme);

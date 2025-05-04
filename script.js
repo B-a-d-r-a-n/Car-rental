@@ -3,15 +3,29 @@ window.onload = function () {
   displayOffers();
 };
 const root = document.documentElement;
+let savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") {
+  document.querySelector(".fas").classList.add("fa-sun");
+  document.querySelector(".fas").classList.remove("fa-moon");
+  localStorage.setItem("theme", "dark");
+  root.setAttribute("data-bs-theme", "dark");
+} else {
+  document.querySelector(".fas").classList.remove("fa-sun");
+  document.querySelector(".fas").classList.add("fa-moon");
+
+  localStorage.setItem("theme", "light");
+  root.setAttribute("data-bs-theme", "light");
+}
 function toggleTheme() {
   if (root.getAttribute("data-bs-theme") === "dark") {
     document.querySelector(".fas").classList.remove("fa-sun");
     document.querySelector(".fas").classList.add("fa-moon");
-
+    localStorage.setItem("theme", "light");
     root.setAttribute("data-bs-theme", "light");
   } else {
     document.querySelector(".fas").classList.add("fa-sun");
     document.querySelector(".fas").classList.remove("fa-moon");
+    localStorage.setItem("theme", "dark");
     root.setAttribute("data-bs-theme", "dark");
   }
 }
@@ -144,3 +158,32 @@ document.querySelector("#logout").addEventListener("click", () => {
   window.location.href = "./presentation/signIn/signIn.html";
 });
 dynamicNavbarFor_user();
+
+////////////////////////////////////////
+
+const loadingScreen = document.getElementById("loadingScreen");
+if (loadingScreen) {
+  loadingScreen.classList.add("hidden");
+  setTimeout(() => {
+    loadingScreen.remove();
+  }, 1000);
+}
+// let savedTheme = "";
+// function setTheme(theme) {
+//   try {
+//     let htmlElement = document.documentElement;
+//     htmlElement.setAttribute("data-bs-theme", theme);
+//     localStorage.setItem("theme", theme);
+//     let currentTheme = theme;
+//     let isDark = theme === "dark";
+//   } catch (error) {
+//     console.error("Error setting theme:", error);
+//   }
+// }
+
+// setTheme(
+//   savedTheme ||
+//     (window.matchMedia("(prefers-color-scheme: dark)").matches
+//       ? "dark"
+//       : "light")
+// );
