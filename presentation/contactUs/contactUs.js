@@ -40,10 +40,6 @@ function dynamicNavbarFor_user() {
     navLogin.removeAttribute("hidden");
   }
 
-  navLogout.addEventListener("click", () => {
-    localStorage.removeItem("currUser");
-    window.location.href = "../signIn/signIn.html";
-  });
 }
 
 dynamicNavbarFor_user();

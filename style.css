@@ -4,72 +4,67 @@ body {
 }
 
 :root {
-  /* ===== LIGHT MODE ===== */
-  --clr-accent: #f5b754; /* Warm yellow/orange */
-  --clr-dark: #1b1b1b; /* Very dark gray */
-  --clr-light: #ffffff; /* Pure white */
-  --clr-light-darker: #f8f9fa; /* Slightly off-white for less glare */
+  --clr-accent: #f5b754;
+  --clr-dark: #1b1b1b;
+  --clr-light: #ffffff;
+  --clr-light-darker: #f8f9fa;
   --clr-accent-rgb: 245, 183, 84;
   --clr-dark-rgb: 27, 27, 27;
   --clr-light-rgb: 255, 255, 255;
-  --clr-accent-darker: #e0a43f; /* Richer accent for better contrast */
-  --text-primary: var(--clr-dark); /* Dark text for high contrast */
-  --text-secondary: rgba(var(--clr-dark-rgb), 0.65); /* Softer dark gray */
-  --text-accent: var(--clr-accent); /* Accent for text */
+  --clr-accent-darker: #e0a43f;
+  --text-primary: var(--clr-dark);
+  --text-secondary: rgba(var(--clr-dark-rgb), 0.65);
+  --text-accent: var(--clr-accent);
   --clr-accent-darker-on-white-bg: rgb(26, 23, 19);
-  --text-on-accent: var(--clr-dark); /* Dark text on accent bg */
-  --text-on-dark-bg: var(--clr-light); /* White text on dark elements */
-  --text-muted-on-dark-bg: rgba(var(--clr-light-rgb), 0.7); /* Muted white */
-  --bg-page: var(--clr-light-darker); /* Off-white page background */
-  --bg-panel: var(--clr-light); /* White panel background */
-  --bg-card: var(--clr-light); /* White card background */
-  --bg-table-header: var(--clr-dark); /* Dark table header */
-  --bg-table-row-odd: rgba(var(--clr-dark-rgb), 0.05); /* Subtle dark tint */
-  --border-color: rgba(var(--clr-dark-rgb), 0.2); /* Light gray border */
+  --text-on-accent: var(--clr-dark);
+  --text-on-dark-bg: var(--clr-light);
+  --text-muted-on-dark-bg: rgba(var(--clr-light-rgb), 0.7);
+  --bg-page: var(--clr-light-darker);
+  --bg-panel: var(--clr-light);
+  --bg-card: var(--clr-light);
+  --bg-table-header: var(--clr-dark);
+  --bg-table-row-odd: rgba(var(--clr-dark-rgb), 0.05);
+  --border-color: rgba(var(--clr-dark-rgb), 0.2);
   --shade: rgba(var(--clr-light-rgb), 0.6);
   --border-color-panel: color-mix(
     in srgb,
     var(--clr-light),
     var(--clr-dark) 10%
   );
-  --border-color-accent: var(--clr-accent); /* Accent color border */
-  --clr-accent-opacity: rgba(var(--clr-accent), 1); /* Full opacity accent */
+  --border-color-accent: var(--clr-accent);
+  --clr-accent-opacity: rgba(var(--clr-accent), 1);
 }
 
 [data-bs-theme="dark"] {
-  /* ===== DARK MODE ===== */
   --clr-accent: #f5b754;
   --clr-dark: #1b1b1b;
   --clr-light: #ffffff;
-  --clr-light-darker: #2a2a2a; /* Darker shade for panels */
+  --clr-light-darker: #2a2a2a;
   --clr-accent-rgb: 245, 183, 84;
   --clr-dark-rgb: 27, 27, 27;
   --clr-light-rgb: 255, 255, 255;
-  --clr-accent-darker: #e0a43f; /* Richer accent */
-  --text-primary: #e0e0e0; /* Soft white */
-  --text-secondary: rgba(var(--clr-light-rgb), 0.65); /* Muted light gray */
+  --clr-accent-darker: #e0a43f;
+  --text-primary: #e0e0e0;
+  --text-secondary: rgba(var(--clr-light-rgb), 0.65);
   --clr-accent-darker-on-white-bg: #e0a43f;
-  --text-accent: var(--clr-accent); /* Vibrant accent */
-  --text-on-accent: var(--clr-dark); /* Dark text on accent bg */
-  --text-on-dark-bg: var(--clr-light); /* White text */
+  --text-accent: var(--clr-accent);
+  --text-on-accent: var(--clr-dark);
+  --text-on-dark-bg: var(--clr-light);
   --text-muted-on-dark-bg: rgba(var(--clr-light-rgb), 0.6);
-  --shade: rgba(var(--clr-dark-rgb), 0.6); /* Softer muted text */
-  --bg-page: var(--clr-dark); /* Deep dark page background */
-  --bg-panel: var(--clr-light-darker); /* Lighter dark for panels */
-  --bg-card: #222222; /* Distinct dark for cards */
-  --bg-table-header: var(--clr-accent-darker); /* Accent-tinted table header */
-  --bg-table-row-odd: rgba(var(--clr-light-rgb), 0.05); /* Subtle light tint */
-  --border-color: rgba(var(--clr-light-rgb), 0.2); /* Light gray border */
+  --shade: rgba(var(--clr-dark-rgb), 0.6);
+  --bg-page: var(--clr-dark);
+  --bg-panel: var(--clr-light-darker);
+  --bg-card: #222222;
+  --bg-table-header: var(--clr-accent-darker);
+  --bg-table-row-odd: rgba(var(--clr-light-rgb), 0.05);
+  --border-color: rgba(var(--clr-light-rgb), 0.2);
   --border-color-panel: color-mix(
     in srgb,
     var(--clr-light-darker),
     var(--clr-light) 10%
   );
-  --border-color-accent: var(--clr-accent); /* Accent color border */
-  --clr-accent-opacity: rgba(
-    var(--clr-accent),
-    0.9
-  ); /* Slightly transparent accent */
+  --border-color-accent: var(--clr-accent);
+  --clr-accent-opacity: rgba(var(--clr-accent), 0.9);
 }
 
 body {
@@ -120,7 +115,6 @@ body {
   border: 1px solid var(--border-color);
 }
 
-/* Loading Screen */
 .loading-screen {
   position: fixed;
   top: 0;
@@ -158,7 +152,6 @@ body {
   }
 }
 
-/* Toast Container */
 .toast-container {
   z-index: 1055;
 }
@@ -199,7 +192,8 @@ body {
 .toast .btn-close {
   filter: brightness(1.5);
 }
-/*   Specific  */
+
+/*   Specific - mahmoud */
 
 html {
   scroll-behavior: smooth;
