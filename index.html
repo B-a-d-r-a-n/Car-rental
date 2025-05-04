@@ -131,8 +131,13 @@
         <div class="container mainbutton">
           <h1 class="main-header">Rental Car</h1>
           <h5 style="font-weight: bold">The best car for you</h5>
-          <button type="button" class="btn btn-primary btn-lg custom-button">
-            View Details
+          <button type="button" 
+          class="btn btn-primary btn-lg custom-button"
+          onclick="window.location.href='presentation/carListing/carListing.html'"
+
+          
+          >
+           Go to Cars
             <i class="fa-solid fa-arrow-right" style="color: whitesmoke"></i>
           </button>
           <button
@@ -143,8 +148,10 @@
               background-color: transparent;
               color: whitesmoke;
             "
+            
+            onclick="document.getElementById('Offers').scrollIntoView({ behavior: 'smooth' });"
           >
-            Rent Now <i class="fa-solid fa-arrow-right"></i>
+          get offers <i class="fa-solid fa-arrow-right"></i>
           </button>
         </div>
       </div>
@@ -227,7 +234,7 @@
 
       <!-- pricing section -->
 
-      <section class="py-5 rounded-4 id=" style="margin-top: 200px">
+      <section class="py-5 rounded-4 " id="Offers" style="margin-top: 200px">
         <div class="container text-center">
           <h2 class="mb-4 fw-bold">Special Offers Just for You</h2>
           <p class="mb-5 text-muted">
@@ -425,28 +432,28 @@
             <h5>Quick Links</h5>
             <ul class="list-unstyled">
               <li class="mb-2">
-                <a href="contact.html" class="text-white text-decoration-none"
-                  ><i class="fas fa-chevron-right me-2"></i>About</a
+                <a href="./presentation/contactUs/contact.html" class="text-white text-decoration-none"
+                  ><i class="fas fa-chevron-right me-2"></i>Contact</a
                 >
               </li>
               <li class="mb-2">
                 <a
-                  href="../carListing/carListing.html"
+                  href="./presentation//carListing/carListing.html"
                   class="text-white text-decoration-none"
                   ><i class="fas fa-chevron-right me-2"></i>Cars</a
                 >
               </li>
               <li class="mb-2">
-                <a
-                  href="../carListing/carListing.html"
+                <a 
+                  href="./presentation//carListing/carListing.html"
                   class="text-white text-decoration-none"
                   ><i class="fas fa-chevron-right me-2"></i>Car Types</a
                 >
               </li>
 
               <li class="mb-2">
-                <a href="#" class="text-white text-decoration-none"
-                  ><i class="fas fa-chevron-right me-2"></i>Contact</a
+                <a href="#Offers" class="text-white text-decoration-none"
+                  ><i class="fas fa-chevron-right me-2"></i>offers</a
                 >
               </li>
             </ul>
