@@ -39,9 +39,6 @@ function dynamicNavbarFor_user() {
   } else {
     navLogin.removeAttribute("hidden");
   }
-  profileIcon.addEventListener("click", () => {
-    window.location.href = "./presentation/userProfile/profile.html";
-  });
 }
 
 dynamicNavbarFor_user();
