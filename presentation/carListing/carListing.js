@@ -20,7 +20,7 @@ function renderCars(cars) {
                   <p class="card-text">Type: ${car.type}</p>
                   <div class="d-flex  justify-content-between align-items-center">
                     <p class="card-text mt-auto"><span>$${car.rentPerDay}</span>/day</p>
-                    <a href="../carDetails/carDetails.html?id=${car.id}" class="btn btn-outline-primary">Details</a>
+                    <a href="../cardetails/carDetails.html?id=${car.id}" class="btn btn-outline-primary">Details</a>
                   </div> 
                 </div>
             </div>
