@@ -2,13 +2,18 @@
 nav {
   color: white;
 }
+nav h1{
+  color: white;
+}
+nav h1 span{
+  color: #f5b754;
+}
 .navbar {
   background-color: none !important;
   /* background-color: #ffffff; */
   transition: background-color 0.3s ease;
 }
 .nav-link {
-  color: #333;
   color: white;
 }
 .nav-link:hover {
