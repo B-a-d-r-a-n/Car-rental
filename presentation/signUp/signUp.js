@@ -130,6 +130,20 @@ if (savedTheme === "dark") {
   root.setAttribute("data-bs-theme", "light");
 }
 
+function toggleTheme() {
+  if (root.getAttribute("data-bs-theme") === "dark") {
+    document.querySelector(".fas").classList.remove("fa-sun");
+    document.querySelector(".fas").classList.add("fa-moon");
+    localStorage.setItem("theme", "light");
+    root.setAttribute("data-bs-theme", "light");
+  } else {
+    document.querySelector(".fas").classList.add("fa-sun");
+    document.querySelector(".fas").classList.remove("fa-moon");
+    localStorage.setItem("theme", "dark");
+    root.setAttribute("data-bs-theme", "dark");
+  }
+}
+
 document
   .getElementById("theme-toggle-button")
   .addEventListener("click", toggleTheme);

@@ -26,7 +26,7 @@ function handleactive(element) {
 
 function dynamicNavbarFor_user() {
   const navLogin = document.querySelector("#loginBtn");
-  const navLogout = document.querySelector("#Logout");
+  const navLogout = document.querySelector("#logout");
 
   const profileIcon = document.querySelector(".profIcon");
   const userData = localStorage.getItem("currUser");
@@ -34,11 +34,12 @@ function dynamicNavbarFor_user() {
 
   if (user && (user.role === "user" || user.role === "admin")) {
     navLogin.setAttribute("hidden", "");
-    profileIcon.removeAttribute("hidden");
     navLogout.removeAttribute("hidden");
+    profileIcon.removeAttribute("hidden");
   } else {
     navLogin.removeAttribute("hidden");
   }
+
 }
 
 dynamicNavbarFor_user();
